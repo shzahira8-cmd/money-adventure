@@ -362,13 +362,11 @@
           </div>
 
           <div class="flex flex-wrap items-center gap-3">
-            <!-- 5 Question Progress Pills -->
             <div class="bg-slate-950 border border-cyan-500/40 rounded-2xl px-3.5 py-2.5 text-center">
               <div class="text-[10px] font-hud text-slate-400 mb-1" id="lab-q-label">QUESTION</div>
               <div class="flex items-center gap-1.5" id="lab-q-dots"></div>
             </div>
 
-            <!-- Countdown Timer -->
             <div id="lab-timer-box" class="bg-slate-950 border-2 border-amber-400/70 rounded-2xl px-4 py-2.5 flex items-center gap-3">
               <div>
                 <div class="text-[10px] font-hud text-slate-400 text-center" id="lab-countdown-lbl">COUNTDOWN</div>
@@ -379,7 +377,6 @@
           </div>
         </div>
 
-        <!-- Target Calibration Banner -->
         <div class="bg-gradient-to-r from-amber-500/15 via-slate-900 to-cyan-500/15 border border-amber-400/40 rounded-2xl p-4 sm:p-5 mb-6 flex flex-wrap items-center justify-between gap-4">
           <div>
             <div class="text-xs font-hud text-cyan-300" id="lab-target-lbl">QUESTION 1 OF 5 — TARGET CALIBRATION VALUE</div>
@@ -392,13 +389,11 @@
           </div>
         </div>
 
-        <!-- Fail / Complete Banner -->
         <div id="lab-alert-banner" class="hidden mb-6 p-4 rounded-2xl border flex flex-wrap items-center justify-between gap-3">
           <div id="lab-alert-text" class="font-hud text-xs sm:text-sm font-bold"></div>
           <button onclick="startLabSession(true)" id="lab-retry-btn" class="px-4 py-2 rounded-xl bg-amber-400 text-slate-950 font-hud font-extrabold text-xs">RETRY 5-QUESTION MISSION</button>
         </div>
 
-        <!-- 5-Box Place Value Scanner -->
         <div class="grid grid-cols-5 gap-2 sm:gap-4 max-w-4xl mx-auto mb-5">
           <div class="bg-slate-950/90 border-2 border-cyan-500/40 rounded-2xl p-3 sm:p-5 text-center">
             <div class="text-[10px] sm:text-xs font-hud text-cyan-400" id="box-lbl-hundreds">HUNDREDS</div>
@@ -427,7 +422,6 @@
           </div>
         </div>
 
-        <!-- Current Scanner Load Pill -->
         <div class="text-center mb-6">
           <div class="inline-flex items-center gap-3 bg-slate-950 border border-slate-700 px-5 py-2.5 rounded-full">
             <span class="text-xs font-hud text-slate-400" id="lab-current-lbl">CURRENT SCANNER LOAD:</span>
@@ -435,7 +429,6 @@
           </div>
         </div>
 
-        <!-- 10 Currency Denomination Buttons -->
         <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 max-w-4xl mx-auto">
           <button onclick="addLabDenom(10000)" class="py-3 rounded-xl bg-purple-950/80 hover:bg-purple-900 border border-purple-400/50 font-hud text-xs sm:text-sm font-bold text-purple-200">+ RM 100</button>
           <button onclick="addLabDenom(5000)" class="py-3 rounded-xl bg-teal-950/80 hover:bg-teal-900 border border-teal-400/50 font-hud text-xs sm:text-sm font-bold text-teal-200">+ RM 50</button>
@@ -451,26 +444,26 @@
 
         <div class="mt-6 flex justify-end">
           <button onclick="navigateMenu('langkah')" id="m3-next-btn" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">
-            NEXT: MENU 04 LEARNING STEPS & 3D MINI MARKET ➔
+            NEXT: MENU 04 LEARNING STEPS ➔
           </button>
         </div>
       </div>
     </section>
 
-    <!-- ==================== VIEW 4: LANGKAH PEMBELAJARAN (LEARNING STEPS + 3D MINI MARKET) ==================== -->
+    <!-- ==================== VIEW 4: LANGKAH PEMBELAJARAN (LEARNING STEPS ONLY) ==================== -->
     <section id="view-langkah" class="hidden space-y-6">
       <div class="hud-panel rounded-3xl p-6 sm:p-8">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4 mb-6">
           <div>
             <span class="text-xs font-hud text-cyan-400" id="m4-tag">MENU 04 // LEARNING STEPS</span>
-            <h2 class="font-hud text-2xl sm:text-3xl font-extrabold text-white mt-1" id="m4-title">Addition of Money & 3D Mini Market</h2>
+            <h2 class="font-hud text-2xl sm:text-3xl font-extrabold text-white mt-1" id="m4-title">Addition of Money (Up to RM10,000)</h2>
           </div>
           <button onclick="completeMission('langkah', 150)" id="m4-claim-btn" class="px-4 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">
             COMPLETE LEARNING STEPS (+150 XP)
           </button>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div class="lg:col-span-7 space-y-4">
             <div class="bg-slate-900/90 border border-emerald-500/30 rounded-2xl p-5">
               <h3 class="font-hud text-sm text-emerald-400 mb-2" id="step1-title">STEP 1: ADDITION WITHOUT REGROUPING</h3>
@@ -568,18 +561,15 @@
           </div>
         </div>
 
-        <!-- Part B: Colourful 3D Mini Market Adventure Mount -->
-        <div id="mm-mount-langkah"></div>
-
         <div class="mt-6 flex justify-end">
           <button onclick="navigateMenu('penilaian')" id="m4-next-btn" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">
-            NEXT: MENU 05 ASSESSMENT & GAMES ➔
+            NEXT: MENU 05 ASSESSMENT & GAMES (3D MINI MARKET) ➔
           </button>
         </div>
       </div>
     </section>
 
-    <!-- ==================== VIEW 5: PENILAIAN & PERMAINAN (ASSESSMENT & GAMES) ==================== -->
+    <!-- ==================== VIEW 5: PENILAIAN & PERMAINAN (3D MINI MARKET + QUIZ) ==================== -->
     <section id="view-penilaian" class="hidden space-y-6">
       <div class="hud-panel rounded-3xl p-6 sm:p-8">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4 mb-6">
@@ -593,10 +583,257 @@
           </div>
         </div>
 
+        <!-- Mode A: Colourful 3D Mini Market Adventure -->
         <div id="assess-mode-market">
-          <div id="mm-mount-penilaian"></div>
+          <div id="mini-market-widget" class="font-kid-body text-slate-800 rounded-3xl overflow-hidden border-4 border-emerald-400 shadow-2xl bg-[#f0fdf4]">
+            <div class="bg-white/95 px-4 py-3 border-b-2 border-emerald-200 flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white text-xl shadow">🛒</div>
+                <div>
+                  <h3 class="font-kid font-bold text-base sm:text-lg text-emerald-900 leading-none" id="mm-title">Mini Market Adventure</h3>
+                  <p class="text-xs font-bold text-emerald-600 mt-0.5" id="mm-subtitle">Year 3 KSSR/DLP • Ringgit Malaysia (RM)</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-1.5 bg-emerald-50 p-1 rounded-2xl border border-emerald-200">
+                <button id="mm-tab-shop" onclick="switchMMStage('shop')" class="px-3 py-1.5 rounded-xl font-kid font-bold text-xs bg-emerald-500 text-white shadow">
+                  🏪 <span id="mm-lbl-shop">1. Shop</span>
+                </button>
+                <button id="mm-tab-basket" onclick="switchMMStage('basket')" class="px-3 py-1.5 rounded-xl font-kid font-bold text-xs text-slate-600 hover:bg-white flex items-center gap-1">
+                  🧺 <span id="mm-lbl-basket">2. Basket</span>
+                  <span id="mm-basket-badge" class="bg-rose-500 text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded-full">0</span>
+                </button>
+                <button id="mm-tab-pay" onclick="switchMMStage('pay')" class="px-3 py-1.5 rounded-xl font-kid font-bold text-xs text-slate-600 hover:bg-white">
+                  💵 <span id="mm-lbl-pay">3. Pay</span>
+                </button>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <select id="mm-challenge-select" onchange="setMMChallenge(this.value)" class="bg-amber-300 text-amber-950 font-kid font-bold text-xs px-3 py-2 rounded-xl border-2 border-amber-200 focus:outline-none">
+                  <option value="free">🎯 Free Shop</option>
+                  <option value="c1">⭐ Mission 1: Breakfast (Milo + Roti)</option>
+                  <option value="c2">⭐ Mission 2: School Kit (Color Pencils + Book)</option>
+                  <option value="c3">⭐ Mission 3: Family Groceries (Rice + Eggs + Milk)</option>
+                </select>
+                <div class="bg-amber-100 border-2 border-amber-300 px-3 py-1.5 rounded-xl flex items-center gap-1">
+                  <span>⭐</span>
+                  <span id="mm-star-count" class="font-kid font-bold text-sm text-amber-700">0</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="mm-mission-banner" class="hidden bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 text-xs font-bold flex items-center justify-between">
+              <span id="mm-mission-text">Mission: Buy 1 Milo Tin and 1 Roti Gardenia!</span>
+              <button onclick="setMMChallenge('free')" class="bg-white/20 px-2 py-0.5 rounded-lg text-[11px]" id="mm-exit-mission">Exit Mission</button>
+            </div>
+
+            <!-- STAGE 1: 3D SUPERMARKET + PRODUCT SHELF -->
+            <div id="mm-stage-shop" class="p-3 sm:p-4 space-y-3">
+              <div class="relative w-full h-[320px] sm:h-[370px] rounded-2xl overflow-hidden border-2 border-emerald-300 bg-[#e6f9ef] shadow-inner">
+                <div id="mm-three-container" class="w-full h-full cursor-grab active:cursor-grabbing"></div>
+
+                <div id="mm-hover-tooltip" class="hidden absolute pointer-events-none z-20 transform -translate-x-1/2 -translate-y-full pb-2">
+                  <div class="bg-slate-900/95 text-white px-3 py-1.5 rounded-xl border-2 border-amber-400 text-center shadow-lg">
+                    <div id="mm-tip-name" class="font-kid font-bold text-xs text-amber-300">Milo Tin</div>
+                    <div id="mm-tip-price" class="font-extrabold text-sm">RM 12.00</div>
+                  </div>
+                </div>
+
+                <div class="absolute bottom-2.5 left-2.5 right-2.5 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
+                  <div class="bg-white/95 px-3 py-1.5 rounded-xl shadow text-[11px] font-bold text-slate-700 pointer-events-auto">
+                    👆 <span id="mm-drag-hint">Tap 3D items on shelves or pick below • Drag screen to look around</span>
+                  </div>
+                  <div class="flex flex-wrap gap-1.5 pointer-events-auto">
+                    <button onclick="focusMMAisle('all')" class="btn-3d bg-emerald-500 text-white px-2.5 py-1 rounded-xl text-xs font-extrabold" id="mm-aisle-all">All Aisles</button>
+                    <button onclick="focusMMAisle('left')" class="btn-3d bg-white text-slate-700 px-2.5 py-1 rounded-xl text-xs font-extrabold" id="mm-aisle-left">🥛 Fresh & Bakery</button>
+                    <button onclick="focusMMAisle('center')" class="btn-3d bg-white text-slate-700 px-2.5 py-1 rounded-xl text-xs font-extrabold" id="mm-aisle-center">🍫 Drinks & Pantry</button>
+                    <button onclick="focusMMAisle('right')" class="btn-3d bg-white text-slate-700 px-2.5 py-1 rounded-xl text-xs font-extrabold" id="mm-aisle-right">🚗 Toys & School</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white rounded-2xl p-3 border-2 border-emerald-300 shadow">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <span class="font-kid font-bold text-sm text-emerald-900" id="mm-catalog-title">
+                    🏷️ Kedai Runcit Items (Tap + to put in Basket • Max RM 100)
+                  </span>
+                  <button onclick="switchMMStage('basket')" class="btn-3d bg-emerald-500 hover:bg-emerald-400 text-white font-kid font-bold text-xs px-4 py-1.5 rounded-xl flex items-center gap-1.5">
+                    <span id="mm-btn-goto-basket">Go to Basket</span>
+                    <span id="mm-strip-count" class="bg-white text-emerald-700 px-1.5 rounded-md font-extrabold">0</span>
+                    <span>➔</span>
+                  </button>
+                </div>
+                <div id="mm-products-strip" class="flex gap-2.5 overflow-x-auto pb-1"></div>
+              </div>
+            </div>
+
+            <!-- STAGE 2: YOUR SHOPPING BASKET -->
+            <div id="mm-stage-basket" class="hidden p-4 sm:p-5">
+              <div class="bg-white rounded-2xl border-2 border-emerald-300 overflow-hidden shadow-lg">
+                <div class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-5 py-3 flex items-center justify-between">
+                  <div>
+                    <h4 class="font-kid font-bold text-lg" id="mm-basket-heading">🧺 Your Shopping Basket</h4>
+                    <p class="text-xs text-emerald-100" id="mm-basket-sub">Step 1: Add up the prices to find the Total Cost!</p>
+                  </div>
+                  <button onclick="switchMMStage('shop')" class="bg-white/20 hover:bg-white/30 text-white font-bold text-xs px-3 py-1.5 rounded-xl" id="mm-btn-addmore">+ Add More Items</button>
+                </div>
+
+                <div class="p-4 grid grid-cols-1 md:grid-cols-12 gap-4">
+                  <div class="md:col-span-6 space-y-2">
+                    <div class="flex justify-between items-center">
+                      <span class="font-kid font-bold text-sm text-slate-700" id="mm-sel-groceries">Selected Groceries</span>
+                      <button onclick="clearMMBasket()" class="text-xs font-bold text-rose-500 hover:underline" id="mm-btn-empty">Empty Basket</button>
+                    </div>
+                    <div id="mm-basket-list" class="bg-slate-50 rounded-2xl p-3 border-2 border-slate-200 min-h-[170px] max-h-[260px] overflow-y-auto space-y-2"></div>
+                  </div>
+
+                  <div class="md:col-span-6 bg-amber-50 rounded-2xl p-4 border-2 border-amber-300 space-y-3">
+                    <div class="flex justify-between items-center">
+                      <span class="font-kid font-bold text-amber-900 text-base" id="mm-calc-total-lbl">🧮 Calculate Total</span>
+                      <button onclick="toggleMMHint()" class="text-xs bg-amber-200 hover:bg-amber-300 text-amber-950 font-extrabold px-2.5 py-1 rounded-lg" id="mm-btn-hint">💡 Step-by-Step Hint</button>
+                    </div>
+                    <p class="text-xs text-amber-900 font-semibold" id="mm-sen-rule">Add RM and sen together. Remember: 100 sen = RM 1.00!</p>
+
+                    <div id="mm-hint-box" class="hidden bg-white p-2.5 rounded-xl border border-amber-300 text-xs font-mono text-right"></div>
+
+                    <div class="flex items-center gap-1.5 bg-white p-2 rounded-2xl border-2 border-amber-400">
+                      <span class="font-kid font-bold text-lg text-emerald-700 pl-1">RM</span>
+                      <input id="mm-input-rm" onfocus="mmKeypadTarget='mm-input-rm'" type="number" min="0" max="200" placeholder="0" class="w-full text-center font-kid font-bold text-xl bg-emerald-50 rounded-xl py-1" />
+                      <span class="font-kid font-bold text-2xl">.</span>
+                      <input id="mm-input-sen" onfocus="mmKeypadTarget='mm-input-sen'" type="number" min="0" max="95" step="5" placeholder="00" class="w-full text-center font-kid font-bold text-xl bg-slate-100 rounded-xl py-1" />
+                      <span class="text-xs font-extrabold text-slate-400 pr-1">sen</span>
+                    </div>
+
+                    <div class="grid grid-cols-6 gap-1.5">
+                      <button type="button" onclick="mmKey('1')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">1</button>
+                      <button type="button" onclick="mmKey('2')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">2</button>
+                      <button type="button" onclick="mmKey('3')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">3</button>
+                      <button type="button" onclick="mmKey('4')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">4</button>
+                      <button type="button" onclick="mmKey('5')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">5</button>
+                      <button type="button" onclick="mmBack()" class="btn-3d bg-rose-100 text-rose-700 font-kid font-bold text-xs py-1.5 rounded-xl">⌫</button>
+                      <button type="button" onclick="mmKey('6')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">6</button>
+                      <button type="button" onclick="mmKey('7')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">7</button>
+                      <button type="button" onclick="mmKey('8')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">8</button>
+                      <button type="button" onclick="mmKey('9')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">9</button>
+                      <button type="button" onclick="mmKey('0')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">0</button>
+                      <button type="button" onclick="mmToggleField()" class="btn-3d bg-sky-100 text-sky-800 font-kid font-bold text-[11px] py-1.5 rounded-xl">RM/sen</button>
+                    </div>
+
+                    <div id="mm-basket-fb" class="hidden text-xs font-bold p-2.5 rounded-xl"></div>
+
+                    <button onclick="verifyMMBasket()" id="mm-btn-verify" class="btn-3d w-full bg-emerald-500 hover:bg-emerald-400 text-white font-kid font-bold text-base py-2.5 rounded-2xl">
+                      Check Total & Go to Cashier ➔
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 3: CASHIER AIMAN & MALAYSIAN RINGGIT WALLET -->
+            <div id="mm-stage-pay" class="hidden p-4 sm:p-5">
+              <div class="bg-white rounded-2xl border-2 border-sky-400 overflow-hidden shadow-lg">
+                <div class="bg-gradient-to-r from-sky-500 to-indigo-600 text-white px-5 py-3 flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-amber-300 border-2 border-white flex items-center justify-center text-2xl">🧑‍💼</div>
+                    <div class="bg-white text-slate-800 px-3.5 py-2 rounded-2xl rounded-tl-none shadow">
+                      <div class="text-[10px] font-extrabold uppercase text-sky-600" id="mm-cashier-lbl">Cashier Aiman says:</div>
+                      <p id="mm-cashier-speech" class="text-xs sm:text-sm font-bold">"Selamat datang! Tap the Ringgit notes and sen coins to pay your total."</p>
+                    </div>
+                  </div>
+                  <button onclick="switchMMStage('basket')" class="bg-white/20 hover:bg-white/30 text-white font-bold text-xs px-3 py-1.5 rounded-xl" id="mm-btn-back-basket">← Back to Basket</button>
+                </div>
+
+                <div class="p-4 grid grid-cols-1 lg:grid-cols-12 gap-4">
+                  <div class="lg:col-span-5 space-y-3">
+                    <div class="bg-slate-900 text-emerald-400 p-4 rounded-2xl border-4 border-slate-700 font-mono">
+                      <div class="flex justify-between items-center border-b border-slate-700 pb-2 mb-2">
+                        <span class="text-xs text-slate-400 font-sans font-bold" id="mm-pos-due-lbl">TOTAL TO PAY:</span>
+                        <span id="mm-pos-due" class="text-2xl font-extrabold text-amber-400">RM 0.00</span>
+                      </div>
+                      <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-400 font-sans font-bold" id="mm-pos-paid-lbl">MONEY GIVEN:</span>
+                        <span id="mm-pos-paid" class="text-2xl font-extrabold text-emerald-400">RM 0.00</span>
+                      </div>
+                    </div>
+
+                    <div class="bg-sky-50 rounded-2xl p-3 border-2 border-dashed border-sky-300 min-h-[110px]">
+                      <div class="flex justify-between items-center mb-1.5">
+                        <span class="text-xs font-extrabold text-sky-900" id="mm-tray-lbl">💰 Counter Tray (Tap to remove)</span>
+                        <button onclick="clearMMTray()" class="text-xs font-bold text-rose-500 hover:underline" id="mm-btn-clear-tray">Clear All</button>
+                      </div>
+                      <div id="mm-tray-items" class="flex flex-wrap gap-1.5 min-h-[60px] items-center"></div>
+                    </div>
+
+                    <!-- Change Verification Box -->
+                    <div id="mm-change-box" class="hidden bg-amber-100 border-2 border-amber-400 rounded-2xl p-3 space-y-2">
+                      <div class="font-kid font-bold text-amber-950 text-sm" id="mm-change-title">➖ Check Your Change! (Baki Wang)</div>
+                      <p class="text-xs text-amber-900 font-semibold" id="mm-change-prompt">Subtract Paid − Total = ?</p>
+                      <div class="flex items-center gap-1.5 bg-white p-1.5 rounded-xl border border-amber-400">
+                        <span class="font-kid font-bold text-sm text-emerald-700 pl-1">RM</span>
+                        <input id="mm-change-rm" type="number" min="0" max="200" placeholder="0" class="w-full text-center font-kid font-bold text-base bg-slate-100 rounded-lg py-1" />
+                        <span class="font-bold">.</span>
+                        <input id="mm-change-sen" type="number" min="0" max="95" step="5" placeholder="00" class="w-full text-center font-kid font-bold text-base bg-slate-100 rounded-lg py-1" />
+                      </div>
+                      <div id="mm-change-fb" class="hidden text-xs font-bold p-2 rounded-lg"></div>
+                      <button onclick="verifyMMChange()" id="mm-btn-confirm-change" class="btn-3d w-full bg-amber-500 hover:bg-amber-400 text-amber-950 font-kid font-bold text-sm py-2 rounded-xl">
+                        Confirm Change & Collect Star ⭐
+                      </button>
+                    </div>
+
+                    <!-- Receipt Summary Box -->
+                    <div id="mm-receipt-box" class="hidden bg-emerald-50 border-2 border-emerald-400 rounded-2xl p-3 space-y-2">
+                      <div class="font-kid font-bold text-emerald-900 text-sm" id="mm-receipt-title">🧾 Payment Complete! Receipt Ready</div>
+                      <pre id="mm-receipt-text" class="bg-white p-2.5 rounded-xl text-[11px] font-mono text-slate-700 border border-emerald-200 overflow-x-auto"></pre>
+                      <div class="flex gap-2">
+                        <button onclick="downloadMMReceipt()" class="btn-3d flex-1 bg-emerald-600 text-white font-kid font-bold text-xs py-2 rounded-xl" id="mm-btn-dl-receipt">Download Receipt</button>
+                        <button onclick="resetMMNewRound()" class="btn-3d flex-1 bg-sky-500 text-white font-kid font-bold text-xs py-2 rounded-xl" id="mm-btn-new-shop">New Shopping Trip</button>
+                      </div>
+                    </div>
+
+                    <button onclick="submitMMPayment()" id="mm-btn-pay-now" class="btn-3d w-full bg-emerald-500 hover:bg-emerald-400 text-white font-kid font-bold text-base py-3 rounded-2xl shadow-md">
+                      Hand Money to Cashier 💵
+                    </button>
+                  </div>
+
+                  <!-- Right Malaysian Ringgit Wallet -->
+                  <div class="lg:col-span-7 bg-slate-50 rounded-2xl p-3.5 border-2 border-slate-200 space-y-3">
+                    <h4 class="font-kid font-bold text-slate-800 text-sm" id="mm-wallet-notes-lbl">🇲🇾 Your Wallet – Malaysian Banknotes (Wang Kertas)</h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      <button onclick="addMMMoney(100,'RM1','bg-sky-500')" class="rm-note bg-gradient-to-r from-sky-500 to-blue-600 text-white p-2.5 text-left h-14 flex flex-col justify-between">
+                        <span class="font-kid font-extrabold text-base">RM1</span><span class="text-[10px] opacity-85">Wau Bulan</span>
+                      </button>
+                      <button onclick="addMMMoney(500,'RM5','bg-emerald-500')" class="rm-note bg-gradient-to-r from-emerald-500 to-green-600 text-white p-2.5 text-left h-14 flex flex-col justify-between">
+                        <span class="font-kid font-extrabold text-base">RM5</span><span class="text-[10px] opacity-85">Hornbill</span>
+                      </button>
+                      <button onclick="addMMMoney(1000,'RM10','bg-rose-500')" class="rm-note bg-gradient-to-r from-rose-500 to-red-600 text-white p-2.5 text-left h-14 flex flex-col justify-between">
+                        <span class="font-kid font-extrabold text-base">RM10</span><span class="text-[10px] opacity-85">Rafflesia</span>
+                      </button>
+                      <button onclick="addMMMoney(2000,'RM20','bg-amber-500')" class="rm-note bg-gradient-to-r from-amber-500 to-orange-500 text-white p-2.5 text-left h-14 flex flex-col justify-between">
+                        <span class="font-kid font-extrabold text-base">RM20</span><span class="text-[10px] opacity-85">Turtle</span>
+                      </button>
+                      <button onclick="addMMMoney(5000,'RM50','bg-teal-600')" class="rm-note bg-gradient-to-r from-teal-500 to-cyan-700 text-white p-2.5 text-left h-14 flex flex-col justify-between">
+                        <span class="font-kid font-extrabold text-base">RM50</span><span class="text-[10px] opacity-85">Oil Palm</span>
+                      </button>
+                      <button onclick="addMMMoney(10000,'RM100','bg-purple-600')" class="rm-note bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-2.5 text-left h-14 flex flex-col justify-between">
+                        <span class="font-kid font-extrabold text-base">RM100</span><span class="text-[10px] opacity-85">Kinabalu</span>
+                      </button>
+                    </div>
+
+                    <h4 class="font-kid font-bold text-slate-800 text-sm pt-1" id="mm-wallet-coins-lbl">🪙 Malaysian Coins (Duit Syiling)</h4>
+                    <div class="flex flex-wrap gap-3 items-center">
+                      <button onclick="addMMMoney(5,'5 sen','bg-slate-300 text-slate-900')" class="rm-coin w-14 h-14 bg-gradient-to-br from-slate-200 to-slate-400 text-slate-900 font-kid font-extrabold text-xs">5 sen</button>
+                      <button onclick="addMMMoney(10,'10 sen','bg-slate-300 text-slate-900')" class="rm-coin w-14 h-14 bg-gradient-to-br from-slate-200 to-slate-400 text-slate-900 font-kid font-extrabold text-xs">10 sen</button>
+                      <button onclick="addMMMoney(20,'20 sen','bg-amber-400 text-amber-950')" class="rm-coin w-14 h-14 bg-gradient-to-br from-amber-300 to-yellow-500 text-amber-950 font-kid font-extrabold text-xs">20 sen</button>
+                      <button onclick="addMMMoney(50,'50 sen','bg-amber-400 text-amber-950')" class="rm-coin w-14 h-14 bg-gradient-to-br from-amber-300 to-yellow-500 text-amber-950 font-kid font-extrabold text-xs">50 sen</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
+        <!-- Mode B: 8-Question Quiz & Landscape A4 Certificate -->
         <div id="assess-mode-quiz" class="hidden space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-900/90 border border-cyan-500/30 p-4 rounded-2xl">
             <div>
@@ -738,7 +975,6 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <!-- Left Gold Tactical Card -->
           <div class="lg:col-span-5 rounded-3xl bg-gradient-to-b from-amber-500/10 via-slate-950/90 to-slate-950 border border-amber-400/40 p-6 flex flex-col items-center text-center justify-between">
             <span id="meta-badge-code" class="px-4 py-1 rounded-full bg-amber-400/15 border border-amber-400/50 font-hud text-xs font-bold text-amber-300">
               OPERATIVE Z-03
@@ -766,7 +1002,6 @@
             </div>
           </div>
 
-          <!-- Right Cyan Editable Form Card -->
           <div class="lg:col-span-7 rounded-3xl bg-slate-950/80 border border-cyan-500/30 p-6 flex flex-col justify-between space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -810,254 +1045,6 @@
       </div>
     </section>
   </main>
-
-  <!-- REUSABLE COLOURFUL 3D MINI MARKET ADVENTURE WIDGET -->
-  <div id="mini-market-widget" class="hidden font-kid-body text-slate-800 rounded-3xl overflow-hidden border-4 border-emerald-400 shadow-2xl bg-[#f0fdf4]">
-    <div class="bg-white/95 px-4 py-3 border-b-2 border-emerald-200 flex flex-wrap items-center justify-between gap-2">
-      <div class="flex items-center gap-2.5">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white text-xl shadow">🛒</div>
-        <div>
-          <h3 class="font-kid font-bold text-base sm:text-lg text-emerald-900 leading-none" id="mm-title">Mini Market Adventure</h3>
-          <p class="text-xs font-bold text-emerald-600 mt-0.5" id="mm-subtitle">Year 3 KSSR/DLP • Ringgit Malaysia (RM)</p>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-1.5 bg-emerald-50 p-1 rounded-2xl border border-emerald-200">
-        <button id="mm-tab-shop" onclick="switchMMStage('shop')" class="px-3 py-1.5 rounded-xl font-kid font-bold text-xs bg-emerald-500 text-white shadow">
-          🏪 <span id="mm-lbl-shop">1. Shop</span>
-        </button>
-        <button id="mm-tab-basket" onclick="switchMMStage('basket')" class="px-3 py-1.5 rounded-xl font-kid font-bold text-xs text-slate-600 hover:bg-white flex items-center gap-1">
-          🧺 <span id="mm-lbl-basket">2. Basket</span>
-          <span id="mm-basket-badge" class="bg-rose-500 text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded-full">0</span>
-        </button>
-        <button id="mm-tab-pay" onclick="switchMMStage('pay')" class="px-3 py-1.5 rounded-xl font-kid font-bold text-xs text-slate-600 hover:bg-white">
-          💵 <span id="mm-lbl-pay">3. Pay</span>
-        </button>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <select id="mm-challenge-select" onchange="setMMChallenge(this.value)" class="bg-amber-300 text-amber-950 font-kid font-bold text-xs px-3 py-2 rounded-xl border-2 border-amber-200 focus:outline-none">
-          <option value="free">🎯 Free Shop</option>
-          <option value="c1">⭐ Mission 1: Breakfast (Milo + Roti)</option>
-          <option value="c2">⭐ Mission 2: School Kit (Color Pencils + Book)</option>
-          <option value="c3">⭐ Mission 3: Family Groceries (Rice + Eggs + Milk)</option>
-        </select>
-        <div class="bg-amber-100 border-2 border-amber-300 px-3 py-1.5 rounded-xl flex items-center gap-1">
-          <span>⭐</span>
-          <span id="mm-star-count" class="font-kid font-bold text-sm text-amber-700">0</span>
-        </div>
-      </div>
-    </div>
-
-    <div id="mm-mission-banner" class="hidden bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 text-xs font-bold flex items-center justify-between">
-      <span id="mm-mission-text">Mission: Buy 1 Milo Tin and 1 Roti Gardenia!</span>
-      <button onclick="setMMChallenge('free')" class="bg-white/20 px-2 py-0.5 rounded-lg text-[11px]" id="mm-exit-mission">Exit Mission</button>
-    </div>
-
-    <!-- STAGE 1: 3D SUPERMARKET + PRODUCT SHELF -->
-    <div id="mm-stage-shop" class="p-3 sm:p-4 space-y-3">
-      <div class="relative w-full h-[320px] sm:h-[370px] rounded-2xl overflow-hidden border-2 border-emerald-300 bg-[#e6f9ef] shadow-inner">
-        <div id="mm-three-container" class="w-full h-full cursor-grab active:cursor-grabbing"></div>
-
-        <div id="mm-hover-tooltip" class="hidden absolute pointer-events-none z-20 transform -translate-x-1/2 -translate-y-full pb-2">
-          <div class="bg-slate-900/95 text-white px-3 py-1.5 rounded-xl border-2 border-amber-400 text-center shadow-lg">
-            <div id="mm-tip-name" class="font-kid font-bold text-xs text-amber-300">Milo Tin</div>
-            <div id="mm-tip-price" class="font-extrabold text-sm">RM 12.00</div>
-          </div>
-        </div>
-
-        <div class="absolute bottom-2.5 left-2.5 right-2.5 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
-          <div class="bg-white/95 px-3 py-1.5 rounded-xl shadow text-[11px] font-bold text-slate-700 pointer-events-auto">
-            👆 <span id="mm-drag-hint">Tap 3D items on shelves or pick below • Drag screen to look around</span>
-          </div>
-          <div class="flex flex-wrap gap-1.5 pointer-events-auto">
-            <button onclick="focusMMAisle('all')" class="btn-3d bg-emerald-500 text-white px-2.5 py-1 rounded-xl text-xs font-extrabold" id="mm-aisle-all">All Aisles</button>
-            <button onclick="focusMMAisle('left')" class="btn-3d bg-white text-slate-700 px-2.5 py-1 rounded-xl text-xs font-extrabold" id="mm-aisle-left">🥛 Fresh & Bakery</button>
-            <button onclick="focusMMAisle('center')" class="btn-3d bg-white text-slate-700 px-2.5 py-1 rounded-xl text-xs font-extrabold" id="mm-aisle-center">🍫 Drinks & Pantry</button>
-            <button onclick="focusMMAisle('right')" class="btn-3d bg-white text-slate-700 px-2.5 py-1 rounded-xl text-xs font-extrabold" id="mm-aisle-right">🚗 Toys & School</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl p-3 border-2 border-emerald-300 shadow">
-        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-          <span class="font-kid font-bold text-sm text-emerald-900" id="mm-catalog-title">
-            🏷️ Kedai Runcit Items (Tap + to put in Basket • Max RM 100)
-          </span>
-          <button onclick="switchMMStage('basket')" class="btn-3d bg-emerald-500 hover:bg-emerald-400 text-white font-kid font-bold text-xs px-4 py-1.5 rounded-xl flex items-center gap-1.5">
-            <span id="mm-btn-goto-basket">Go to Basket</span>
-            <span id="mm-strip-count" class="bg-white text-emerald-700 px-1.5 rounded-md font-extrabold">0</span>
-            <span>➔</span>
-          </button>
-        </div>
-        <div id="mm-products-strip" class="flex gap-2.5 overflow-x-auto pb-1"></div>
-      </div>
-    </div>
-
-    <!-- STAGE 2: YOUR SHOPPING BASKET -->
-    <div id="mm-stage-basket" class="hidden p-4 sm:p-5">
-      <div class="bg-white rounded-2xl border-2 border-emerald-300 overflow-hidden shadow-lg">
-        <div class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-5 py-3 flex items-center justify-between">
-          <div>
-            <h4 class="font-kid font-bold text-lg" id="mm-basket-heading">🧺 Your Shopping Basket</h4>
-            <p class="text-xs text-emerald-100" id="mm-basket-sub">Step 1: Add up the prices to find the Total Cost!</p>
-          </div>
-          <button onclick="switchMMStage('shop')" class="bg-white/20 hover:bg-white/30 text-white font-bold text-xs px-3 py-1.5 rounded-xl" id="mm-btn-addmore">+ Add More Items</button>
-        </div>
-
-        <div class="p-4 grid grid-cols-1 md:grid-cols-12 gap-4">
-          <div class="md:col-span-6 space-y-2">
-            <div class="flex justify-between items-center">
-              <span class="font-kid font-bold text-sm text-slate-700" id="mm-sel-groceries">Selected Groceries</span>
-              <button onclick="clearMMBasket()" class="text-xs font-bold text-rose-500 hover:underline" id="mm-btn-empty">Empty Basket</button>
-            </div>
-            <div id="mm-basket-list" class="bg-slate-50 rounded-2xl p-3 border-2 border-slate-200 min-h-[170px] max-h-[260px] overflow-y-auto space-y-2"></div>
-          </div>
-
-          <div class="md:col-span-6 bg-amber-50 rounded-2xl p-4 border-2 border-amber-300 space-y-3">
-            <div class="flex justify-between items-center">
-              <span class="font-kid font-bold text-amber-900 text-base" id="mm-calc-total-lbl">🧮 Calculate Total</span>
-              <button onclick="toggleMMHint()" class="text-xs bg-amber-200 hover:bg-amber-300 text-amber-950 font-extrabold px-2.5 py-1 rounded-lg" id="mm-btn-hint">💡 Step-by-Step Hint</button>
-            </div>
-            <p class="text-xs text-amber-900 font-semibold" id="mm-sen-rule">Add RM and sen together. Remember: 100 sen = RM 1.00!</p>
-
-            <div id="mm-hint-box" class="hidden bg-white p-2.5 rounded-xl border border-amber-300 text-xs font-mono text-right"></div>
-
-            <div class="flex items-center gap-1.5 bg-white p-2 rounded-2xl border-2 border-amber-400">
-              <span class="font-kid font-bold text-lg text-emerald-700 pl-1">RM</span>
-              <input id="mm-input-rm" onfocus="mmKeypadTarget='mm-input-rm'" type="number" min="0" max="200" placeholder="0" class="w-full text-center font-kid font-bold text-xl bg-emerald-50 rounded-xl py-1" />
-              <span class="font-kid font-bold text-2xl">.</span>
-              <input id="mm-input-sen" onfocus="mmKeypadTarget='mm-input-sen'" type="number" min="0" max="95" step="5" placeholder="00" class="w-full text-center font-kid font-bold text-xl bg-slate-100 rounded-xl py-1" />
-              <span class="text-xs font-extrabold text-slate-400 pr-1">sen</span>
-            </div>
-
-            <div class="grid grid-cols-6 gap-1.5">
-              <button type="button" onclick="mmKey('1')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">1</button>
-              <button type="button" onclick="mmKey('2')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">2</button>
-              <button type="button" onclick="mmKey('3')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">3</button>
-              <button type="button" onclick="mmKey('4')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">4</button>
-              <button type="button" onclick="mmKey('5')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">5</button>
-              <button type="button" onclick="mmBack()" class="btn-3d bg-rose-100 text-rose-700 font-kid font-bold text-xs py-1.5 rounded-xl">⌫</button>
-              <button type="button" onclick="mmKey('6')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">6</button>
-              <button type="button" onclick="mmKey('7')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">7</button>
-              <button type="button" onclick="mmKey('8')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">8</button>
-              <button type="button" onclick="mmKey('9')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">9</button>
-              <button type="button" onclick="mmKey('0')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">0</button>
-              <button type="button" onclick="mmToggleField()" class="btn-3d bg-sky-100 text-sky-800 font-kid font-bold text-[11px] py-1.5 rounded-xl">RM/sen</button>
-            </div>
-
-            <div id="mm-basket-fb" class="hidden text-xs font-bold p-2.5 rounded-xl"></div>
-
-            <button onclick="verifyMMBasket()" id="mm-btn-verify" class="btn-3d w-full bg-emerald-500 hover:bg-emerald-400 text-white font-kid font-bold text-base py-2.5 rounded-2xl">
-              Check Total & Go to Cashier ➔
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STAGE 3: CASHIER AIMAN & MALAYSIAN RINGGIT WALLET -->
-    <div id="mm-stage-pay" class="hidden p-4 sm:p-5">
-      <div class="bg-white rounded-2xl border-2 border-sky-400 overflow-hidden shadow-lg">
-        <div class="bg-gradient-to-r from-sky-500 to-indigo-600 text-white px-5 py-3 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-2xl bg-amber-300 border-2 border-white flex items-center justify-center text-2xl">🧑‍💼</div>
-            <div class="bg-white text-slate-800 px-3.5 py-2 rounded-2xl rounded-tl-none shadow">
-              <div class="text-[10px] font-extrabold uppercase text-sky-600" id="mm-cashier-lbl">Cashier Aiman says:</div>
-              <p id="mm-cashier-speech" class="text-xs sm:text-sm font-bold">"Selamat datang! Tap the Ringgit notes and sen coins to pay your total."</p>
-            </div>
-          </div>
-          <button onclick="switchMMStage('basket')" class="bg-white/20 hover:bg-white/30 text-white font-bold text-xs px-3 py-1.5 rounded-xl" id="mm-btn-back-basket">← Back to Basket</button>
-        </div>
-
-        <div class="p-4 grid grid-cols-1 lg:grid-cols-12 gap-4">
-          <div class="lg:col-span-5 space-y-3">
-            <div class="bg-slate-900 text-emerald-400 p-4 rounded-2xl border-4 border-slate-700 font-mono">
-              <div class="flex justify-between items-center border-b border-slate-700 pb-2 mb-2">
-                <span class="text-xs text-slate-400 font-sans font-bold" id="mm-pos-due-lbl">TOTAL TO PAY:</span>
-                <span id="mm-pos-due" class="text-2xl font-extrabold text-amber-400">RM 0.00</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-xs text-slate-400 font-sans font-bold" id="mm-pos-paid-lbl">MONEY GIVEN:</span>
-                <span id="mm-pos-paid" class="text-2xl font-extrabold text-emerald-400">RM 0.00</span>
-              </div>
-            </div>
-
-            <div class="bg-sky-50 rounded-2xl p-3 border-2 border-dashed border-sky-300 min-h-[110px]">
-              <div class="flex justify-between items-center mb-1.5">
-                <span class="text-xs font-extrabold text-sky-900" id="mm-tray-lbl">💰 Counter Tray (Tap to remove)</span>
-                <button onclick="clearMMTray()" class="text-xs font-bold text-rose-500 hover:underline" id="mm-btn-clear-tray">Clear All</button>
-              </div>
-              <div id="mm-tray-items" class="flex flex-wrap gap-1.5 min-h-[60px] items-center"></div>
-            </div>
-
-            <!-- Change Verification Box -->
-            <div id="mm-change-box" class="hidden bg-amber-100 border-2 border-amber-400 rounded-2xl p-3 space-y-2">
-              <div class="font-kid font-bold text-amber-950 text-sm" id="mm-change-title">➖ Check Your Change! (Baki Wang)</div>
-              <p class="text-xs text-amber-900 font-semibold" id="mm-change-prompt">Subtract Paid − Total = ?</p>
-              <div class="flex items-center gap-1.5 bg-white p-1.5 rounded-xl border border-amber-400">
-                <span class="font-kid font-bold text-sm text-emerald-700 pl-1">RM</span>
-                <input id="mm-change-rm" type="number" min="0" max="200" placeholder="0" class="w-full text-center font-kid font-bold text-base bg-slate-100 rounded-lg py-1" />
-                <span class="font-bold">.</span>
-                <input id="mm-change-sen" type="number" min="0" max="95" step="5" placeholder="00" class="w-full text-center font-kid font-bold text-base bg-slate-100 rounded-lg py-1" />
-              </div>
-              <div id="mm-change-fb" class="hidden text-xs font-bold p-2 rounded-lg"></div>
-              <button onclick="verifyMMChange()" id="mm-btn-confirm-change" class="btn-3d w-full bg-amber-500 hover:bg-amber-400 text-amber-950 font-kid font-bold text-sm py-2 rounded-xl">
-                Confirm Change & Collect Star ⭐
-              </button>
-            </div>
-
-            <!-- Receipt Summary Box -->
-            <div id="mm-receipt-box" class="hidden bg-emerald-50 border-2 border-emerald-400 rounded-2xl p-3 space-y-2">
-              <div class="font-kid font-bold text-emerald-900 text-sm" id="mm-receipt-title">🧾 Payment Complete! Receipt Ready</div>
-              <pre id="mm-receipt-text" class="bg-white p-2.5 rounded-xl text-[11px] font-mono text-slate-700 border border-emerald-200 overflow-x-auto"></pre>
-              <div class="flex gap-2">
-                <button onclick="downloadMMReceipt()" class="btn-3d flex-1 bg-emerald-600 text-white font-kid font-bold text-xs py-2 rounded-xl" id="mm-btn-dl-receipt">Download Receipt</button>
-                <button onclick="resetMMNewRound()" class="btn-3d flex-1 bg-sky-500 text-white font-kid font-bold text-xs py-2 rounded-xl" id="mm-btn-new-shop">New Shopping Trip</button>
-              </div>
-            </div>
-
-            <button onclick="submitMMPayment()" id="mm-btn-pay-now" class="btn-3d w-full bg-emerald-500 hover:bg-emerald-400 text-white font-kid font-bold text-base py-3 rounded-2xl shadow-md">
-              Hand Money to Cashier 💵
-            </button>
-          </div>
-
-          <!-- Right Malaysian Ringgit Wallet -->
-          <div class="lg:col-span-7 bg-slate-50 rounded-2xl p-3.5 border-2 border-slate-200 space-y-3">
-            <h4 class="font-kid font-bold text-slate-800 text-sm" id="mm-wallet-notes-lbl">🇲🇾 Your Wallet – Malaysian Banknotes (Wang Kertas)</h4>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              <button onclick="addMMMoney(100,'RM1','bg-sky-500')" class="rm-note bg-gradient-to-r from-sky-500 to-blue-600 text-white p-2.5 text-left h-14 flex flex-col justify-between">
-                <span class="font-kid font-extrabold text-base">RM1</span><span class="text-[10px] opacity-85">Wau Bulan</span>
-              </button>
-              <button onclick="addMMMoney(500,'RM5','bg-emerald-500')" class="rm-note bg-gradient-to-r from-emerald-500 to-green-600 text-white p-2.5 text-left h-14 flex flex-col justify-between">
-                <span class="font-kid font-extrabold text-base">RM5</span><span class="text-[10px] opacity-85">Hornbill</span>
-              </button>
-              <button onclick="addMMMoney(1000,'RM10','bg-rose-500')" class="rm-note bg-gradient-to-r from-rose-500 to-red-600 text-white p-2.5 text-left h-14 flex flex-col justify-between">
-                <span class="font-kid font-extrabold text-base">RM10</span><span class="text-[10px] opacity-85">Rafflesia</span>
-              </button>
-              <button onclick="addMMMoney(2000,'RM20','bg-amber-500')" class="rm-note bg-gradient-to-r from-amber-500 to-orange-500 text-white p-2.5 text-left h-14 flex flex-col justify-between">
-                <span class="font-kid font-extrabold text-base">RM20</span><span class="text-[10px] opacity-85">Turtle</span>
-              </button>
-              <button onclick="addMMMoney(5000,'RM50','bg-teal-600')" class="rm-note bg-gradient-to-r from-teal-500 to-cyan-700 text-white p-2.5 text-left h-14 flex flex-col justify-between">
-                <span class="font-kid font-extrabold text-base">RM50</span><span class="text-[10px] opacity-85">Oil Palm</span>
-              </button>
-              <button onclick="addMMMoney(10000,'RM100','bg-purple-600')" class="rm-note bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-2.5 text-left h-14 flex flex-col justify-between">
-                <span class="font-kid font-extrabold text-base">RM100</span><span class="text-[10px] opacity-85">Kinabalu</span>
-              </button>
-            </div>
-
-            <h4 class="font-kid font-bold text-slate-800 text-sm pt-1" id="mm-wallet-coins-lbl">🪙 Malaysian Coins (Duit Syiling)</h4>
-            <div class="flex flex-wrap gap-3 items-center">
-              <button onclick="addMMMoney(5,'5 sen','bg-slate-300 text-slate-900')" class="rm-coin w-14 h-14 bg-gradient-to-br from-slate-200 to-slate-400 text-slate-900 font-kid font-extrabold text-xs">5 sen</button>
-              <button onclick="addMMMoney(10,'10 sen','bg-slate-300 text-slate-900')" class="rm-coin w-14 h-14 bg-gradient-to-br from-slate-200 to-slate-400 text-slate-900 font-kid font-extrabold text-xs">10 sen</button>
-              <button onclick="addMMMoney(20,'20 sen','bg-amber-400 text-amber-950')" class="rm-coin w-14 h-14 bg-gradient-to-br from-amber-300 to-yellow-500 text-amber-950 font-kid font-extrabold text-xs">20 sen</button>
-              <button onclick="addMMMoney(50,'50 sen','bg-amber-400 text-amber-950')" class="rm-coin w-14 h-14 bg-gradient-to-br from-amber-300 to-yellow-500 text-amber-950 font-kid font-extrabold text-xs">50 sen</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- FLOATING COMOT x I.R.I.S. AI ASSISTANT -->
   <div class="fixed bottom-4 right-4 z-50">
@@ -1145,8 +1132,8 @@
           { id: 'pengenalan', num: '01', label: 'Introduction', desc: 'Malaysian banknotes, sen coins & 100 sen = RM1 rule.' },
           { id: 'rph', num: '02', label: 'Lesson Plan (RPH)', desc: 'Year 3 KSSR Content & Learning Standards (3.1.1).' },
           { id: 'set_induksi', num: '03', label: 'Induction Set', desc: '5-Question 60-Second Place Value Gadget Lab.' },
-          { id: 'langkah', num: '04', label: 'Learning Steps', desc: 'Vertical addition, FX-3100 Calculator & 3D Mini Market.' },
-          { id: 'penilaian', num: '05', label: 'Assessment & Games', desc: '3D Mini Market missions & 8-Question Certificate Quiz.' },
+          { id: 'langkah', num: '04', label: 'Learning Steps', desc: 'Vertical addition steps & FX-3100 Scientific Calculator.' },
+          { id: 'penilaian', num: '05', label: 'Assessment & Games', desc: '3D Mini Market Adventure & 8-Question Certificate Quiz.' },
           { id: 'penutup', num: '06', label: 'Closure', desc: 'Key rules debrief & Digital Agent Exit Ticket.' },
           { id: 'metadata', num: '07', label: 'Metadata', desc: 'Developer & educator dossier (Operative Z-03).' }
         ],
@@ -1196,9 +1183,9 @@
         labRetry: 'RETRY 5-QUESTION MISSION',
         boxH: 'HUNDREDS', boxT: 'TENS', boxO: 'ONES', boxD: 'DECIMAL', boxP: 'POINT', boxS: 'SEN',
         labCurrent: 'CURRENT SCANNER LOAD:',
-        m3Next: 'NEXT: MENU 04 LEARNING STEPS & 3D MINI MARKET ➔',
+        m3Next: 'NEXT: MENU 04 LEARNING STEPS ➔',
         m4Tag: 'MENU 04 // LEARNING STEPS',
-        m4Title: 'Addition of Money & 3D Mini Market',
+        m4Title: 'Addition of Money (Up to RM10,000)',
         m4Claim: 'COMPLETE LEARNING STEPS (+150 XP)',
         step1T: 'STEP 1: ADDITION WITHOUT REGROUPING',
         step1D: 'Arrange digits vertically according to place value (Thousands, Hundreds, Tens, Ones) and keep the RM symbol aligned.',
@@ -1210,7 +1197,7 @@
         btnUseCalc: 'USE CALCULATOR RESULT',
         calcTitle: 'M.A.T.A SCIENTIFIC CALCULATOR // FX-3100',
         calcTip: 'I.R.I.S. TIP: Compute expressions on the FX-3100, then click "USE CALCULATOR RESULT" to auto-fill your answer.',
-        m4Next: 'NEXT: MENU 05 ASSESSMENT & GAMES ➔',
+        m4Next: 'NEXT: MENU 05 ASSESSMENT & GAMES (3D MINI MARKET) ➔',
         m5Tag: 'MENU 05 // ASSESSMENT & GAMES',
         m5Title: '3D Mini Market & Final Evaluation Quiz',
         modeA: 'MODE A: 3D MINI MARKET',
@@ -1270,8 +1257,8 @@
           { id: 'pengenalan', num: '01', label: 'Pengenalan', desc: 'Wang kertas, duit syiling & rumus 100 sen = RM1.' },
           { id: 'rph', num: '02', label: 'RPH', desc: 'Standard Kandungan & Standard Pembelajaran (3.1.1).' },
           { id: 'set_induksi', num: '03', label: 'Set Induksi', desc: 'Makmal Gajet Nilai Tempat 5 Soalan (60 Saat).' },
-          { id: 'langkah', num: '04', label: 'Langkah Pembelajaran', desc: 'Tambah bentuk lazim, Kalkulator FX-3100 & Pasar Mini 3D.' },
-          { id: 'penilaian', num: '05', label: 'Penilaian & Permainan', desc: 'Misi Pasar Mini 3D & Kuiz 8 Soalan Bersijil.' },
+          { id: 'langkah', num: '04', label: 'Langkah Pembelajaran', desc: 'Langkah tambah bentuk lazim & Kalkulator FX-3100.' },
+          { id: 'penilaian', num: '05', label: 'Penilaian & Permainan', desc: 'Pasar Mini 3D & Kuiz 8 Soalan Bersijil.' },
           { id: 'penutup', num: '06', label: 'Penutup', desc: 'Rumusan peraturan utama & Tiket Keluar Digital.' },
           { id: 'metadata', num: '07', label: 'Metadata', desc: 'Profil pembangun & pendidik (Operative Z-03).' }
         ],
@@ -1321,9 +1308,9 @@
         labRetry: 'CUBA SEMULA MISI 5-SOALAN',
         boxH: 'RATUS', boxT: 'PULUH', boxO: 'SA', boxD: 'TITIK', boxP: 'PERPULUHAN', boxS: 'SEN',
         labCurrent: 'MUATAN PENGIMBAS SEMASA:',
-        m3Next: 'SETERUSNYA: MENU 04 LANGKAH PEMBELAJARAN & PASAR MINI 3D ➔',
+        m3Next: 'SETERUSNYA: MENU 04 LANGKAH PEMBELAJARAN ➔',
         m4Tag: 'MENU 04 // LANGKAH PEMBELAJARAN',
-        m4Title: 'Tambah Wang & Simulasi Pasar Mini 3D',
+        m4Title: 'Tambah Wang (Hingga RM10,000)',
         m4Claim: 'SELESAIKAN LANGKAH PEMBELAJARAN (+150 XP)',
         step1T: 'LANGKAH 1: TAMBAH WANG TANPA MENGUMPUL SEMULA',
         step1D: 'Susun digit mengikut nilai tempat (Ribu, Ratus, Puluh, Sa) secara menegak dan pastikan simbol RM selari.',
@@ -1335,7 +1322,7 @@
         btnUseCalc: 'GUNA HASIL KALKULATOR',
         calcTitle: 'KALKULATOR SAINTIFIK M.A.T.A // FX-3100',
         calcTip: 'TIP I.R.I.S.: Kira ungkapan pada FX-3100, kemudian klik "GUNA HASIL KALKULATOR" untuk mengisi jawapan.',
-        m4Next: 'SETERUSNYA: MENU 05 PENILAIAN & PERMAINAN ➔',
+        m4Next: 'SETERUSNYA: MENU 05 PENILAIAN & PERMAINAN (PASAR MINI 3D) ➔',
         m5Tag: 'MENU 05 // PENILAIAN & PERMAINAN',
         m5Title: 'Pasar Mini 3D & Kuiz Penilaian Akhir',
         modeA: 'MOD A: PASAR MINI 3D',
@@ -1383,7 +1370,7 @@
       }
     };
 
-    /* ==================== SOUND SYNTHESIZER (WEB AUDIO API) ==================== */
+    /* ==================== SOUND SYNTHESIZER ==================== */
     function playTone(type) {
       if (!audioEnabled) return;
       try {
@@ -1465,7 +1452,6 @@
 
     function navigateMenu(menuId) {
       playTone('click');
-      // Stop Gadget Lab timer and mark failed if leaving early while active
       if (currentView === 'set_induksi' && menuId !== 'set_induksi' && labState.active) {
         abortLabEarly();
       }
@@ -1477,16 +1463,12 @@
         if (el) el.classList.toggle('hidden', v !== menuId);
       });
 
-      // Auto-start 5-Question 60-second Gadget Lab when entering Menu 03
       if (menuId === 'set_induksi') {
         startLabSession(true);
       }
 
-      // Mount Colourful 3D Mini Market into Menu 04 or Menu 05
-      if (menuId === 'langkah') {
-        mountMiniMarket('mm-mount-langkah');
-      } else if (menuId === 'penilaian') {
-        mountMiniMarket('mm-mount-penilaian');
+      if (menuId === 'penilaian') {
+        initMiniMarketOnce();
       }
 
       renderNavAndCards();
@@ -1544,8 +1526,8 @@
         playTone('success');
         fb.className = 'text-xs font-bold p-3 rounded-xl bg-emerald-950/80 border border-emerald-400 text-emerald-300';
         fb.textContent = currentLang === 'en'
-          ? 'EXACT! 250 sen = 200 sen + 50 sen = RM2.50 (+50 XP).'
-          : 'TEPAT! 250 sen = 200 sen + 50 sen = RM2.50 (+50 XP).';
+          ? 'EXACT! 250 sen = 200 sen + 50 sen = RM2.50 (+100 XP).'
+          : 'TEPAT! 250 sen = 200 sen + 50 sen = RM2.50 (+100 XP).';
         completeMission('pengenalan', 100);
       } else {
         playTone('error');
@@ -1557,25 +1539,14 @@
     }
 
     /* ==================== MENU 03: 5-QUESTION 60-SECOND GADGET LAB ==================== */
-    const LAB_QUESTION_POOL = [
-      12550, // RM 125.50
-      24685, // RM 246.85
-      35040, // RM 350.40
-      41875, // RM 418.75
-      50990, // RM 509.90
-      18230, // RM 182.30
-      63565, // RM 635.65
-      74095, // RM 740.95
-      81525, // RM 815.25
-      92460  // RM 924.60
-    ];
+    const LAB_QUESTION_POOL = [12550, 24685, 35040, 41875, 50990, 18230, 63565, 74095, 81525, 92460];
 
     let labState = {
       active: false,
       timerId: null,
       secondsLeft: 60,
       questions: [],
-      qIndex: 0, // 0..4 (5 questions)
+      qIndex: 0,
       currentLoadSen: 0
     };
 
@@ -1592,8 +1563,7 @@
       labState.active = true;
       if (resetTimer) labState.secondsLeft = 60;
 
-      const alertBanner = document.getElementById('lab-alert-banner');
-      alertBanner.classList.add('hidden');
+      document.getElementById('lab-alert-banner').classList.add('hidden');
       const statusPill = document.getElementById('lab-status-pill');
       statusPill.textContent = currentLang === 'en' ? 'ACTIVE' : 'AKTIF';
       statusPill.className = 'px-2.5 py-1 rounded-lg bg-cyan-500/20 border border-cyan-400/40 font-hud text-[10px] font-bold text-cyan-300';
@@ -1661,9 +1631,7 @@
       if (!labState.active) return;
       playTone('click');
       const target = labState.questions[labState.qIndex];
-      // Load partial sample close to target
-      const partial = Math.max(0, target - 500);
-      labState.currentLoadSen = partial;
+      labState.currentLoadSen = Math.max(0, target - 500);
       updateLabUI();
     }
 
@@ -1678,7 +1646,6 @@
       if (labState.currentLoadSen === target) {
         playTone('success');
         if (labState.qIndex < 4) {
-          // Advance to next question out of 5 while timer continues
           labState.qIndex++;
           labState.currentLoadSen = 0;
           const banner = document.getElementById('lab-alert-banner');
@@ -1689,7 +1656,6 @@
           document.getElementById('lab-retry-btn').classList.add('hidden');
           updateLabUI();
         } else {
-          // All 5 questions completed!
           labState.active = false;
           clearInterval(labState.timerId);
           const statusPill = document.getElementById('lab-status-pill');
@@ -1716,7 +1682,6 @@
         : `SOALAN ${labState.qIndex + 1} DARIPADA 5 — NILAI KALIBRASI SASARAN`;
       document.getElementById('lab-target-display').textContent = `RM ${(targetSen / 100).toFixed(2)}`;
 
-      // Render 5 question dots
       const dotsEl = document.getElementById('lab-q-dots');
       dotsEl.innerHTML = [0, 1, 2, 3, 4].map(idx => {
         const isDone = idx < labState.qIndex || (!labState.active && completedMissions['set_induksi'] && labState.qIndex === 4);
@@ -1832,7 +1797,7 @@
       }
     }
 
-    /* ==================== COLOURFUL 3D MINI MARKET ADVENTURE ==================== */
+    /* ==================== MENU 05: COLOURFUL 3D MINI MARKET ADVENTURE ==================== */
     const MM_PRODUCTS = [
       { id: 'roti', nameEn: 'Roti Gardenia', nameBm: 'Roti Gardenia', price: 350, icon: '🍞', aisle: 'left', color: 0xf59e0b, x: -3.2, y: 1.55, z: -1.5 },
       { id: 'milk', nameEn: 'Fresh Milk', nameBm: 'Susu Segar', price: 420, icon: '🥛', aisle: 'left', color: 0x38bdf8, x: -2.1, y: 1.55, z: -1.5 },
@@ -1850,8 +1815,8 @@
       { id: 'book', nameEn: 'Exercise Book', nameBm: 'Buku Latihan', price: 250, icon: '📒', aisle: 'right', color: 0x10b981, x: 3.2, y: 0.75, z: -1.5 }
     ];
 
-    let mmBasket = {}; // { id: qty }
-    let mmTray = [];   // [{ val, label, cls }]
+    let mmBasket = {};
+    let mmTray = [];
     let mmStars = 0;
     let mmChallenge = 'free';
     let mmKeypadTarget = 'mm-input-rm';
@@ -1860,12 +1825,7 @@
     let camTargetPos = { x: 0, y: 2.3, z: 5.2 };
     let camLookAt = { x: 0, y: 1.1, z: -1.5 };
 
-    function mountMiniMarket(targetId) {
-      const host = document.getElementById(targetId);
-      const widget = document.getElementById('mini-market-widget');
-      if (!host || !widget) return;
-      host.appendChild(widget);
-      widget.classList.remove('hidden');
+    function initMiniMarketOnce() {
       renderMMProducts();
       renderMMBasket();
       renderMMTray();
@@ -1875,9 +1835,11 @@
         threeInitialized = true;
       } else if (threeRenderer) {
         const cont = document.getElementById('mm-three-container');
-        threeRenderer.setSize(cont.clientWidth, cont.clientHeight);
-        threeCamera.aspect = cont.clientWidth / cont.clientHeight;
-        threeCamera.updateProjectionMatrix();
+        if (cont && cont.clientWidth > 0) {
+          threeRenderer.setSize(cont.clientWidth, cont.clientHeight);
+          threeCamera.aspect = cont.clientWidth / cont.clientHeight;
+          threeCamera.updateProjectionMatrix();
+        }
       }
     }
 
@@ -1898,8 +1860,7 @@
         ctx.font = 'bold 32px sans-serif';
         ctx.fillText(sub, 256, 125);
       }
-      const tex = new THREE.CanvasTexture(c);
-      return tex;
+      return new THREE.CanvasTexture(c);
     }
 
     function initThreeMiniMarket() {
@@ -1907,23 +1868,23 @@
       threeScene = new THREE.Scene();
       threeScene.background = new THREE.Color(0xeafcf2);
 
-      threeCamera = new THREE.PerspectiveCamera(46, container.clientWidth / container.clientHeight, 0.1, 100);
+      const w = container.clientWidth || 720;
+      const h = container.clientHeight || 350;
+      threeCamera = new THREE.PerspectiveCamera(46, w / h, 0.1, 100);
       threeCamera.position.set(0, 2.3, 5.2);
 
       threeRenderer = new THREE.WebGLRenderer({ antialias: true });
-      threeRenderer.setSize(container.clientWidth, container.clientHeight);
+      threeRenderer.setSize(w, h);
       threeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       container.innerHTML = '';
       container.appendChild(threeRenderer.domElement);
 
-      // Bright Daylight Lights
       const hemi = new THREE.HemisphereLight(0xffffff, 0xbbf7d0, 1.15);
       threeScene.add(hemi);
       const dir = new THREE.DirectionalLight(0xffffff, 0.8);
       dir.position.set(4, 8, 6);
       threeScene.add(dir);
 
-      // Mint Cream Floor
       const floor = new THREE.Mesh(
         new THREE.PlaneGeometry(20, 14),
         new THREE.MeshStandardMaterial({ color: 0xd1fae5, roughness: 0.8 })
@@ -1931,7 +1892,6 @@
       floor.rotation.x = -Math.PI / 2;
       threeScene.add(floor);
 
-      // Overhead Emerald MINI MARKET Banner
       const bannerTex = makeCanvasSignTexture('MINI MARKET', '', '#10b981', '#ffffff');
       const banner = new THREE.Mesh(
         new THREE.BoxGeometry(3.6, 0.75, 0.2),
@@ -1940,7 +1900,6 @@
       banner.position.set(0, 3.15, -2.2);
       threeScene.add(banner);
 
-      // Helper to build colourful shelf units
       function buildShelfUnit(x, z, headerTitle, headerBg) {
         const grp = new THREE.Group();
         const back = new THREE.Mesh(
@@ -1950,7 +1909,6 @@
         back.position.set(0, 1.1, -0.22);
         grp.add(back);
 
-        // Two bright yellow shelves
         [0.55, 1.35].forEach(sy => {
           const plank = new THREE.Mesh(
             new THREE.BoxGeometry(2.25, 0.1, 0.6),
@@ -1960,7 +1918,6 @@
           grp.add(plank);
         });
 
-        // Header Sign
         const hTex = makeCanvasSignTexture(headerTitle, '', headerBg, '#ffffff');
         const hMesh = new THREE.Mesh(
           new THREE.BoxGeometry(2.2, 0.34, 0.16),
@@ -1977,7 +1934,6 @@
       buildShelfUnit(0, -2.2, 'DRINKS & PANTRY', '#0d9488');
       buildShelfUnit(2.65, -1.5, 'TOYS & SCHOOL', '#6366f1');
 
-      // Add 3D Products + Bright Yellow Price Tag Cards
       threeMeshes = [];
       MM_PRODUCTS.forEach(p => {
         const mesh = new THREE.Mesh(
@@ -1989,7 +1945,6 @@
         threeScene.add(mesh);
         threeMeshes.push(mesh);
 
-        // Yellow price tag beneath item
         const tagTex = makeCanvasSignTexture(p.nameEn, `RM ${(p.price / 100).toFixed(2)}`, '#fef08a', '#1e293b');
         const tag = new THREE.Mesh(
           new THREE.PlaneGeometry(0.75, 0.25),
@@ -1999,7 +1954,6 @@
         threeScene.add(tag);
       });
 
-      // Friendly Cashier Aiman Figure at Counter
       const counter = new THREE.Mesh(
         new THREE.BoxGeometry(1.5, 0.75, 0.9),
         new THREE.MeshStandardMaterial({ color: 0x1e293b })
@@ -2028,7 +1982,6 @@
       aimanCap.position.set(0.15, 1.42, 0.7);
       threeScene.add(aimanCap);
 
-      // Raycaster for Tapping/Hovering 3D Products + Orbit Drag
       const raycaster = new THREE.Raycaster();
       const pointer = new THREE.Vector2();
       let isDragging = false, prevX = 0, yawOffset = 0;
@@ -2131,6 +2084,7 @@
 
     function renderMMProducts() {
       const strip = document.getElementById('mm-products-strip');
+      if (!strip) return;
       strip.innerHTML = MM_PRODUCTS.map(p => {
         const label = currentLang === 'en' ? p.nameEn : p.nameBm;
         return `
@@ -2194,6 +2148,7 @@
 
     function renderMMBasket() {
       const list = document.getElementById('mm-basket-list');
+      if (!list) return;
       const entries = Object.entries(mmBasket);
       if (entries.length === 0) {
         list.innerHTML = `<div class="text-xs text-slate-400 italic text-center py-8">${currentLang === 'en' ? 'Your basket is empty. Tap items in the 3D shop!' : 'Bakul kosong. Pilih barang di kedai 3D!'}</div>`;
@@ -2296,6 +2251,7 @@
 
     function renderMMTray() {
       const box = document.getElementById('mm-tray-items');
+      if (!box) return;
       const paidSen = mmTray.reduce((s, item) => s + item.val, 0);
       document.getElementById('mm-pos-paid').textContent = `RM ${(paidSen / 100).toFixed(2)}`;
       if (mmTray.length === 0) {
@@ -2381,7 +2337,7 @@
 
       document.getElementById('mm-receipt-text').textContent = receipt;
       document.getElementById('mm-receipt-box').classList.remove('hidden');
-      completeMission('langkah', 150);
+      completeMission('penilaian', 200);
     }
 
     function downloadMMReceipt() {
@@ -2432,6 +2388,7 @@
         ? 'px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-hud font-bold text-xs'
         : 'px-4 py-2 rounded-xl bg-slate-800 text-slate-200 border border-slate-600 font-hud font-bold text-xs';
       if (mode === 'quiz') renderQuizQuestions();
+      if (mode === 'market') initMiniMarketOnce();
     }
 
     function renderQuizQuestions() {
@@ -2578,7 +2535,6 @@
       const imgBytes = new Uint8Array(binStr.length);
       for (let i = 0; i < binStr.length; i++) imgBytes[i] = binStr.charCodeAt(i);
 
-      // Build valid Landscape A4 PDF (842 x 595 pt) embedding the JPEG image
       const encoder = new TextEncoder();
       const chunks = [];
       const offsets = [0];
