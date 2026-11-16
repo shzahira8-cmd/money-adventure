@@ -1,0 +1,2883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>M.A.T.A Academy — Mission: Money Operations (Year 3 Mathematics)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&family=Orbitron:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-dark: #060b16;
+      --panel-dark: rgba(13, 23, 42, 0.92);
+      --cyan: #22d3ee;
+      --amber: #fbbf24;
+      --emerald: #34d399;
+      --rose: #fb7185;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(circle at 15% 15%, rgba(34, 211, 238, 0.09), transparent 35%),
+        radial-gradient(circle at 85% 80%, rgba(251, 191, 36, 0.08), transparent 38%),
+        linear-gradient(rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 34px 34px, 34px 34px;
+      color: #e2e8f0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .font-hud { font-family: 'Orbitron', sans-serif; letter-spacing: 0.04em; }
+    .font-kid { font-family: 'Fredoka', sans-serif; }
+    .font-kid-body { font-family: 'Nunito', sans-serif; }
+
+    .hud-panel {
+      background: var(--panel-dark);
+      border: 1px solid rgba(34, 211, 238, 0.25);
+      box-shadow: 0 12px 32px rgba(2, 6, 23, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+    }
+    .hud-card-hover {
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hud-card-hover:hover {
+      transform: translateY(-3px);
+      border-color: rgba(34, 211, 238, 0.7);
+      box-shadow: 0 14px 30px rgba(34, 211, 238, 0.16);
+    }
+
+    /* Colourful 3D Mini Market Styles */
+    .btn-3d {
+      transition: all 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+    }
+    .btn-3d:active:not(:disabled) {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+    }
+    .rm-note {
+      position: relative;
+      border-radius: 10px;
+      border: 2px solid rgba(255,255,255,0.7);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.18), inset 0 0 12px rgba(255,255,255,0.3);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      overflow: hidden;
+    }
+    .rm-note:hover { transform: translateY(-3px) scale(1.03); }
+    .rm-note:active { transform: translateY(1px) scale(0.98); }
+    .rm-note::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 22%;
+      width: 6px; height: 100%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.75), rgba(255,255,255,0.2));
+      pointer-events: none;
+    }
+    .rm-coin {
+      border-radius: 9999px;
+      box-shadow: 0 3px 5px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.65);
+      transition: transform 0.15s ease;
+    }
+    .rm-coin:hover { transform: translateY(-3px) scale(1.06); }
+    .rm-coin:active { transform: translateY(1px) scale(0.95); }
+
+    @media print {
+      body * { visibility: hidden !important; }
+      #printable-certificate-area, #printable-certificate-area * { visibility: visible !important; }
+      #printable-certificate-area {
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 99999 !important;
+        background: #071124 !important;
+      }
+      @page { size: A4 landscape; margin: 0; }
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-between">
+
+  <!-- TOP COMMAND BAR -->
+  <header class="sticky top-0 z-40 hud-panel border-b border-cyan-500/30 px-3 sm:px-6 py-3">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <button onclick="navigateMenu('dashboard')" class="flex items-center gap-3 text-left group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 p-0.5 shadow-lg group-hover:scale-105 transition">
+          <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center font-hud font-black text-cyan-300 text-lg">M</div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-hud font-extrabold text-sm sm:text-base text-white tracking-wider">M.A.T.A ACADEMY</span>
+            <span class="text-[10px] font-hud bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 px-2 py-0.5 rounded-full" id="hud-year-pill">YEAR 3 MATH</span>
+          </div>
+          <p id="hud-subtitle" class="text-xs text-slate-400">Mission: Addition of Money (Up to RM10,000)</p>
+        </div>
+      </button>
+
+      <!-- XP, Rank & Progress -->
+      <div class="hidden lg:flex items-center gap-4 bg-slate-900/90 border border-slate-700/80 px-4 py-2 rounded-2xl">
+        <div>
+          <div class="text-[10px] font-hud text-slate-400" id="lbl-rank-title">AGENT RANK</div>
+          <div id="hud-rank" class="font-hud font-bold text-xs text-amber-400">CADET RECRUIT</div>
+        </div>
+        <div class="h-7 w-px bg-slate-700"></div>
+        <div>
+          <div class="text-[10px] font-hud text-slate-400" id="lbl-xp-title">TACTICAL XP</div>
+          <div id="hud-xp" class="font-hud font-extrabold text-sm text-cyan-300">0 XP</div>
+        </div>
+        <div class="h-7 w-px bg-slate-700"></div>
+        <div class="w-36">
+          <div class="flex justify-between text-[10px] font-hud text-slate-400 mb-1">
+            <span id="lbl-mission-prog">MISSIONS</span>
+            <span id="hud-prog-text">0/7</span>
+          </div>
+          <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+            <div id="hud-prog-bar" class="h-full bg-gradient-to-r from-cyan-400 to-emerald-400 transition-all duration-500" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls: EN/BM Toggle, Sound, Reset -->
+      <div class="flex items-center gap-2">
+        <div class="flex bg-slate-900 border border-cyan-500/30 rounded-xl p-1">
+          <button id="btn-lang-en" onclick="setLang('en')" class="px-2.5 py-1 rounded-lg font-hud text-xs font-bold bg-cyan-500 text-slate-950 transition">EN</button>
+          <button id="btn-lang-bm" onclick="setLang('bm')" class="px-2.5 py-1 rounded-lg font-hud text-xs font-bold text-slate-300 hover:text-white transition">BM</button>
+        </div>
+        <button id="btn-sound" onclick="toggleAudio()" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 hover:border-cyan-400 text-xs font-hud text-cyan-300 flex items-center gap-1.5">
+          <span id="sound-icon">🔊</span>
+          <span id="sound-label" class="hidden sm:inline">AUDIO ON</span>
+        </button>
+        <button onclick="resetAllProgress()" class="px-3 py-2 rounded-xl bg-rose-950/60 border border-rose-500/40 hover:bg-rose-900/60 text-xs font-hud text-rose-300" id="btn-reset-all">
+          RESET
+        </button>
+      </div>
+    </div>
+
+    <!-- 7-MENU NAVIGATION PILLS -->
+    <nav id="menu-nav-bar" class="max-w-7xl mx-auto mt-3 pt-2.5 border-t border-slate-800 flex items-center gap-1.5 overflow-x-auto pb-1"></nav>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-6">
+
+    <!-- ==================== VIEW 0: COMMAND CENTER DASHBOARD ==================== -->
+    <section id="view-dashboard" class="space-y-6">
+      <div class="hud-panel rounded-3xl p-6 sm:p-8 border-cyan-500/40 relative overflow-hidden">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="space-y-3 max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-300 font-hud text-xs">
+              <span>⚡</span>
+              <span id="dash-badge">KSSR YEAR 3 MATHEMATICS • TOPIC 3.0 MONEY</span>
+            </div>
+            <h1 id="dash-title" class="font-hud text-2xl sm:text-4xl font-black text-white leading-tight">
+              M.A.T.A MONEY OPERATIONS COMMAND
+            </h1>
+            <p id="dash-desc" class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Welcome, Junior Agent! Master Malaysian Ringgit and Sen addition up to RM10,000 across 7 structured learning missions, a 5-question timed Gadget Lab, a 3D Mini Market, and earn your official M.A.T.A Academy Certificate.
+            </p>
+            <div class="pt-2 flex flex-wrap gap-3">
+              <button onclick="navigateMenu('pengenalan')" id="dash-start-btn" class="px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-hud font-extrabold text-xs sm:text-sm shadow-lg hover:brightness-110 transition">
+                START MISSION 01: INTRODUCTION ➔
+              </button>
+              <button onclick="navigateMenu('penilaian')" id="dash-sim-btn" class="px-5 py-3 rounded-xl bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 font-hud font-bold text-xs sm:text-sm hover:bg-emerald-500/30 transition">
+                LAUNCH 3D MINI MARKET & QUIZ
+              </button>
+            </div>
+          </div>
+
+          <!-- Operative Card Preview -->
+          <div class="bg-slate-950/80 border border-amber-400/30 rounded-2xl p-4 sm:p-5 flex items-center gap-4 shrink-0">
+            <img id="dash-avatar-img" src="" alt="Operative Z-03" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-cyan-400 bg-slate-900" />
+            <div>
+              <div class="text-[10px] font-hud text-amber-400" id="dash-op-code">OPERATIVE Z-03</div>
+              <div class="font-hud font-bold text-sm sm:text-base text-white" id="dash-op-name">SHARIFAH NUR ZAHIRA</div>
+              <div class="text-xs text-cyan-300" id="dash-op-role">Student In Mathematic Education</div>
+              <button onclick="navigateMenu('metadata')" id="dash-op-btn" class="mt-2 text-[11px] font-hud text-amber-300 hover:underline">
+                VIEW METADATA DOSSIER →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 MENU CARDS GRID -->
+      <div id="dashboard-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
+    </section>
+
+    <!-- ==================== VIEW 1: PENGENALAN (INTRODUCTION) ==================== -->
+    <section id="view-pengenalan" class="hidden space-y-6">
+      <div class="hud-panel rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4 mb-6">
+          <div>
+            <span class="text-xs font-hud text-cyan-400" id="m1-tag">MENU 01 // INTRODUCTION</span>
+            <h2 class="font-hud text-2xl sm:text-3xl font-extrabold text-white mt-1" id="m1-title">Malaysian Currency Briefing</h2>
+          </div>
+          <button onclick="completeMission('pengenalan', 100)" id="m1-claim-btn" class="px-4 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">
+            MARK BRIEFING COMPLETE (+100 XP)
+          </button>
+        </div>
+
+        <p id="m1-intro-p" class="text-slate-300 text-sm sm:text-base mb-6 leading-relaxed">
+          In Malaysia, our official currency is Ringgit Malaysia (RM) and Sen. Before performing addition operations up to RM10,000, every M.A.T.A agent must recognize all banknotes and coins and master the conversion rule: <strong class="text-amber-300">100 sen = RM1.00</strong>.
+        </p>
+
+        <h3 class="font-hud text-sm text-amber-400 mb-3" id="m1-notes-heading">MALAYSIAN BANKNOTES (WANG KERTAS)</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
+          <div class="rounded-2xl p-4 bg-gradient-to-br from-sky-500 to-blue-700 text-white shadow-lg border border-white/30">
+            <div class="font-hud font-black text-xl">RM 1</div>
+            <div class="text-xs opacity-90 mt-1" id="note-desc-1">Blue • Wau Bulan</div>
+          </div>
+          <div class="rounded-2xl p-4 bg-gradient-to-br from-emerald-500 to-green-700 text-white shadow-lg border border-white/30">
+            <div class="font-hud font-black text-xl">RM 5</div>
+            <div class="text-xs opacity-90 mt-1" id="note-desc-5">Green • Hornbill</div>
+          </div>
+          <div class="rounded-2xl p-4 bg-gradient-to-br from-rose-500 to-red-700 text-white shadow-lg border border-white/30">
+            <div class="font-hud font-black text-xl">RM 10</div>
+            <div class="text-xs opacity-90 mt-1" id="note-desc-10">Red • Rafflesia</div>
+          </div>
+          <div class="rounded-2xl p-4 bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-lg border border-white/30">
+            <div class="font-hud font-black text-xl">RM 20</div>
+            <div class="text-xs opacity-90 mt-1" id="note-desc-20">Orange • Turtle</div>
+          </div>
+          <div class="rounded-2xl p-4 bg-gradient-to-br from-teal-500 to-cyan-800 text-white shadow-lg border border-white/30">
+            <div class="font-hud font-black text-xl">RM 50</div>
+            <div class="text-xs opacity-90 mt-1" id="note-desc-50">Cyan • Oil Palm</div>
+          </div>
+          <div class="rounded-2xl p-4 bg-gradient-to-br from-purple-600 to-indigo-800 text-white shadow-lg border border-white/30">
+            <div class="font-hud font-black text-xl">RM 100</div>
+            <div class="text-xs opacity-90 mt-1" id="note-desc-100">Purple • Kinabalu</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-5">
+            <h3 class="font-hud text-sm text-cyan-300 mb-3" id="m1-coins-heading">MALAYSIAN COINS (DUIT SYILING)</h3>
+            <div class="flex flex-wrap gap-4 items-center">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-slate-200 to-slate-400 text-slate-900 flex flex-col items-center justify-center font-hud font-black text-xs shadow-lg border-2 border-white"><span>5</span><span>sen</span></div>
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-slate-200 to-slate-400 text-slate-900 flex flex-col items-center justify-center font-hud font-black text-xs shadow-lg border-2 border-white"><span>10</span><span>sen</span></div>
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-amber-300 to-yellow-500 text-amber-950 flex flex-col items-center justify-center font-hud font-black text-xs shadow-lg border-2 border-amber-100"><span>20</span><span>sen</span></div>
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-amber-300 to-yellow-500 text-amber-950 flex flex-col items-center justify-center font-hud font-black text-xs shadow-lg border-2 border-amber-100"><span>50</span><span>sen</span></div>
+            </div>
+            <p id="m1-coin-rule" class="text-xs text-slate-400 mt-4">
+              Tip: Two 50 sen coins equal 100 sen = RM1.00. Always align the decimal point when adding Ringgit and Sen!
+            </p>
+          </div>
+
+          <div class="bg-slate-900/80 border border-amber-400/30 rounded-2xl p-5 space-y-3">
+            <h3 class="font-hud text-sm text-amber-300" id="m1-check-title">QUICK CONVERSION CHECKPOINT</h3>
+            <p class="text-sm text-slate-200" id="m1-check-q">If you have 250 sen, how much is that in Ringgit Malaysia (RM)?</p>
+            <div class="flex flex-wrap gap-2">
+              <button onclick="checkIntroConversion(2.5)" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-cyan-500/20 border border-slate-600 font-hud text-xs text-white">RM 2.50</button>
+              <button onclick="checkIntroConversion(25)" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-cyan-500/20 border border-slate-600 font-hud text-xs text-white">RM 25.00</button>
+              <button onclick="checkIntroConversion(0.25)" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-cyan-500/20 border border-slate-600 font-hud text-xs text-white">RM 0.25</button>
+            </div>
+            <div id="m1-check-fb" class="hidden text-xs font-bold p-3 rounded-xl"></div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button onclick="navigateMenu('rph')" id="m1-next-btn" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">
+            NEXT: MENU 02 LESSON PLAN (RPH) ➔
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: RPH (LESSON PLAN) ==================== -->
+    <section id="view-rph" class="hidden space-y-6">
+      <div class="hud-panel rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4 mb-6">
+          <div>
+            <span class="text-xs font-hud text-cyan-400" id="m2-tag">MENU 02 // DAILY LESSON PLAN (RPH)</span>
+            <h2 class="font-hud text-2xl sm:text-3xl font-extrabold text-white mt-1" id="m2-title">Year 3 Mathematics Curriculum Dossier</h2>
+          </div>
+          <button onclick="completeMission('rph', 100)" id="m2-claim-btn" class="px-4 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">
+            VERIFY RPH (+100 XP)
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="bg-slate-900/90 border border-slate-700 p-4 rounded-2xl">
+            <div class="text-[11px] font-hud text-cyan-400" id="rph-lbl-subj">SUBJECT</div>
+            <div class="font-bold text-white text-sm mt-1" id="rph-val-subj">Mathematics (Year 3)</div>
+          </div>
+          <div class="bg-slate-900/90 border border-slate-700 p-4 rounded-2xl">
+            <div class="text-[11px] font-hud text-cyan-400" id="rph-lbl-topic">TOPIC</div>
+            <div class="font-bold text-white text-sm mt-1" id="rph-val-topic">3.0 Money — Addition of Money</div>
+          </div>
+          <div class="bg-slate-900/90 border border-slate-700 p-4 rounded-2xl">
+            <div class="text-[11px] font-hud text-cyan-400" id="rph-lbl-cs">CONTENT STANDARD</div>
+            <div class="font-bold text-white text-sm mt-1" id="rph-val-cs">3.1 Addition of money</div>
+          </div>
+          <div class="bg-slate-900/90 border border-slate-700 p-4 rounded-2xl">
+            <div class="text-[11px] font-hud text-cyan-400" id="rph-lbl-ls">LEARNING STANDARD</div>
+            <div class="font-bold text-white text-sm mt-1" id="rph-val-ls">3.1.1 Solve addition number sentences involving up to three values of money with the sum up to RM10,000.</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-7 bg-slate-900/80 border border-amber-400/30 rounded-2xl p-5">
+            <h3 class="font-hud text-sm text-amber-300 mb-3" id="rph-obj-heading">LEARNING OBJECTIVES (OBJEKTIF PEMBELAJARAN)</h3>
+            <ul id="rph-obj-list" class="space-y-2.5 text-sm text-slate-200"></ul>
+          </div>
+
+          <div class="lg:col-span-5 space-y-4">
+            <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-5">
+              <h3 class="font-hud text-sm text-emerald-400 mb-2" id="rph-prof-heading">PUPILS' PROFILE</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="rph-prof-text">
+                Year 3 pupils (ages 9) familiar with basic whole number addition up to 10,000 and recognizing Malaysian banknotes and coins in daily life.
+              </p>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-700 rounded-2xl p-5">
+              <h3 class="font-hud text-sm text-cyan-300 mb-2" id="rph-ped-heading">TEACHING & LEARNING APPROACH</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="rph-ped-text">
+                Contextual Learning, Gamification (M.A.T.A Tactical Simulation), Concrete-Pictorial-Abstract (CPA), and 3D Virtual Mini Market Role-Play.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button onclick="navigateMenu('set_induksi')" id="m2-next-btn" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">
+            NEXT: MENU 03 INDUCTION SET (GADGET LAB) ➔
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: SET INDUKSI (5-QUESTION GADGET LAB) ==================== -->
+    <section id="view-set_induksi" class="hidden space-y-6">
+      <div class="hud-panel rounded-3xl p-6 sm:p-8 border-cyan-500/40">
+        <div class="flex flex-wrap items-start justify-between gap-4 mb-5">
+          <div>
+            <span class="text-xs font-hud text-amber-400" id="m3-tag">MENU 03 // INDUCTION SET — 5-STAGE CALIBRATION</span>
+            <h2 class="font-hud text-xl sm:text-3xl font-black text-white mt-1" id="m3-title">M.A.T.A 5-Box Place Value Gadget Lab</h2>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1" id="m3-desc">
+              Complete all <strong class="text-amber-300">5 Target Calibration Questions</strong> inside the 60-second timer! Leaving this tab early aborts the calibration.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <!-- 5 Question Progress Pills -->
+            <div class="bg-slate-950 border border-cyan-500/40 rounded-2xl px-3.5 py-2.5 text-center">
+              <div class="text-[10px] font-hud text-slate-400 mb-1" id="lab-q-label">QUESTION</div>
+              <div class="flex items-center gap-1.5" id="lab-q-dots"></div>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div id="lab-timer-box" class="bg-slate-950 border-2 border-amber-400/70 rounded-2xl px-4 py-2.5 flex items-center gap-3">
+              <div>
+                <div class="text-[10px] font-hud text-slate-400 text-center" id="lab-countdown-lbl">COUNTDOWN</div>
+                <div id="lab-timer-display" class="font-hud text-2xl sm:text-3xl font-black text-amber-400">01:00</div>
+              </div>
+              <span id="lab-status-pill" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 border border-cyan-400/40 font-hud text-[10px] font-bold text-cyan-300">ACTIVE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Target Calibration Banner -->
+        <div class="bg-gradient-to-r from-amber-500/15 via-slate-900 to-cyan-500/15 border border-amber-400/40 rounded-2xl p-4 sm:p-5 mb-6 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div class="text-xs font-hud text-cyan-300" id="lab-target-lbl">QUESTION 1 OF 5 — TARGET CALIBRATION VALUE</div>
+            <div id="lab-target-display" class="font-hud text-3xl sm:text-4xl font-black text-white mt-1">RM 125.50</div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button onclick="resetLabScanner()" id="btn-lab-reset" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 font-hud text-xs font-bold text-slate-200">RESET SCANNER</button>
+            <button onclick="loadRandomLabSample()" id="btn-lab-random" class="px-4 py-2.5 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/50 font-hud text-xs font-bold text-cyan-300">RANDOM SAMPLE</button>
+            <button onclick="startLabSession(true)" id="btn-lab-restart" class="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-hud text-xs font-extrabold">RESTART 5-Q MISSION</button>
+          </div>
+        </div>
+
+        <!-- Fail / Complete Banner -->
+        <div id="lab-alert-banner" class="hidden mb-6 p-4 rounded-2xl border flex flex-wrap items-center justify-between gap-3">
+          <div id="lab-alert-text" class="font-hud text-xs sm:text-sm font-bold"></div>
+          <button onclick="startLabSession(true)" id="lab-retry-btn" class="px-4 py-2 rounded-xl bg-amber-400 text-slate-950 font-hud font-extrabold text-xs">RETRY 5-QUESTION MISSION</button>
+        </div>
+
+        <!-- 5-Box Place Value Scanner -->
+        <div class="grid grid-cols-5 gap-2 sm:gap-4 max-w-4xl mx-auto mb-5">
+          <div class="bg-slate-950/90 border-2 border-cyan-500/40 rounded-2xl p-3 sm:p-5 text-center">
+            <div class="text-[10px] sm:text-xs font-hud text-cyan-400" id="box-lbl-hundreds">HUNDREDS</div>
+            <div id="box-val-hundreds" class="font-hud text-3xl sm:text-5xl font-black text-white my-2">0</div>
+            <div class="text-[10px] font-hud text-slate-400">RM100</div>
+          </div>
+          <div class="bg-slate-950/90 border-2 border-cyan-500/40 rounded-2xl p-3 sm:p-5 text-center">
+            <div class="text-[10px] sm:text-xs font-hud text-cyan-400" id="box-lbl-tens">TENS</div>
+            <div id="box-val-tens" class="font-hud text-3xl sm:text-5xl font-black text-white my-2">0</div>
+            <div class="text-[10px] font-hud text-slate-400">RM10</div>
+          </div>
+          <div class="bg-slate-950/90 border-2 border-cyan-500/40 rounded-2xl p-3 sm:p-5 text-center">
+            <div class="text-[10px] sm:text-xs font-hud text-cyan-400" id="box-lbl-ones">ONES</div>
+            <div id="box-val-ones" class="font-hud text-3xl sm:text-5xl font-black text-white my-2">0</div>
+            <div class="text-[10px] font-hud text-slate-400">RM1</div>
+          </div>
+          <div class="bg-slate-950/90 border-2 border-amber-400/60 rounded-2xl p-3 sm:p-5 text-center">
+            <div class="text-[10px] sm:text-xs font-hud text-amber-400" id="box-lbl-decimal">DECIMAL</div>
+            <div class="font-hud text-3xl sm:text-5xl font-black text-amber-400 my-2">.</div>
+            <div class="text-[10px] font-hud text-amber-300/80" id="box-lbl-point">POINT</div>
+          </div>
+          <div class="bg-slate-950/90 border-2 border-emerald-500/40 rounded-2xl p-3 sm:p-5 text-center">
+            <div class="text-[10px] sm:text-xs font-hud text-emerald-400" id="box-lbl-sen">SEN</div>
+            <div id="box-val-sen" class="font-hud text-3xl sm:text-5xl font-black text-emerald-300 my-2">00</div>
+            <div class="text-[10px] font-hud text-slate-400">.05–.95</div>
+          </div>
+        </div>
+
+        <!-- Current Scanner Load Pill -->
+        <div class="text-center mb-6">
+          <div class="inline-flex items-center gap-3 bg-slate-950 border border-slate-700 px-5 py-2.5 rounded-full">
+            <span class="text-xs font-hud text-slate-400" id="lab-current-lbl">CURRENT SCANNER LOAD:</span>
+            <span id="lab-current-load" class="font-hud text-lg sm:text-xl font-black text-cyan-300">RM 0.00</span>
+          </div>
+        </div>
+
+        <!-- 10 Currency Denomination Buttons -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 max-w-4xl mx-auto">
+          <button onclick="addLabDenom(10000)" class="py-3 rounded-xl bg-purple-950/80 hover:bg-purple-900 border border-purple-400/50 font-hud text-xs sm:text-sm font-bold text-purple-200">+ RM 100</button>
+          <button onclick="addLabDenom(5000)" class="py-3 rounded-xl bg-teal-950/80 hover:bg-teal-900 border border-teal-400/50 font-hud text-xs sm:text-sm font-bold text-teal-200">+ RM 50</button>
+          <button onclick="addLabDenom(2000)" class="py-3 rounded-xl bg-orange-950/80 hover:bg-orange-900 border border-orange-400/50 font-hud text-xs sm:text-sm font-bold text-orange-200">+ RM 20</button>
+          <button onclick="addLabDenom(1000)" class="py-3 rounded-xl bg-rose-950/80 hover:bg-rose-900 border border-rose-400/50 font-hud text-xs sm:text-sm font-bold text-rose-200">+ RM 10</button>
+          <button onclick="addLabDenom(500)" class="py-3 rounded-xl bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-400/50 font-hud text-xs sm:text-sm font-bold text-emerald-200">+ RM 5</button>
+          <button onclick="addLabDenom(100)" class="py-3 rounded-xl bg-sky-950/80 hover:bg-sky-900 border border-sky-400/50 font-hud text-xs sm:text-sm font-bold text-sky-200">+ RM 1</button>
+          <button onclick="addLabDenom(50)" class="py-3 rounded-xl bg-amber-950/80 hover:bg-amber-900 border border-amber-400/50 font-hud text-xs sm:text-sm font-bold text-amber-200">+ 50 sen</button>
+          <button onclick="addLabDenom(20)" class="py-3 rounded-xl bg-amber-950/80 hover:bg-amber-900 border border-amber-400/50 font-hud text-xs sm:text-sm font-bold text-amber-200">+ 20 sen</button>
+          <button onclick="addLabDenom(10)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-500/50 font-hud text-xs sm:text-sm font-bold text-slate-200">+ 10 sen</button>
+          <button onclick="addLabDenom(5)" class="py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-500/50 font-hud text-xs sm:text-sm font-bold text-slate-200">+ 5 sen</button>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button onclick="navigateMenu('langkah')" id="m3-next-btn" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">
+            NEXT: MENU 04 LEARNING STEPS & 3D MINI MARKET ➔
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 4: LANGKAH PEMBELAJARAN (LEARNING STEPS + 3D MINI MARKET) ==================== -->
+    <section id="view-langkah" class="hidden space-y-6">
+      <div class="hud-panel rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4 mb-6">
+          <div>
+            <span class="text-xs font-hud text-cyan-400" id="m4-tag">MENU 04 // LEARNING STEPS</span>
+            <h2 class="font-hud text-2xl sm:text-3xl font-extrabold text-white mt-1" id="m4-title">Addition of Money & 3D Mini Market</h2>
+          </div>
+          <button onclick="completeMission('langkah', 150)" id="m4-claim-btn" class="px-4 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">
+            COMPLETE LEARNING STEPS (+150 XP)
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+          <div class="lg:col-span-7 space-y-4">
+            <div class="bg-slate-900/90 border border-emerald-500/30 rounded-2xl p-5">
+              <h3 class="font-hud text-sm text-emerald-400 mb-2" id="step1-title">STEP 1: ADDITION WITHOUT REGROUPING</h3>
+              <p class="text-xs sm:text-sm text-slate-300 mb-3" id="step1-desc">
+                Arrange digits vertically according to place value (Thousands, Hundreds, Tens, Ones) and keep the RM symbol aligned.
+              </p>
+              <div class="bg-slate-950 p-4 rounded-xl font-mono text-sm sm:text-base text-right max-w-xs border border-slate-800">
+                <div class="text-slate-300">RM 2,140.20</div>
+                <div class="text-cyan-300 border-b border-slate-700 pb-1">+ RM 1,325.45</div>
+                <div class="text-emerald-400 font-bold pt-1">RM 3,465.65</div>
+              </div>
+            </div>
+
+            <div class="bg-slate-900/90 border border-amber-400/30 rounded-2xl p-5">
+              <h3 class="font-hud text-sm text-amber-300 mb-2" id="step2-title">STEP 2: ADDITION WITH REGROUPING (100 SEN = RM1)</h3>
+              <p class="text-xs sm:text-sm text-slate-300 mb-3" id="step2-desc">
+                When adding sen exceeds 100 sen, regroup 100 sen into RM1 in the Ones column. Example: RM1,250.70 + RM2,375.60 = RM3,626.30.
+              </p>
+              <div class="bg-slate-950 p-4 rounded-xl font-mono text-sm sm:text-base text-right max-w-xs border border-slate-800">
+                <div class="text-amber-400 text-xs">¹ &nbsp; ¹ &nbsp; ¹</div>
+                <div class="text-slate-300">RM 1,250.70</div>
+                <div class="text-cyan-300 border-b border-slate-700 pb-1">+ RM 2,375.60</div>
+                <div class="text-amber-300 font-bold pt-1">RM 3,626.30</div>
+              </div>
+            </div>
+
+            <!-- Interactive Checkpoint -->
+            <div class="bg-slate-900/90 border border-cyan-500/40 rounded-2xl p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="font-hud text-sm text-cyan-300" id="learn-practice-title">INTERACTIVE PRACTICE CHECKPOINT</h3>
+                <span class="text-xs font-hud text-amber-400">+150 XP</span>
+              </div>
+              <p class="text-sm text-white font-bold" id="learn-practice-q">Solve: RM1,450 + RM2,380 = ?</p>
+              <div class="flex flex-wrap gap-2">
+                <input id="learn-practice-input" type="number" step="0.01" placeholder="3830" class="px-4 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white font-hud text-sm w-40 focus:outline-none focus:border-cyan-400" />
+                <button onclick="checkLearnPractice()" id="btn-check-answer" class="px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 font-hud font-bold text-xs">CHECK ANSWER</button>
+                <button onclick="useCalcResult()" id="btn-use-calc-result" class="px-4 py-2 rounded-xl bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 font-hud font-bold text-xs">USE CALCULATOR RESULT</button>
+              </div>
+              <div id="learn-practice-fb" class="hidden text-xs font-bold p-3 rounded-xl"></div>
+            </div>
+          </div>
+
+          <!-- Embedded M.A.T.A Scientific Calculator FX-3100 -->
+          <div class="lg:col-span-5 bg-slate-950 border-2 border-cyan-500/40 rounded-3xl p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-hud text-xs text-cyan-300" id="calc-header-title">M.A.T.A SCIENTIFIC CALCULATOR // FX-3100</span>
+                <button onclick="toggleCalcMode()" id="calc-deg-btn" class="px-2.5 py-1 rounded-lg bg-amber-400/20 border border-amber-400/40 text-amber-300 font-hud text-[10px] font-bold">DEG</button>
+              </div>
+              <div class="bg-slate-900 border border-slate-700 rounded-2xl p-3.5 text-right mb-3">
+                <div id="calc-expr" class="font-mono text-xs text-slate-400 h-4 overflow-hidden">0</div>
+                <div id="calc-display" class="font-hud text-2xl font-black text-white mt-1 truncate">0</div>
+                <div id="calc-rm-preview" class="font-hud text-xs text-emerald-400 mt-1">RM 0.00</div>
+              </div>
+              <div class="grid grid-cols-5 gap-1.5 font-hud text-xs">
+                <button onclick="calcFunc('sin')" class="py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300">sin</button>
+                <button onclick="calcFunc('cos')" class="py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300">cos</button>
+                <button onclick="calcFunc('tan')" class="py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300">tan</button>
+                <button onclick="calcFunc('log')" class="py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300">log</button>
+                <button onclick="calcFunc('ln')" class="py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300">ln</button>
+
+                <button onclick="calcFunc('sqrt')" class="py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300">√</button>
+                <button onclick="calcFunc('sq')" class="py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300">x²</button>
+                <button onclick="calcAppend('^')" class="py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300">xʸ</button>
+                <button onclick="calcAppend('(')" class="py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300">(</button>
+                <button onclick="calcAppend(')')" class="py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300">)</button>
+
+                <button onclick="calcAppend('7')" class="py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold">7</button>
+                <button onclick="calcAppend('8')" class="py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold">8</button>
+                <button onclick="calcAppend('9')" class="py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold">9</button>
+                <button onclick="calcBackspace()" class="py-2.5 rounded-lg bg-rose-950 hover:bg-rose-900 text-rose-300 font-bold">DEL</button>
+                <button onclick="calcClear()" class="py-2.5 rounded-lg bg-rose-950 hover:bg-rose-900 text-rose-300 font-bold">AC</button>
+
+                <button onclick="calcAppend('4')" class="py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold">4</button>
+                <button onclick="calcAppend('5')" class="py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold">5</button>
+                <button onclick="calcAppend('6')" class="py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold">6</button>
+                <button onclick="calcAppend('*')" class="py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold">×</button>
+                <button onclick="calcAppend('/')" class="py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold">÷</button>
+
+                <button onclick="calcAppend('1')" class="py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold">1</button>
+                <button onclick="calcAppend('2')" class="py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold">2</button>
+                <button onclick="calcAppend('3')" class="py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold">3</button>
+                <button onclick="calcAppend('+')" class="py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold">+</button>
+                <button onclick="calcAppend('-')" class="py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold">−</button>
+
+                <button onclick="calcAppend('0')" class="py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold">0</button>
+                <button onclick="calcAppend('00')" class="py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold">00</button>
+                <button onclick="calcAppend('.')" class="py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold">.</button>
+                <button onclick="calcEvaluate()" class="col-span-2 py-2.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black">=</button>
+              </div>
+            </div>
+            <p id="calc-tip-text" class="text-[11px] text-slate-400 mt-3">
+              I.R.I.S. TIP: Compute expressions on the FX-3100, then click "USE CALCULATOR RESULT" to auto-fill your answer.
+            </p>
+          </div>
+        </div>
+
+        <!-- Part B: Colourful 3D Mini Market Adventure Mount -->
+        <div id="mm-mount-langkah"></div>
+
+        <div class="mt-6 flex justify-end">
+          <button onclick="navigateMenu('penilaian')" id="m4-next-btn" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">
+            NEXT: MENU 05 ASSESSMENT & GAMES ➔
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 5: PENILAIAN & PERMAINAN (ASSESSMENT & GAMES) ==================== -->
+    <section id="view-penilaian" class="hidden space-y-6">
+      <div class="hud-panel rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4 mb-6">
+          <div>
+            <span class="text-xs font-hud text-amber-400" id="m5-tag">MENU 05 // ASSESSMENT & GAMES</span>
+            <h2 class="font-hud text-2xl sm:text-3xl font-extrabold text-white mt-1" id="m5-title">3D Mini Market & Final Evaluation Quiz</h2>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="switchAssessMode('market')" id="btn-mode-market" class="px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 font-hud font-bold text-xs">MODE A: 3D MINI MARKET</button>
+            <button onclick="switchAssessMode('quiz')" id="btn-mode-quiz" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-200 border border-slate-600 font-hud font-bold text-xs">MODE B: 8-QUESTION QUIZ</button>
+          </div>
+        </div>
+
+        <div id="assess-mode-market">
+          <div id="mm-mount-penilaian"></div>
+        </div>
+
+        <div id="assess-mode-quiz" class="hidden space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-900/90 border border-cyan-500/30 p-4 rounded-2xl">
+            <div>
+              <h3 class="font-hud text-base text-white" id="quiz-header-title">M.A.T.A AGENT CERTIFICATION ASSESSMENT (8 QUESTIONS)</h3>
+              <p class="text-xs text-slate-300" id="quiz-header-sub">Score at least 5/8 (62.5%) to unlock your official Landscape A4 M.A.T.A Certificate!</p>
+            </div>
+            <div class="font-hud text-sm text-amber-400" id="quiz-score-pill">SCORE: 0 / 8</div>
+          </div>
+
+          <div id="quiz-questions-container" class="space-y-4"></div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button onclick="submitFinalQuiz()" id="btn-submit-quiz" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-emerald-400 text-slate-950 font-hud font-black text-xs sm:text-sm shadow-lg">SUBMIT ANSWERS & GRADE MISSION</button>
+            <button onclick="resetQuiz()" id="btn-retake-quiz" class="px-4 py-3 rounded-xl bg-slate-800 border border-slate-600 text-slate-200 font-hud font-bold text-xs">RETAKE QUIZ</button>
+          </div>
+
+          <!-- Certificate Unlock Section -->
+          <div id="certificate-unlock-panel" class="hidden bg-slate-950 border-2 border-amber-400 rounded-3xl p-6 space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-hud text-xs" id="cert-unlocked-badge">CERTIFICATE UNLOCKED!</span>
+                <h3 class="font-hud text-xl text-white mt-2" id="cert-section-title">Official M.A.T.A Academy Certificate of Achievement</h3>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <button onclick="downloadCertificatePDF()" id="btn-dl-pdf" class="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-hud font-extrabold text-xs">DOWNLOAD AS PDF</button>
+                <button onclick="downloadCertificatePNG()" id="btn-dl-png" class="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-hud font-extrabold text-xs">DOWNLOAD PNG</button>
+                <button onclick="window.print()" id="btn-print-cert" class="px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-600 text-white font-hud font-bold text-xs">PRINT CERTIFICATE</button>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3">
+              <label class="text-xs font-hud text-cyan-300" id="lbl-cert-name">AGENT / PUPIL FULL NAME:</label>
+              <input id="cert-student-name" oninput="renderCertificatePreview()" type="text" value="AGENT ALI BIN GHAZALI" class="px-4 py-2 rounded-xl bg-slate-900 border border-cyan-500/40 text-white font-hud text-sm w-full sm:w-80" />
+            </div>
+
+            <!-- Live Landscape A4 Certificate Preview -->
+            <div id="printable-certificate-area" class="w-full aspect-[1.414/1] max-w-4xl mx-auto rounded-2xl bg-gradient-to-br from-[#071124] via-[#0c1e3e] to-[#060d1c] border-4 border-amber-400 p-6 sm:p-10 flex flex-col justify-between text-center relative overflow-hidden shadow-2xl">
+              <div class="border-2 border-cyan-400/40 rounded-xl p-4 sm:p-8 h-full flex flex-col justify-between">
+                <div>
+                  <div class="font-hud text-xs sm:text-sm text-cyan-300 tracking-widest" id="cert-org">M.A.T.A ACADEMY // MONEY OPERATIONS DIVISION</div>
+                  <h4 class="font-hud text-xl sm:text-3xl font-black text-amber-400 mt-2" id="cert-heading">CERTIFICATE OF ACHIEVEMENT</h4>
+                  <p class="text-xs sm:text-sm text-slate-300 mt-2" id="cert-sub">This certifies that Junior Agent</p>
+                </div>
+
+                <div>
+                  <div id="cert-display-name" class="font-hud text-2xl sm:text-4xl font-black text-white border-b-2 border-amber-400/60 inline-block px-6 pb-2">AGENT ALI BIN GHAZALI</div>
+                  <p id="cert-body-text" class="text-xs sm:text-base text-slate-200 max-w-2xl mx-auto mt-4 leading-relaxed">
+                    has successfully mastered Year 3 Mathematics: Addition of Money (up to RM10,000) and passed the M.A.T.A Tactical Assessment.
+                  </p>
+                </div>
+
+                <div class="flex items-center justify-between text-left pt-4 border-t border-slate-700/80 text-xs">
+                  <div>
+                    <div class="text-slate-400 font-hud" id="cert-lbl-score">ASSESSMENT SCORE</div>
+                    <div id="cert-display-score" class="font-hud font-bold text-emerald-400 text-sm sm:text-base">8 / 8 (100%)</div>
+                  </div>
+                  <div class="w-14 h-14 rounded-full bg-amber-400/20 border-2 border-amber-400 flex items-center justify-center font-hud font-black text-amber-300 text-xs">M.A.T.A</div>
+                  <div class="text-right">
+                    <div class="text-slate-400 font-hud" id="cert-lbl-date">DATE ISSUED</div>
+                    <div id="cert-display-date" class="font-hud font-bold text-cyan-300 text-sm sm:text-base">16 NOV 2026</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button onclick="navigateMenu('penutup')" id="m5-next-btn" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">
+            NEXT: MENU 06 CLOSURE & EXIT TICKET ➔
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 6: PENUTUP (CLOSURE) ==================== -->
+    <section id="view-penutup" class="hidden space-y-6">
+      <div class="hud-panel rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4 mb-6">
+          <div>
+            <span class="text-xs font-hud text-cyan-400" id="m6-tag">MENU 06 // LESSON CLOSURE</span>
+            <h2 class="font-hud text-2xl sm:text-3xl font-extrabold text-white mt-1" id="m6-title">Mission Debrief & Digital Exit Ticket</h2>
+          </div>
+          <button onclick="completeMission('penutup', 100)" id="m6-claim-btn" class="px-4 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">
+            COMPLETE CLOSURE (+100 XP)
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div class="bg-slate-900/90 border border-cyan-500/30 p-5 rounded-2xl">
+            <div class="font-hud text-xs text-cyan-400 mb-1" id="take1-tag">RULE 01</div>
+            <h3 class="font-hud text-sm text-white mb-2" id="take1-title">Align Decimal Points</h3>
+            <p class="text-xs text-slate-300" id="take1-desc">Always line up Ringgit (RM) and Sen vertically so ones, tens, hundreds, and thousands match accurately.</p>
+          </div>
+          <div class="bg-slate-900/90 border border-amber-400/30 p-5 rounded-2xl">
+            <div class="font-hud text-xs text-amber-400 mb-1" id="take2-tag">RULE 02</div>
+            <h3 class="font-hud text-sm text-white mb-2" id="take2-title">100 Sen = RM1.00</h3>
+            <p class="text-xs text-slate-300" id="take2-desc">Whenever the sen column totals 100 sen or more, regroup 100 sen into RM1 in the Ones place.</p>
+          </div>
+          <div class="bg-slate-900/90 border border-emerald-500/30 p-5 rounded-2xl">
+            <div class="font-hud text-xs text-emerald-400 mb-1" id="take3-tag">RULE 03</div>
+            <h3 class="font-hud text-sm text-white mb-2" id="take3-title">Smart Budgeting</h3>
+            <p class="text-xs text-slate-300" id="take3-desc">Calculate total prices before paying at the counter to verify exact change (baki wang).</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-6 bg-slate-900/90 border border-slate-700 rounded-2xl p-5 space-y-3">
+            <h3 class="font-hud text-sm text-amber-300" id="exit-form-title">SUBMIT AGENT EXIT TICKET</h3>
+            <input id="exit-agent-name" type="text" placeholder="Your Name / Codename" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm" />
+            <textarea id="exit-reflection" rows="3" placeholder="What is one important rule you learned about adding Ringgit and Sen today?" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm"></textarea>
+            <button onclick="submitExitTicket()" id="btn-submit-exit" class="px-5 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-hud font-bold text-xs">
+              TRANSMIT EXIT TICKET (+100 XP)
+            </button>
+          </div>
+          <div class="lg:col-span-6 bg-slate-900/90 border border-slate-700 rounded-2xl p-5">
+            <h3 class="font-hud text-sm text-cyan-300 mb-3" id="exit-log-title">LIVE AGENT DEBRIEF LOG</h3>
+            <div id="exit-log-list" class="space-y-2.5 max-h-56 overflow-y-auto text-xs"></div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button onclick="navigateMenu('metadata')" id="m6-next-btn" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">
+            NEXT: MENU 07 METADATA & DEVELOPER PROFILE ➔
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 7: METADATA (OPERATIVE Z-03 PROFILE) ==================== -->
+    <section id="view-metadata" class="hidden space-y-6">
+      <div class="hud-panel rounded-3xl p-6 sm:p-8 border-cyan-500/30">
+        <div class="mb-6">
+          <span class="text-xs font-hud text-cyan-400" id="m7-tag">MENU 07 // METADATA & DEVELOPER DOSSIER</span>
+          <h2 class="font-hud text-2xl sm:text-3xl font-extrabold text-white mt-1" id="m7-title">Developer & Educator Profile</h2>
+          <p class="text-xs sm:text-sm text-slate-300 mt-1" id="m7-subtitle">
+            Creator and educator profile for this Year 3 Mathematics learning portal. All fields are editable and saved locally.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Left Gold Tactical Card -->
+          <div class="lg:col-span-5 rounded-3xl bg-gradient-to-b from-amber-500/10 via-slate-950/90 to-slate-950 border border-amber-400/40 p-6 flex flex-col items-center text-center justify-between">
+            <span id="meta-badge-code" class="px-4 py-1 rounded-full bg-amber-400/15 border border-amber-400/50 font-hud text-xs font-bold text-amber-300">
+              OPERATIVE Z-03
+            </span>
+
+            <div class="my-5">
+              <img id="meta-avatar-preview" src="" alt="Sharifah Nur Zahira" class="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl object-cover border-2 border-cyan-400 shadow-xl mx-auto bg-slate-900" />
+            </div>
+
+            <div class="space-y-1">
+              <h3 id="meta-card-name" class="font-hud text-lg sm:text-xl font-black text-white">SHARIFAH NUR ZAHIRA</h3>
+              <p id="meta-card-role" class="text-xs sm:text-sm font-bold text-cyan-300">Student In Mathematic Education</p>
+              <p id="meta-card-school" class="text-xs text-slate-300">Akademi Teknologi Pendidikan M.A.T.A</p>
+              <p id="meta-card-email" class="text-xs text-amber-300 font-mono pt-1">zahira.math@mata-academy.edu.my</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-2.5 mt-6 w-full">
+              <label class="cursor-pointer px-4 py-2 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/50 font-hud text-[11px] font-bold text-cyan-200">
+                <span id="btn-upload-photo">📷 UPLOAD PROFILE PHOTO</span>
+                <input type="file" accept="image/*" onchange="handleProfilePhotoUpload(event)" class="hidden" />
+              </label>
+              <button onclick="resetProfilePhoto()" id="btn-reset-photo" class="px-4 py-2 rounded-xl bg-rose-950/60 hover:bg-rose-900/70 border border-rose-500/40 font-hud text-[11px] font-bold text-rose-200">
+                RESET PHOTO
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Cyan Editable Form Card -->
+          <div class="lg:col-span-7 rounded-3xl bg-slate-950/80 border border-cyan-500/30 p-6 flex flex-col justify-between space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-hud text-cyan-300 mb-1.5" id="lbl-meta-name">DEVELOPER / EDUCATOR FULL NAME</label>
+                <input id="input-meta-name" type="text" value="SHARIFAH NUR ZAHIRA" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-semibold text-sm focus:outline-none focus:border-cyan-400" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-hud text-cyan-300 mb-1.5" id="lbl-meta-code">AGENT CODENAME</label>
+                <input id="input-meta-code" type="text" value="OPERATIVE Z-03" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-amber-300 font-hud text-sm focus:outline-none focus:border-cyan-400" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-hud text-cyan-300 mb-1.5" id="lbl-meta-role">ROLE / SUBJECT</label>
+              <input id="input-meta-role" type="text" value="Student In Mathematic Education" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-semibold text-sm focus:outline-none focus:border-cyan-400" />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-hud text-cyan-300 mb-1.5" id="lbl-meta-school">SCHOOL / INSTITUTION</label>
+                <input id="input-meta-school" type="text" value="Akademi Teknologi Pendidikan M.A.T.A" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-semibold text-sm focus:outline-none focus:border-cyan-400" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-hud text-cyan-300 mb-1.5" id="lbl-meta-email">EMAIL ADDRESS</label>
+                <input id="input-meta-email" type="email" value="zahira.math@mata-academy.edu.my" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white font-semibold text-sm focus:outline-none focus:border-cyan-400" />
+              </div>
+            </div>
+
+            <div id="meta-save-fb" class="hidden text-xs font-bold text-emerald-300 bg-emerald-950/60 border border-emerald-500/40 p-3 rounded-xl"></div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+              <button onclick="saveMetadataProfile()" id="btn-save-meta" class="px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 text-slate-950 font-hud font-black text-xs shadow-lg">
+                SAVE PROFILE & CLAIM +100 XP
+              </button>
+              <button onclick="navigateMenu('dashboard')" id="btn-return-dash" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200 font-hud font-bold text-xs">
+                RETURN TO COMMAND CENTER
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- REUSABLE COLOURFUL 3D MINI MARKET ADVENTURE WIDGET -->
+  <div id="mini-market-widget" class="hidden font-kid-body text-slate-800 rounded-3xl overflow-hidden border-4 border-emerald-400 shadow-2xl bg-[#f0fdf4]">
+    <div class="bg-white/95 px-4 py-3 border-b-2 border-emerald-200 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white text-xl shadow">🛒</div>
+        <div>
+          <h3 class="font-kid font-bold text-base sm:text-lg text-emerald-900 leading-none" id="mm-title">Mini Market Adventure</h3>
+          <p class="text-xs font-bold text-emerald-600 mt-0.5" id="mm-subtitle">Year 3 KSSR/DLP • Ringgit Malaysia (RM)</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5 bg-emerald-50 p-1 rounded-2xl border border-emerald-200">
+        <button id="mm-tab-shop" onclick="switchMMStage('shop')" class="px-3 py-1.5 rounded-xl font-kid font-bold text-xs bg-emerald-500 text-white shadow">
+          🏪 <span id="mm-lbl-shop">1. Shop</span>
+        </button>
+        <button id="mm-tab-basket" onclick="switchMMStage('basket')" class="px-3 py-1.5 rounded-xl font-kid font-bold text-xs text-slate-600 hover:bg-white flex items-center gap-1">
+          🧺 <span id="mm-lbl-basket">2. Basket</span>
+          <span id="mm-basket-badge" class="bg-rose-500 text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded-full">0</span>
+        </button>
+        <button id="mm-tab-pay" onclick="switchMMStage('pay')" class="px-3 py-1.5 rounded-xl font-kid font-bold text-xs text-slate-600 hover:bg-white">
+          💵 <span id="mm-lbl-pay">3. Pay</span>
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <select id="mm-challenge-select" onchange="setMMChallenge(this.value)" class="bg-amber-300 text-amber-950 font-kid font-bold text-xs px-3 py-2 rounded-xl border-2 border-amber-200 focus:outline-none">
+          <option value="free">🎯 Free Shop</option>
+          <option value="c1">⭐ Mission 1: Breakfast (Milo + Roti)</option>
+          <option value="c2">⭐ Mission 2: School Kit (Color Pencils + Book)</option>
+          <option value="c3">⭐ Mission 3: Family Groceries (Rice + Eggs + Milk)</option>
+        </select>
+        <div class="bg-amber-100 border-2 border-amber-300 px-3 py-1.5 rounded-xl flex items-center gap-1">
+          <span>⭐</span>
+          <span id="mm-star-count" class="font-kid font-bold text-sm text-amber-700">0</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="mm-mission-banner" class="hidden bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 text-xs font-bold flex items-center justify-between">
+      <span id="mm-mission-text">Mission: Buy 1 Milo Tin and 1 Roti Gardenia!</span>
+      <button onclick="setMMChallenge('free')" class="bg-white/20 px-2 py-0.5 rounded-lg text-[11px]" id="mm-exit-mission">Exit Mission</button>
+    </div>
+
+    <!-- STAGE 1: 3D SUPERMARKET + PRODUCT SHELF -->
+    <div id="mm-stage-shop" class="p-3 sm:p-4 space-y-3">
+      <div class="relative w-full h-[320px] sm:h-[370px] rounded-2xl overflow-hidden border-2 border-emerald-300 bg-[#e6f9ef] shadow-inner">
+        <div id="mm-three-container" class="w-full h-full cursor-grab active:cursor-grabbing"></div>
+
+        <div id="mm-hover-tooltip" class="hidden absolute pointer-events-none z-20 transform -translate-x-1/2 -translate-y-full pb-2">
+          <div class="bg-slate-900/95 text-white px-3 py-1.5 rounded-xl border-2 border-amber-400 text-center shadow-lg">
+            <div id="mm-tip-name" class="font-kid font-bold text-xs text-amber-300">Milo Tin</div>
+            <div id="mm-tip-price" class="font-extrabold text-sm">RM 12.00</div>
+          </div>
+        </div>
+
+        <div class="absolute bottom-2.5 left-2.5 right-2.5 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
+          <div class="bg-white/95 px-3 py-1.5 rounded-xl shadow text-[11px] font-bold text-slate-700 pointer-events-auto">
+            👆 <span id="mm-drag-hint">Tap 3D items on shelves or pick below • Drag screen to look around</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5 pointer-events-auto">
+            <button onclick="focusMMAisle('all')" class="btn-3d bg-emerald-500 text-white px-2.5 py-1 rounded-xl text-xs font-extrabold" id="mm-aisle-all">All Aisles</button>
+            <button onclick="focusMMAisle('left')" class="btn-3d bg-white text-slate-700 px-2.5 py-1 rounded-xl text-xs font-extrabold" id="mm-aisle-left">🥛 Fresh & Bakery</button>
+            <button onclick="focusMMAisle('center')" class="btn-3d bg-white text-slate-700 px-2.5 py-1 rounded-xl text-xs font-extrabold" id="mm-aisle-center">🍫 Drinks & Pantry</button>
+            <button onclick="focusMMAisle('right')" class="btn-3d bg-white text-slate-700 px-2.5 py-1 rounded-xl text-xs font-extrabold" id="mm-aisle-right">🚗 Toys & School</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-3 border-2 border-emerald-300 shadow">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+          <span class="font-kid font-bold text-sm text-emerald-900" id="mm-catalog-title">
+            🏷️ Kedai Runcit Items (Tap + to put in Basket • Max RM 100)
+          </span>
+          <button onclick="switchMMStage('basket')" class="btn-3d bg-emerald-500 hover:bg-emerald-400 text-white font-kid font-bold text-xs px-4 py-1.5 rounded-xl flex items-center gap-1.5">
+            <span id="mm-btn-goto-basket">Go to Basket</span>
+            <span id="mm-strip-count" class="bg-white text-emerald-700 px-1.5 rounded-md font-extrabold">0</span>
+            <span>➔</span>
+          </button>
+        </div>
+        <div id="mm-products-strip" class="flex gap-2.5 overflow-x-auto pb-1"></div>
+      </div>
+    </div>
+
+    <!-- STAGE 2: YOUR SHOPPING BASKET -->
+    <div id="mm-stage-basket" class="hidden p-4 sm:p-5">
+      <div class="bg-white rounded-2xl border-2 border-emerald-300 overflow-hidden shadow-lg">
+        <div class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-5 py-3 flex items-center justify-between">
+          <div>
+            <h4 class="font-kid font-bold text-lg" id="mm-basket-heading">🧺 Your Shopping Basket</h4>
+            <p class="text-xs text-emerald-100" id="mm-basket-sub">Step 1: Add up the prices to find the Total Cost!</p>
+          </div>
+          <button onclick="switchMMStage('shop')" class="bg-white/20 hover:bg-white/30 text-white font-bold text-xs px-3 py-1.5 rounded-xl" id="mm-btn-addmore">+ Add More Items</button>
+        </div>
+
+        <div class="p-4 grid grid-cols-1 md:grid-cols-12 gap-4">
+          <div class="md:col-span-6 space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="font-kid font-bold text-sm text-slate-700" id="mm-sel-groceries">Selected Groceries</span>
+              <button onclick="clearMMBasket()" class="text-xs font-bold text-rose-500 hover:underline" id="mm-btn-empty">Empty Basket</button>
+            </div>
+            <div id="mm-basket-list" class="bg-slate-50 rounded-2xl p-3 border-2 border-slate-200 min-h-[170px] max-h-[260px] overflow-y-auto space-y-2"></div>
+          </div>
+
+          <div class="md:col-span-6 bg-amber-50 rounded-2xl p-4 border-2 border-amber-300 space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="font-kid font-bold text-amber-900 text-base" id="mm-calc-total-lbl">🧮 Calculate Total</span>
+              <button onclick="toggleMMHint()" class="text-xs bg-amber-200 hover:bg-amber-300 text-amber-950 font-extrabold px-2.5 py-1 rounded-lg" id="mm-btn-hint">💡 Step-by-Step Hint</button>
+            </div>
+            <p class="text-xs text-amber-900 font-semibold" id="mm-sen-rule">Add RM and sen together. Remember: 100 sen = RM 1.00!</p>
+
+            <div id="mm-hint-box" class="hidden bg-white p-2.5 rounded-xl border border-amber-300 text-xs font-mono text-right"></div>
+
+            <div class="flex items-center gap-1.5 bg-white p-2 rounded-2xl border-2 border-amber-400">
+              <span class="font-kid font-bold text-lg text-emerald-700 pl-1">RM</span>
+              <input id="mm-input-rm" onfocus="mmKeypadTarget='mm-input-rm'" type="number" min="0" max="200" placeholder="0" class="w-full text-center font-kid font-bold text-xl bg-emerald-50 rounded-xl py-1" />
+              <span class="font-kid font-bold text-2xl">.</span>
+              <input id="mm-input-sen" onfocus="mmKeypadTarget='mm-input-sen'" type="number" min="0" max="95" step="5" placeholder="00" class="w-full text-center font-kid font-bold text-xl bg-slate-100 rounded-xl py-1" />
+              <span class="text-xs font-extrabold text-slate-400 pr-1">sen</span>
+            </div>
+
+            <div class="grid grid-cols-6 gap-1.5">
+              <button type="button" onclick="mmKey('1')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">1</button>
+              <button type="button" onclick="mmKey('2')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">2</button>
+              <button type="button" onclick="mmKey('3')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">3</button>
+              <button type="button" onclick="mmKey('4')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">4</button>
+              <button type="button" onclick="mmKey('5')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">5</button>
+              <button type="button" onclick="mmBack()" class="btn-3d bg-rose-100 text-rose-700 font-kid font-bold text-xs py-1.5 rounded-xl">⌫</button>
+              <button type="button" onclick="mmKey('6')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">6</button>
+              <button type="button" onclick="mmKey('7')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">7</button>
+              <button type="button" onclick="mmKey('8')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">8</button>
+              <button type="button" onclick="mmKey('9')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">9</button>
+              <button type="button" onclick="mmKey('0')" class="btn-3d bg-white font-kid font-bold text-sm py-1.5 rounded-xl border">0</button>
+              <button type="button" onclick="mmToggleField()" class="btn-3d bg-sky-100 text-sky-800 font-kid font-bold text-[11px] py-1.5 rounded-xl">RM/sen</button>
+            </div>
+
+            <div id="mm-basket-fb" class="hidden text-xs font-bold p-2.5 rounded-xl"></div>
+
+            <button onclick="verifyMMBasket()" id="mm-btn-verify" class="btn-3d w-full bg-emerald-500 hover:bg-emerald-400 text-white font-kid font-bold text-base py-2.5 rounded-2xl">
+              Check Total & Go to Cashier ➔
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 3: CASHIER AIMAN & MALAYSIAN RINGGIT WALLET -->
+    <div id="mm-stage-pay" class="hidden p-4 sm:p-5">
+      <div class="bg-white rounded-2xl border-2 border-sky-400 overflow-hidden shadow-lg">
+        <div class="bg-gradient-to-r from-sky-500 to-indigo-600 text-white px-5 py-3 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-2xl bg-amber-300 border-2 border-white flex items-center justify-center text-2xl">🧑‍💼</div>
+            <div class="bg-white text-slate-800 px-3.5 py-2 rounded-2xl rounded-tl-none shadow">
+              <div class="text-[10px] font-extrabold uppercase text-sky-600" id="mm-cashier-lbl">Cashier Aiman says:</div>
+              <p id="mm-cashier-speech" class="text-xs sm:text-sm font-bold">"Selamat datang! Tap the Ringgit notes and sen coins to pay your total."</p>
+            </div>
+          </div>
+          <button onclick="switchMMStage('basket')" class="bg-white/20 hover:bg-white/30 text-white font-bold text-xs px-3 py-1.5 rounded-xl" id="mm-btn-back-basket">← Back to Basket</button>
+        </div>
+
+        <div class="p-4 grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <div class="lg:col-span-5 space-y-3">
+            <div class="bg-slate-900 text-emerald-400 p-4 rounded-2xl border-4 border-slate-700 font-mono">
+              <div class="flex justify-between items-center border-b border-slate-700 pb-2 mb-2">
+                <span class="text-xs text-slate-400 font-sans font-bold" id="mm-pos-due-lbl">TOTAL TO PAY:</span>
+                <span id="mm-pos-due" class="text-2xl font-extrabold text-amber-400">RM 0.00</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-slate-400 font-sans font-bold" id="mm-pos-paid-lbl">MONEY GIVEN:</span>
+                <span id="mm-pos-paid" class="text-2xl font-extrabold text-emerald-400">RM 0.00</span>
+              </div>
+            </div>
+
+            <div class="bg-sky-50 rounded-2xl p-3 border-2 border-dashed border-sky-300 min-h-[110px]">
+              <div class="flex justify-between items-center mb-1.5">
+                <span class="text-xs font-extrabold text-sky-900" id="mm-tray-lbl">💰 Counter Tray (Tap to remove)</span>
+                <button onclick="clearMMTray()" class="text-xs font-bold text-rose-500 hover:underline" id="mm-btn-clear-tray">Clear All</button>
+              </div>
+              <div id="mm-tray-items" class="flex flex-wrap gap-1.5 min-h-[60px] items-center"></div>
+            </div>
+
+            <!-- Change Verification Box -->
+            <div id="mm-change-box" class="hidden bg-amber-100 border-2 border-amber-400 rounded-2xl p-3 space-y-2">
+              <div class="font-kid font-bold text-amber-950 text-sm" id="mm-change-title">➖ Check Your Change! (Baki Wang)</div>
+              <p class="text-xs text-amber-900 font-semibold" id="mm-change-prompt">Subtract Paid − Total = ?</p>
+              <div class="flex items-center gap-1.5 bg-white p-1.5 rounded-xl border border-amber-400">
+                <span class="font-kid font-bold text-sm text-emerald-700 pl-1">RM</span>
+                <input id="mm-change-rm" type="number" min="0" max="200" placeholder="0" class="w-full text-center font-kid font-bold text-base bg-slate-100 rounded-lg py-1" />
+                <span class="font-bold">.</span>
+                <input id="mm-change-sen" type="number" min="0" max="95" step="5" placeholder="00" class="w-full text-center font-kid font-bold text-base bg-slate-100 rounded-lg py-1" />
+              </div>
+              <div id="mm-change-fb" class="hidden text-xs font-bold p-2 rounded-lg"></div>
+              <button onclick="verifyMMChange()" id="mm-btn-confirm-change" class="btn-3d w-full bg-amber-500 hover:bg-amber-400 text-amber-950 font-kid font-bold text-sm py-2 rounded-xl">
+                Confirm Change & Collect Star ⭐
+              </button>
+            </div>
+
+            <!-- Receipt Summary Box -->
+            <div id="mm-receipt-box" class="hidden bg-emerald-50 border-2 border-emerald-400 rounded-2xl p-3 space-y-2">
+              <div class="font-kid font-bold text-emerald-900 text-sm" id="mm-receipt-title">🧾 Payment Complete! Receipt Ready</div>
+              <pre id="mm-receipt-text" class="bg-white p-2.5 rounded-xl text-[11px] font-mono text-slate-700 border border-emerald-200 overflow-x-auto"></pre>
+              <div class="flex gap-2">
+                <button onclick="downloadMMReceipt()" class="btn-3d flex-1 bg-emerald-600 text-white font-kid font-bold text-xs py-2 rounded-xl" id="mm-btn-dl-receipt">Download Receipt</button>
+                <button onclick="resetMMNewRound()" class="btn-3d flex-1 bg-sky-500 text-white font-kid font-bold text-xs py-2 rounded-xl" id="mm-btn-new-shop">New Shopping Trip</button>
+              </div>
+            </div>
+
+            <button onclick="submitMMPayment()" id="mm-btn-pay-now" class="btn-3d w-full bg-emerald-500 hover:bg-emerald-400 text-white font-kid font-bold text-base py-3 rounded-2xl shadow-md">
+              Hand Money to Cashier 💵
+            </button>
+          </div>
+
+          <!-- Right Malaysian Ringgit Wallet -->
+          <div class="lg:col-span-7 bg-slate-50 rounded-2xl p-3.5 border-2 border-slate-200 space-y-3">
+            <h4 class="font-kid font-bold text-slate-800 text-sm" id="mm-wallet-notes-lbl">🇲🇾 Your Wallet – Malaysian Banknotes (Wang Kertas)</h4>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <button onclick="addMMMoney(100,'RM1','bg-sky-500')" class="rm-note bg-gradient-to-r from-sky-500 to-blue-600 text-white p-2.5 text-left h-14 flex flex-col justify-between">
+                <span class="font-kid font-extrabold text-base">RM1</span><span class="text-[10px] opacity-85">Wau Bulan</span>
+              </button>
+              <button onclick="addMMMoney(500,'RM5','bg-emerald-500')" class="rm-note bg-gradient-to-r from-emerald-500 to-green-600 text-white p-2.5 text-left h-14 flex flex-col justify-between">
+                <span class="font-kid font-extrabold text-base">RM5</span><span class="text-[10px] opacity-85">Hornbill</span>
+              </button>
+              <button onclick="addMMMoney(1000,'RM10','bg-rose-500')" class="rm-note bg-gradient-to-r from-rose-500 to-red-600 text-white p-2.5 text-left h-14 flex flex-col justify-between">
+                <span class="font-kid font-extrabold text-base">RM10</span><span class="text-[10px] opacity-85">Rafflesia</span>
+              </button>
+              <button onclick="addMMMoney(2000,'RM20','bg-amber-500')" class="rm-note bg-gradient-to-r from-amber-500 to-orange-500 text-white p-2.5 text-left h-14 flex flex-col justify-between">
+                <span class="font-kid font-extrabold text-base">RM20</span><span class="text-[10px] opacity-85">Turtle</span>
+              </button>
+              <button onclick="addMMMoney(5000,'RM50','bg-teal-600')" class="rm-note bg-gradient-to-r from-teal-500 to-cyan-700 text-white p-2.5 text-left h-14 flex flex-col justify-between">
+                <span class="font-kid font-extrabold text-base">RM50</span><span class="text-[10px] opacity-85">Oil Palm</span>
+              </button>
+              <button onclick="addMMMoney(10000,'RM100','bg-purple-600')" class="rm-note bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-2.5 text-left h-14 flex flex-col justify-between">
+                <span class="font-kid font-extrabold text-base">RM100</span><span class="text-[10px] opacity-85">Kinabalu</span>
+              </button>
+            </div>
+
+            <h4 class="font-kid font-bold text-slate-800 text-sm pt-1" id="mm-wallet-coins-lbl">🪙 Malaysian Coins (Duit Syiling)</h4>
+            <div class="flex flex-wrap gap-3 items-center">
+              <button onclick="addMMMoney(5,'5 sen','bg-slate-300 text-slate-900')" class="rm-coin w-14 h-14 bg-gradient-to-br from-slate-200 to-slate-400 text-slate-900 font-kid font-extrabold text-xs">5 sen</button>
+              <button onclick="addMMMoney(10,'10 sen','bg-slate-300 text-slate-900')" class="rm-coin w-14 h-14 bg-gradient-to-br from-slate-200 to-slate-400 text-slate-900 font-kid font-extrabold text-xs">10 sen</button>
+              <button onclick="addMMMoney(20,'20 sen','bg-amber-400 text-amber-950')" class="rm-coin w-14 h-14 bg-gradient-to-br from-amber-300 to-yellow-500 text-amber-950 font-kid font-extrabold text-xs">20 sen</button>
+              <button onclick="addMMMoney(50,'50 sen','bg-amber-400 text-amber-950')" class="rm-coin w-14 h-14 bg-gradient-to-br from-amber-300 to-yellow-500 text-amber-950 font-kid font-extrabold text-xs">50 sen</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING COMOT x I.R.I.S. AI ASSISTANT -->
+  <div class="fixed bottom-4 right-4 z-50">
+    <div id="iris-chat-window" class="hidden mb-3 w-80 sm:w-96 hud-panel rounded-3xl border-2 border-cyan-400/60 shadow-2xl overflow-hidden">
+      <div class="bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-3 flex items-center justify-between text-slate-950">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">🐱</span>
+          <div>
+            <div class="font-hud font-black text-xs">COMOT × I.R.I.S. ASSIST</div>
+            <div class="text-[10px] font-bold opacity-85" id="iris-sub">Tactical Math Companion</div>
+          </div>
+        </div>
+        <button onclick="toggleIrisChat()" class="font-hud font-black text-sm px-2 py-0.5 rounded-lg bg-slate-950/20">✕</button>
+      </div>
+      <div id="iris-messages" class="p-3.5 h-56 overflow-y-auto space-y-2.5 text-xs bg-slate-950/90"></div>
+      <div class="p-2.5 bg-slate-900 border-t border-slate-800 space-y-2">
+        <div class="flex flex-wrap gap-1">
+          <button onclick="askIrisPreset('sen')" id="iris-chip-1" class="px-2 py-1 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-[10px] text-cyan-300 font-bold">100 sen rule?</button>
+          <button onclick="askIrisPreset('regroup')" id="iris-chip-2" class="px-2 py-1 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-[10px] text-cyan-300 font-bold">How to regroup?</button>
+          <button onclick="askIrisPreset('lab')" id="iris-chip-3" class="px-2 py-1 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-[10px] text-cyan-300 font-bold">Gadget Lab tip?</button>
+        </div>
+        <div class="flex gap-1.5">
+          <input id="iris-input" onkeydown="if(event.key==='Enter')sendIrisCustom()" type="text" placeholder="Ask I.R.I.S. for a hint..." class="flex-1 px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs focus:outline-none" />
+          <button onclick="sendIrisCustom()" class="px-3 py-1.5 rounded-xl bg-cyan-500 text-slate-950 font-hud font-bold text-xs">SEND</button>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="toggleIrisChat()" class="ml-auto flex items-center gap-2.5 bg-slate-950/95 hover:bg-slate-900 border-2 border-cyan-400 px-4 py-2.5 rounded-full shadow-2xl transition">
+      <span class="w-8 h-8 rounded-full bg-cyan-400/20 border border-cyan-300 flex items-center justify-center text-lg">🐱</span>
+      <div class="text-left">
+        <div class="font-hud font-extrabold text-xs text-cyan-300">I.R.I.S. ASSIST</div>
+        <div class="text-[10px] text-slate-300" id="iris-fab-sub">Tap for Tactical Hint</div>
+      </div>
+    </button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800/80 py-3 px-4 text-center text-[11px] font-hud text-slate-400">
+    <span id="footer-text">M.A.T.A ACADEMY • YEAR 3 MATHEMATICS: ADDITION OF MONEY (UP TO RM10,000) • KSSR CURRICULUM</span>
+  </footer>
+
+  <script>
+    /* ==================== DEFAULT PORTRAIT SVG FOR OPERATIVE Z-03 ==================== */
+    const DEFAULT_AVATAR_SVG = "data:image/svg+xml;utf8," + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+        <defs>
+          <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#38bdf8"/>
+            <stop offset="100%" stop-color="#0284c7"/>
+          </linearGradient>
+        </defs>
+        <rect width="200" height="200" fill="url(#bg)"/>
+        <circle cx="100" cy="95" r="56" fill="#0f172a"/>
+        <path d="M35 200 C35 145, 165 145, 165 200 Z" fill="#0f172a"/>
+        <ellipse cx="100" cy="96" rx="34" ry="40" fill="#fde68a"/>
+        <path d="M64 88 C66 52, 134 52, 136 88 C126 70, 74 70, 64 88 Z" fill="#0f172a"/>
+        <circle cx="87" cy="94" r="4" fill="#1e293b"/>
+        <circle cx="113" cy="94" r="4" fill="#1e293b"/>
+        <path d="M88 112 Q100 123 112 112" stroke="#b45309" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      </svg>
+    `);
+
+    /* ==================== GLOBAL STATE ==================== */
+    let currentLang = localStorage.getItem('mata_lang') || 'en';
+    let currentView = 'dashboard';
+    let audioEnabled = true;
+    let audioCtx = null;
+    let xp = parseInt(localStorage.getItem('mata_xp') || '0', 10);
+    let completedMissions = JSON.parse(localStorage.getItem('mata_completed') || '{}');
+
+    /* ==================== BILINGUAL DICTIONARY (100% EN / BM) ==================== */
+    const I18N = {
+      en: {
+        yearPill: 'YEAR 3 MATH',
+        hudSub: 'Mission: Addition of Money (Up to RM10,000)',
+        rankTitle: 'AGENT RANK',
+        xpTitle: 'TACTICAL XP',
+        missionProg: 'MISSIONS',
+        audioOn: 'AUDIO ON',
+        audioOff: 'MUTED',
+        reset: 'RESET',
+        menus: [
+          { id: 'dashboard', num: '00', label: 'Command Center', desc: 'Overview of all 7 RPH missions and rank progress.' },
+          { id: 'pengenalan', num: '01', label: 'Introduction', desc: 'Malaysian banknotes, sen coins & 100 sen = RM1 rule.' },
+          { id: 'rph', num: '02', label: 'Lesson Plan (RPH)', desc: 'Year 3 KSSR Content & Learning Standards (3.1.1).' },
+          { id: 'set_induksi', num: '03', label: 'Induction Set', desc: '5-Question 60-Second Place Value Gadget Lab.' },
+          { id: 'langkah', num: '04', label: 'Learning Steps', desc: 'Vertical addition, FX-3100 Calculator & 3D Mini Market.' },
+          { id: 'penilaian', num: '05', label: 'Assessment & Games', desc: '3D Mini Market missions & 8-Question Certificate Quiz.' },
+          { id: 'penutup', num: '06', label: 'Closure', desc: 'Key rules debrief & Digital Agent Exit Ticket.' },
+          { id: 'metadata', num: '07', label: 'Metadata', desc: 'Developer & educator dossier (Operative Z-03).' }
+        ],
+        dashBadge: 'KSSR YEAR 3 MATHEMATICS • TOPIC 3.0 MONEY',
+        dashTitle: 'M.A.T.A MONEY OPERATIONS COMMAND',
+        dashDesc: 'Welcome, Junior Agent! Master Malaysian Ringgit and Sen addition up to RM10,000 across 7 structured learning missions, a 5-question timed Gadget Lab, a 3D Mini Market, and earn your official M.A.T.A Academy Certificate.',
+        dashStartBtn: 'START MISSION 01: INTRODUCTION ➔',
+        dashSimBtn: 'LAUNCH 3D MINI MARKET & QUIZ',
+        dashOpBtn: 'VIEW METADATA DOSSIER →',
+        m1Tag: 'MENU 01 // INTRODUCTION',
+        m1Title: 'Malaysian Currency Briefing',
+        m1Claim: 'MARK BRIEFING COMPLETE (+100 XP)',
+        m1Intro: 'In Malaysia, our official currency is Ringgit Malaysia (RM) and Sen. Before performing addition operations up to RM10,000, every M.A.T.A agent must recognize all banknotes and coins and master the conversion rule: 100 sen = RM1.00.',
+        m1NotesH: 'MALAYSIAN BANKNOTES',
+        m1CoinsH: 'MALAYSIAN COINS',
+        m1CoinRule: 'Tip: Two 50 sen coins equal 100 sen = RM1.00. Always align the decimal point when adding Ringgit and Sen!',
+        m1CheckTitle: 'QUICK CONVERSION CHECKPOINT',
+        m1CheckQ: 'If you have 250 sen, how much is that in Ringgit Malaysia (RM)?',
+        m1Next: 'NEXT: MENU 02 LESSON PLAN (RPH) ➔',
+        m2Tag: 'MENU 02 // DAILY LESSON PLAN (RPH)',
+        m2Title: 'Year 3 Mathematics Curriculum Dossier',
+        m2Claim: 'VERIFY RPH (+100 XP)',
+        rphSubjL: 'SUBJECT', rphSubjV: 'Mathematics (Year 3)',
+        rphTopicL: 'TOPIC', rphTopicV: '3.0 Money — Addition of Money',
+        rphCsL: 'CONTENT STANDARD', rphCsV: '3.1 Addition of money',
+        rphLsL: 'LEARNING STANDARD', rphLsV: '3.1.1 Solve addition number sentences involving up to three values of money with the sum up to RM10,000.',
+        rphObjH: 'LEARNING OBJECTIVES',
+        rphObjs: [
+          '1. Add two values of money without regrouping with a sum up to RM10,000 accurately.',
+          '2. Add two values of money with regrouping (100 sen = RM1) up to RM10,000.',
+          '3. Solve addition of three values of money involving Ringgit and Sen up to RM10,000.',
+          '4. Apply money addition skills in a simulated 3D Mini Market shopping transaction.'
+        ],
+        rphProfH: "PUPILS' PROFILE",
+        rphProfT: 'Year 3 pupils (ages 9) familiar with basic whole number addition up to 10,000 and recognizing Malaysian banknotes and coins in daily life.',
+        rphPedH: 'TEACHING & LEARNING APPROACH',
+        rphPedT: 'Contextual Learning, Gamification (M.A.T.A Tactical Simulation), Concrete-Pictorial-Abstract (CPA), and 3D Virtual Mini Market Role-Play.',
+        m2Next: 'NEXT: MENU 03 INDUCTION SET (GADGET LAB) ➔',
+        m3Tag: 'MENU 03 // INDUCTION SET — 5-STAGE CALIBRATION',
+        m3Title: 'M.A.T.A 5-Box Place Value Gadget Lab',
+        m3Desc: 'Complete all 5 Target Calibration Questions inside the 60-second timer! Leaving this tab early aborts the calibration.',
+        labQLabel: 'QUESTION',
+        labCountdown: 'COUNTDOWN',
+        labReset: 'RESET SCANNER',
+        labRandom: 'RANDOM SAMPLE',
+        labRestart: 'RESTART 5-Q MISSION',
+        labRetry: 'RETRY 5-QUESTION MISSION',
+        boxH: 'HUNDREDS', boxT: 'TENS', boxO: 'ONES', boxD: 'DECIMAL', boxP: 'POINT', boxS: 'SEN',
+        labCurrent: 'CURRENT SCANNER LOAD:',
+        m3Next: 'NEXT: MENU 04 LEARNING STEPS & 3D MINI MARKET ➔',
+        m4Tag: 'MENU 04 // LEARNING STEPS',
+        m4Title: 'Addition of Money & 3D Mini Market',
+        m4Claim: 'COMPLETE LEARNING STEPS (+150 XP)',
+        step1T: 'STEP 1: ADDITION WITHOUT REGROUPING',
+        step1D: 'Arrange digits vertically according to place value (Thousands, Hundreds, Tens, Ones) and keep the RM symbol aligned.',
+        step2T: 'STEP 2: ADDITION WITH REGROUPING (100 SEN = RM1)',
+        step2D: 'When adding sen exceeds 100 sen, regroup 100 sen into RM1 in the Ones column. Example: RM1,250.70 + RM2,375.60 = RM3,626.30.',
+        learnPracT: 'INTERACTIVE PRACTICE CHECKPOINT',
+        learnPracQ: 'Solve: RM1,450 + RM2,380 = ?',
+        btnCheck: 'CHECK ANSWER',
+        btnUseCalc: 'USE CALCULATOR RESULT',
+        calcTitle: 'M.A.T.A SCIENTIFIC CALCULATOR // FX-3100',
+        calcTip: 'I.R.I.S. TIP: Compute expressions on the FX-3100, then click "USE CALCULATOR RESULT" to auto-fill your answer.',
+        m4Next: 'NEXT: MENU 05 ASSESSMENT & GAMES ➔',
+        m5Tag: 'MENU 05 // ASSESSMENT & GAMES',
+        m5Title: '3D Mini Market & Final Evaluation Quiz',
+        modeA: 'MODE A: 3D MINI MARKET',
+        modeB: 'MODE B: 8-QUESTION QUIZ',
+        quizH: 'M.A.T.A AGENT CERTIFICATION ASSESSMENT (8 QUESTIONS)',
+        quizSub: 'Score at least 5/8 (62.5%) to unlock your official Landscape A4 M.A.T.A Certificate!',
+        btnSubmitQuiz: 'SUBMIT ANSWERS & GRADE MISSION',
+        btnRetakeQuiz: 'RETAKE QUIZ',
+        certBadge: 'CERTIFICATE UNLOCKED!',
+        certSecT: 'Official M.A.T.A Academy Certificate of Achievement',
+        btnDlPdf: 'DOWNLOAD AS PDF',
+        btnDlPng: 'DOWNLOAD PNG',
+        btnPrint: 'PRINT CERTIFICATE',
+        lblCertName: 'AGENT / PUPIL FULL NAME:',
+        certOrg: 'M.A.T.A ACADEMY // MONEY OPERATIONS DIVISION',
+        certHeading: 'CERTIFICATE OF ACHIEVEMENT',
+        certSub: 'This certifies that Junior Agent',
+        certBody: 'has successfully mastered Year 3 Mathematics: Addition of Money (up to RM10,000) and passed the M.A.T.A Tactical Assessment.',
+        certLblScore: 'ASSESSMENT SCORE',
+        certLblDate: 'DATE ISSUED',
+        m5Next: 'NEXT: MENU 06 CLOSURE & EXIT TICKET ➔',
+        m6Tag: 'MENU 06 // LESSON CLOSURE',
+        m6Title: 'Mission Debrief & Digital Exit Ticket',
+        m6Claim: 'COMPLETE CLOSURE (+100 XP)',
+        take1Tag: 'RULE 01', take1T: 'Align Decimal Points', take1D: 'Always line up Ringgit (RM) and Sen vertically so ones, tens, hundreds, and thousands match accurately.',
+        take2Tag: 'RULE 02', take2T: '100 Sen = RM1.00', take2D: 'Whenever the sen column totals 100 sen or more, regroup 100 sen into RM1 in the Ones place.',
+        take3Tag: 'RULE 03', take3T: 'Smart Budgeting', take3D: 'Calculate total prices before paying at the counter to verify exact change.',
+        exitFormT: 'SUBMIT AGENT EXIT TICKET',
+        btnSubmitExit: 'TRANSMIT EXIT TICKET (+100 XP)',
+        exitLogT: 'LIVE AGENT DEBRIEF LOG',
+        m6Next: 'NEXT: MENU 07 METADATA & DEVELOPER PROFILE ➔',
+        m7Tag: 'MENU 07 // METADATA & DEVELOPER DOSSIER',
+        m7Title: 'Developer & Educator Profile',
+        m7Sub: 'Creator and educator profile for this Year 3 Mathematics learning portal. All fields are editable and saved locally.',
+        btnUpload: '📷 UPLOAD PROFILE PHOTO',
+        btnResetPhoto: 'RESET PHOTO',
+        lblMetaName: 'DEVELOPER / EDUCATOR FULL NAME',
+        lblMetaCode: 'AGENT CODENAME',
+        lblMetaRole: 'ROLE / SUBJECT',
+        lblMetaSchool: 'SCHOOL / INSTITUTION',
+        lblMetaEmail: 'EMAIL ADDRESS',
+        btnSaveMeta: 'SAVE PROFILE & CLAIM +100 XP',
+        btnReturnDash: 'RETURN TO COMMAND CENTER',
+        footer: 'M.A.T.A ACADEMY • YEAR 3 MATHEMATICS: ADDITION OF MONEY (UP TO RM10,000) • KSSR CURRICULUM'
+      },
+      bm: {
+        yearPill: 'MATEMATIK TAHUN 3',
+        hudSub: 'Misi: Tambah Wang (Hingga RM10,000)',
+        rankTitle: 'PANGKAT EJEN',
+        xpTitle: 'XP TAKTIKAL',
+        missionProg: 'MISI',
+        audioOn: 'AUDIO HIDUP',
+        audioOff: 'SENYAP',
+        reset: 'SET SEMULA',
+        menus: [
+          { id: 'dashboard', num: '00', label: 'Pusat Kawalan', desc: 'Paparan keseluruhan 7 misi RPH dan tahap pangkat.' },
+          { id: 'pengenalan', num: '01', label: 'Pengenalan', desc: 'Wang kertas, duit syiling & rumus 100 sen = RM1.' },
+          { id: 'rph', num: '02', label: 'RPH', desc: 'Standard Kandungan & Standard Pembelajaran (3.1.1).' },
+          { id: 'set_induksi', num: '03', label: 'Set Induksi', desc: 'Makmal Gajet Nilai Tempat 5 Soalan (60 Saat).' },
+          { id: 'langkah', num: '04', label: 'Langkah Pembelajaran', desc: 'Tambah bentuk lazim, Kalkulator FX-3100 & Pasar Mini 3D.' },
+          { id: 'penilaian', num: '05', label: 'Penilaian & Permainan', desc: 'Misi Pasar Mini 3D & Kuiz 8 Soalan Bersijil.' },
+          { id: 'penutup', num: '06', label: 'Penutup', desc: 'Rumusan peraturan utama & Tiket Keluar Digital.' },
+          { id: 'metadata', num: '07', label: 'Metadata', desc: 'Profil pembangun & pendidik (Operative Z-03).' }
+        ],
+        dashBadge: 'MATEMATIK TAHUN 3 KSSR • TAJUK 3.0 WANG',
+        dashTitle: 'PUSAT OPERASI WANG AKADEMI M.A.T.A',
+        dashDesc: 'Selamat datang, Ejen Muda! Kuasai operasi tambah Ringgit Malaysia dan Sen sehingga RM10,000 melalui 7 misi pembelajaran berstruktur, Makmal Gajet 5 soalan, Pasar Mini 3D, dan raih Sijil Rasmi Akademi M.A.T.A.',
+        dashStartBtn: 'MULA MISI 01: PENGENALAN ➔',
+        dashSimBtn: 'BUKA PASAR MINI 3D & KUIZ',
+        dashOpBtn: 'LIHAT DOSSIER METADATA →',
+        m1Tag: 'MENU 01 // PENGENALAN',
+        m1Title: 'Taklimat Mata Wang Malaysia',
+        m1Claim: 'TANDAKAN SELESAI (+100 XP)',
+        m1Intro: 'Di Malaysia, mata wang rasmi ialah Ringgit Malaysia (RM) dan Sen. Sebelum menyelesaikan operasi tambah wang sehingga RM10,000, setiap ejen M.A.T.A mesti mengenal pasti wang kertas dan syiling serta menguasai penukaran: 100 sen = RM1.00.',
+        m1NotesH: 'WANG KERTAS MALAYSIA',
+        m1CoinsH: 'DUIT SYILING MALAYSIA',
+        m1CoinRule: 'Tip: Dua keping syiling 50 sen bersamaan 100 sen = RM1.00. Sentiasa selarikan titik perpuluhan apabila menambah Ringgit dan Sen!',
+        m1CheckTitle: 'SEMAKAN PANTAS PENUKARAN',
+        m1CheckQ: 'Jika kamu mempunyai 250 sen, berapakah nilainya dalam Ringgit Malaysia (RM)?',
+        m1Next: 'SETERUSNYA: MENU 02 RPH ➔',
+        m2Tag: 'MENU 02 // RANCANGAN PENGAJARAN HARIAN (RPH)',
+        m2Title: 'Dossier Kurikulum Matematik Tahun 3',
+        m2Claim: 'SAHKAN RPH (+100 XP)',
+        rphSubjL: 'MATA PELAJARAN', rphSubjV: 'Matematik (Tahun 3)',
+        rphTopicL: 'TAJUK', rphTopicV: '3.0 Wang — Tambah Wang',
+        rphCsL: 'STANDARD KANDUNGAN', rphCsV: '3.1 Tambah wang',
+        rphLsL: 'STANDARD PEMBELAJARAN', rphLsV: '3.1.1 Menyelesaikan ayat matematik tambah melibatkan hingga tiga nilai wang dan hasil tambahnya hingga RM10,000.',
+        rphObjH: 'OBJEKTIF PEMBELAJARAN',
+        rphObjs: [
+          '1. Menambah dua nilai wang tanpa mengumpul semula dengan hasil tambah hingga RM10,000 dengan tepat.',
+          '2. Menambah dua nilai wang dengan mengumpul semula (100 sen = RM1) hingga RM10,000.',
+          '3. Menyelesaikan penambahan tiga nilai wang melibatkan Ringgit dan Sen hingga RM10,000.',
+          '4. Mengaplikasikan kemahiran tambah wang dalam simulasi jual beli Pasar Mini 3D.'
+        ],
+        rphProfH: 'PROFIL MURID',
+        rphProfT: 'Murid Tahun 3 (berumur 9 tahun) yang telah menguasai penambahan nombor bulat hingga 10,000 serta mengenali wang kertas dan duit syiling Malaysia.',
+        rphPedH: 'PENDEKATAN PENGAJARAN & PEMBELAJARAN',
+        rphPedT: 'Pembelajaran Kontekstual, Gamifikasi (Simulasi Taktikal M.A.T.A), Konkrit-Gambar-Abstrak (CPA), dan Main Peranan Pasar Mini Maya 3D.',
+        m2Next: 'SETERUSNYA: MENU 03 SET INDUKSI (MAKMAL GAJET) ➔',
+        m3Tag: 'MENU 03 // SET INDUKSI — KALIBRASI 5 PERINGKAT',
+        m3Title: 'Makmal Gajet Nilai Tempat 5-Kotak M.A.T.A',
+        m3Desc: 'Selesaikan kesemua 5 Soalan Kalibrasi Sasaran dalam masa 60 saat! Keluar dari paparan ini lebih awal akan membatalkan kalibrasi.',
+        labQLabel: 'SOALAN',
+        labCountdown: 'MASA BERUNDUR',
+        labReset: 'SET SEMULA PENGIMBAS',
+        labRandom: 'SAMPEL RAWAK',
+        labRestart: 'MULA SEMULA MISI 5-SOALAN',
+        labRetry: 'CUBA SEMULA MISI 5-SOALAN',
+        boxH: 'RATUS', boxT: 'PULUH', boxO: 'SA', boxD: 'TITIK', boxP: 'PERPULUHAN', boxS: 'SEN',
+        labCurrent: 'MUATAN PENGIMBAS SEMASA:',
+        m3Next: 'SETERUSNYA: MENU 04 LANGKAH PEMBELAJARAN & PASAR MINI 3D ➔',
+        m4Tag: 'MENU 04 // LANGKAH PEMBELAJARAN',
+        m4Title: 'Tambah Wang & Simulasi Pasar Mini 3D',
+        m4Claim: 'SELESAIKAN LANGKAH PEMBELAJARAN (+150 XP)',
+        step1T: 'LANGKAH 1: TAMBAH WANG TANPA MENGUMPUL SEMULA',
+        step1D: 'Susun digit mengikut nilai tempat (Ribu, Ratus, Puluh, Sa) secara menegak dan pastikan simbol RM selari.',
+        step2T: 'LANGKAH 2: TAMBAH WANG DENGAN MENGUMPUL SEMULA (100 SEN = RM1)',
+        step2D: 'Apabila jumlah sen melebihi 100 sen, kumpul semula 100 sen menjadi RM1 di rumah Sa. Contoh: RM1,250.70 + RM2,375.60 = RM3,626.30.',
+        learnPracT: 'SEMAKAN LATIHAN INTERAKTIF',
+        learnPracQ: 'Selesaikan: RM1,450 + RM2,380 = ?',
+        btnCheck: 'SEMAK JAWAPAN',
+        btnUseCalc: 'GUNA HASIL KALKULATOR',
+        calcTitle: 'KALKULATOR SAINTIFIK M.A.T.A // FX-3100',
+        calcTip: 'TIP I.R.I.S.: Kira ungkapan pada FX-3100, kemudian klik "GUNA HASIL KALKULATOR" untuk mengisi jawapan.',
+        m4Next: 'SETERUSNYA: MENU 05 PENILAIAN & PERMAINAN ➔',
+        m5Tag: 'MENU 05 // PENILAIAN & PERMAINAN',
+        m5Title: 'Pasar Mini 3D & Kuiz Penilaian Akhir',
+        modeA: 'MOD A: PASAR MINI 3D',
+        modeB: 'MOD B: KUIZ 8 SOALAN',
+        quizH: 'PENILAIAN PENTAULIAHAN EJEN M.A.T.A (8 SOALAN)',
+        quizSub: 'Capai sekurang-kurangnya 5/8 (62.5%) untuk membuka kunci Sijil Rasmi A4 Landskap Akademi M.A.T.A!',
+        btnSubmitQuiz: 'HANTAR JAWAPAN & NILAI MISI',
+        btnRetakeQuiz: 'ULANG KUIZ',
+        certBadge: 'SIJIL DIBUKA KUNCI!',
+        certSecT: 'Sijil Pencapaian Rasmi Akademi M.A.T.A',
+        btnDlPdf: 'MUAT TURUN PDF',
+        btnDlPng: 'MUAT TURUN PNG',
+        btnPrint: 'CETAK SIJIL',
+        lblCertName: 'NAMA PENUH EJEN / MURID:',
+        certOrg: 'AKADEMI M.A.T.A // BAHAGIAN OPERASI WANG',
+        certHeading: 'SIJIL PENCAPAIAN',
+        certSub: 'Dengan ini disahkan bahawa Ejen Muda',
+        certBody: 'telah berjaya menguasai Matematik Tahun 3: Tambah Wang (sehingga RM10,000) dan lulus Penilaian Taktikal M.A.T.A.',
+        certLblScore: 'MARKAH PENILAIAN',
+        certLblDate: 'TARIKH DIKELUARKAN',
+        m5Next: 'SETERUSNYA: MENU 06 PENUTUP & TIKET KELUAR ➔',
+        m6Tag: 'MENU 06 // PENUTUP PEMBELAJARAN',
+        m6Title: 'Rumusan Misi & Tiket Keluar Digital',
+        m6Claim: 'SELESAIKAN PENUTUP (+100 XP)',
+        take1Tag: 'PERATURAN 01', take1T: 'Selarikan Titik Perpuluhan', take1D: 'Sentiasa susun nilai Ringgit (RM) dan Sen secara menegak supaya rumah sa, puluh, ratus dan ribu sepadan.',
+        take2Tag: 'PERATURAN 02', take2T: '100 Sen = RM1.00', take2D: 'Apabila jumlah lajur sen mencapai 100 sen atau lebih, kumpul semula 100 sen menjadi RM1 di rumah Sa.',
+        take3Tag: 'PERATURAN 03', take3T: 'Perbelanjaan Berhemah', take3D: 'Kira jumlah harga barang sebelum membayar di kaunter untuk menyemak baki wang dengan tepat.',
+        exitFormT: 'HANTAR TIKET KELUAR EJEN',
+        btnSubmitExit: 'HANTAR TIKET KELUAR (+100 XP)',
+        exitLogT: 'LOG REFLEKSI EJEN LANGSUNG',
+        m6Next: 'SETERUSNYA: MENU 07 METADATA & PROFIL PEMBANGUN ➔',
+        m7Tag: 'MENU 07 // METADATA & DOSSIER PEMBANGUN',
+        m7Title: 'Profil Pembangun & Pendidik',
+        m7Sub: 'Profil pencipta dan pendidik bagi portal pembelajaran Matematik Tahun 3 ini. Semua ruangan boleh disunting dan disimpan secara tempatan.',
+        btnUpload: '📷 MUAT NAIK FOTO PROFIL',
+        btnResetPhoto: 'SET SEMULA FOTO',
+        lblMetaName: 'NAMA PENUH PEMBANGUN / PENDIDIK',
+        lblMetaCode: 'NAMA KOD EJEN',
+        lblMetaRole: 'PERANAN / SUBJEK',
+        lblMetaSchool: 'SEKOLAH / INSTITUSI',
+        lblMetaEmail: 'ALAMAT E-MEL',
+        btnSaveMeta: 'SIMPAN PROFIL & TUNTUT +100 XP',
+        btnReturnDash: 'KEMBALI KE PUSAT KAWALAN',
+        footer: 'AKADEMI M.A.T.A • MATEMATIK TAHUN 3: TAMBAH WANG (HINGGA RM10,000) • KURIKULUM KSSR'
+      }
+    };
+
+    /* ==================== SOUND SYNTHESIZER (WEB AUDIO API) ==================== */
+    function playTone(type) {
+      if (!audioEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        const now = audioCtx.currentTime;
+        if (type === 'click') {
+          osc.type = 'sine'; osc.frequency.setValueAtTime(620, now);
+          gain.gain.setValueAtTime(0.08, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          osc.start(now); osc.stop(now + 0.08);
+        } else if (type === 'success') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.09);
+          osc.frequency.setValueAtTime(783.99, now + 0.18);
+          gain.gain.setValueAtTime(0.12, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now); osc.stop(now + 0.35);
+        } else if (type === 'error') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(190, now);
+          osc.frequency.setValueAtTime(145, now + 0.12);
+          gain.gain.setValueAtTime(0.1, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+          osc.start(now); osc.stop(now + 0.28);
+        }
+      } catch (e) {}
+    }
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      document.getElementById('sound-icon').textContent = audioEnabled ? '🔊' : '🔇';
+      document.getElementById('sound-label').textContent = audioEnabled ? I18N[currentLang].audioOn : I18N[currentLang].audioOff;
+    }
+
+    /* ==================== XP & NAVIGATION SYSTEM ==================== */
+    function updateHUD() {
+      document.getElementById('hud-xp').textContent = `${xp} XP`;
+      const doneCount = Object.keys(completedMissions).length;
+      document.getElementById('hud-prog-text').textContent = `${doneCount}/7`;
+      document.getElementById('hud-prog-bar').style.width = `${Math.min(100, Math.round((doneCount / 7) * 100))}%`;
+
+      let rank = currentLang === 'en' ? 'CADET RECRUIT' : 'REKRUT KADET';
+      if (xp >= 700) rank = currentLang === 'en' ? 'ELITE M.A.T.A COMMANDER' : 'KOMANDER ELIT M.A.T.A';
+      else if (xp >= 500) rank = currentLang === 'en' ? 'SENIOR TACTICAL AGENT' : 'EJEN TAKTIKAL KANAN';
+      else if (xp >= 300) rank = currentLang === 'en' ? 'FIELD OPERATIVE' : 'OPERATIF LAPANGAN';
+      else if (xp >= 100) rank = currentLang === 'en' ? 'JUNIOR AGENT' : 'EJEN MUDA';
+      document.getElementById('hud-rank').textContent = rank;
+
+      renderNavAndCards();
+    }
+
+    function completeMission(key, bonus) {
+      if (!completedMissions[key]) {
+        completedMissions[key] = true;
+        xp += bonus;
+        localStorage.setItem('mata_completed', JSON.stringify(completedMissions));
+        localStorage.setItem('mata_xp', String(xp));
+        playTone('success');
+        updateHUD();
+      } else {
+        playTone('click');
+      }
+    }
+
+    function resetAllProgress() {
+      const msg = currentLang === 'en'
+        ? 'Reset all mission XP, quiz progress, and badges?'
+        : 'Set semula semua XP misi, kemajuan kuiz dan lencana?';
+      if (!confirm(msg)) return;
+      xp = 0;
+      completedMissions = {};
+      localStorage.removeItem('mata_xp');
+      localStorage.removeItem('mata_completed');
+      playTone('click');
+      updateHUD();
+    }
+
+    function navigateMenu(menuId) {
+      playTone('click');
+      // Stop Gadget Lab timer and mark failed if leaving early while active
+      if (currentView === 'set_induksi' && menuId !== 'set_induksi' && labState.active) {
+        abortLabEarly();
+      }
+
+      currentView = menuId;
+      const views = ['dashboard', 'pengenalan', 'rph', 'set_induksi', 'langkah', 'penilaian', 'penutup', 'metadata'];
+      views.forEach(v => {
+        const el = document.getElementById('view-' + v);
+        if (el) el.classList.toggle('hidden', v !== menuId);
+      });
+
+      // Auto-start 5-Question 60-second Gadget Lab when entering Menu 03
+      if (menuId === 'set_induksi') {
+        startLabSession(true);
+      }
+
+      // Mount Colourful 3D Mini Market into Menu 04 or Menu 05
+      if (menuId === 'langkah') {
+        mountMiniMarket('mm-mount-langkah');
+      } else if (menuId === 'penilaian') {
+        mountMiniMarket('mm-mount-penilaian');
+      }
+
+      renderNavAndCards();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderNavAndCards() {
+      const t = I18N[currentLang];
+      const nav = document.getElementById('menu-nav-bar');
+      nav.innerHTML = t.menus.map(m => {
+        const active = currentView === m.id;
+        const done = completedMissions[m.id];
+        return `
+          <button onclick="navigateMenu('${m.id}')" class="px-3 py-1.5 rounded-xl font-hud text-[11px] font-bold whitespace-nowrap transition flex items-center gap-1.5 ${
+            active
+              ? 'bg-cyan-400 text-slate-950 shadow'
+              : 'bg-slate-900/90 text-slate-300 hover:text-white border border-slate-700/80'
+          }">
+            <span>${m.num}</span>
+            <span>${m.label}</span>
+            ${done ? '<span class="text-emerald-400">✔</span>' : ''}
+          </button>
+        `;
+      }).join('');
+
+      const grid = document.getElementById('dashboard-cards-grid');
+      if (grid) {
+        grid.innerHTML = t.menus.filter(m => m.id !== 'dashboard').map(m => {
+          const done = completedMissions[m.id];
+          return `
+            <div onclick="navigateMenu('${m.id}')" class="cursor-pointer hud-panel hud-card-hover rounded-2xl p-5 flex flex-col justify-between border ${done ? 'border-emerald-400/50' : 'border-cyan-500/25'}">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 rounded-lg bg-cyan-500/15 text-cyan-300 font-hud text-xs font-bold">MENU ${m.num}</span>
+                  <span class="font-hud text-[11px] ${done ? 'text-emerald-400' : 'text-amber-300'}">${done ? '✔ COMPLETED' : 'ACTIVE'}</span>
+                </div>
+                <h3 class="font-hud text-base font-extrabold text-white mt-2">${m.label}</h3>
+                <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">${m.desc}</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-[11px] font-hud text-cyan-300">
+                <span>${currentLang === 'en' ? 'ENTER MODULE' : 'MASUK MODUL'}</span>
+                <span>➔</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    /* ==================== MENU 01: INTRO CONVERSION CHECK ==================== */
+    function checkIntroConversion(val) {
+      const fb = document.getElementById('m1-check-fb');
+      fb.classList.remove('hidden');
+      if (val === 2.5) {
+        playTone('success');
+        fb.className = 'text-xs font-bold p-3 rounded-xl bg-emerald-950/80 border border-emerald-400 text-emerald-300';
+        fb.textContent = currentLang === 'en'
+          ? 'EXACT! 250 sen = 200 sen + 50 sen = RM2.50 (+50 XP).'
+          : 'TEPAT! 250 sen = 200 sen + 50 sen = RM2.50 (+50 XP).';
+        completeMission('pengenalan', 100);
+      } else {
+        playTone('error');
+        fb.className = 'text-xs font-bold p-3 rounded-xl bg-rose-950/80 border border-rose-400 text-rose-300';
+        fb.textContent = currentLang === 'en'
+          ? 'Try again! Remember 100 sen = RM1.00, so divide 250 by 100.'
+          : 'Cuba lagi! Ingat 100 sen = RM1.00, jadi bahagikan 250 dengan 100.';
+      }
+    }
+
+    /* ==================== MENU 03: 5-QUESTION 60-SECOND GADGET LAB ==================== */
+    const LAB_QUESTION_POOL = [
+      12550, // RM 125.50
+      24685, // RM 246.85
+      35040, // RM 350.40
+      41875, // RM 418.75
+      50990, // RM 509.90
+      18230, // RM 182.30
+      63565, // RM 635.65
+      74095, // RM 740.95
+      81525, // RM 815.25
+      92460  // RM 924.60
+    ];
+
+    let labState = {
+      active: false,
+      timerId: null,
+      secondsLeft: 60,
+      questions: [],
+      qIndex: 0, // 0..4 (5 questions)
+      currentLoadSen: 0
+    };
+
+    function generate5LabQuestions() {
+      const shuffled = [...LAB_QUESTION_POOL].sort(() => Math.random() - 0.5);
+      return shuffled.slice(0, 5);
+    }
+
+    function startLabSession(resetTimer = true) {
+      if (labState.timerId) clearInterval(labState.timerId);
+      labState.questions = generate5LabQuestions();
+      labState.qIndex = 0;
+      labState.currentLoadSen = 0;
+      labState.active = true;
+      if (resetTimer) labState.secondsLeft = 60;
+
+      const alertBanner = document.getElementById('lab-alert-banner');
+      alertBanner.classList.add('hidden');
+      const statusPill = document.getElementById('lab-status-pill');
+      statusPill.textContent = currentLang === 'en' ? 'ACTIVE' : 'AKTIF';
+      statusPill.className = 'px-2.5 py-1 rounded-lg bg-cyan-500/20 border border-cyan-400/40 font-hud text-[10px] font-bold text-cyan-300';
+
+      updateLabUI();
+
+      labState.timerId = setInterval(() => {
+        if (!labState.active) return;
+        labState.secondsLeft--;
+        updateLabTimerDisplay();
+        if (labState.secondsLeft <= 0) {
+          failLabTimeout();
+        }
+      }, 1000);
+    }
+
+    function updateLabTimerDisplay() {
+      const s = Math.max(0, labState.secondsLeft);
+      const mins = String(Math.floor(s / 60)).padStart(2, '0');
+      const secs = String(s % 60).padStart(2, '0');
+      const disp = document.getElementById('lab-timer-display');
+      disp.textContent = `${mins}:${secs}`;
+      disp.className = s <= 15
+        ? 'font-hud text-2xl sm:text-3xl font-black text-rose-400 animate-pulse'
+        : 'font-hud text-2xl sm:text-3xl font-black text-amber-400';
+    }
+
+    function abortLabEarly() {
+      labState.active = false;
+      if (labState.timerId) clearInterval(labState.timerId);
+      const statusPill = document.getElementById('lab-status-pill');
+      statusPill.textContent = currentLang === 'en' ? 'MISSION FAILED' : 'MISI GAGAL';
+      statusPill.className = 'px-2.5 py-1 rounded-lg bg-rose-500/20 border border-rose-400/50 font-hud text-[10px] font-bold text-rose-300';
+
+      const banner = document.getElementById('lab-alert-banner');
+      banner.className = 'mb-6 p-4 rounded-2xl border border-rose-500/50 bg-rose-950/70 text-rose-200 flex flex-wrap items-center justify-between gap-3';
+      document.getElementById('lab-alert-text').textContent = currentLang === 'en'
+        ? 'CALIBRATION ABORTED! You exited the Gadget Lab before finishing all 5 questions.'
+        : 'KALIBRASI DIBATALKAN! Anda keluar dari Makmal Gajet sebelum menyelesaikan kesemua 5 soalan.';
+    }
+
+    function failLabTimeout() {
+      labState.active = false;
+      clearInterval(labState.timerId);
+      playTone('error');
+      const statusPill = document.getElementById('lab-status-pill');
+      statusPill.textContent = currentLang === 'en' ? 'TIME EXPIRED' : 'MASA TAMAT';
+      statusPill.className = 'px-2.5 py-1 rounded-lg bg-rose-500/20 border border-rose-400/50 font-hud text-[10px] font-bold text-rose-300';
+
+      const banner = document.getElementById('lab-alert-banner');
+      banner.className = 'mb-6 p-4 rounded-2xl border border-rose-500/50 bg-rose-950/70 text-rose-200 flex flex-wrap items-center justify-between gap-3';
+      document.getElementById('lab-alert-text').textContent = currentLang === 'en'
+        ? `TIME EXPIRED! You completed ${labState.qIndex}/5 questions. Click Retry to run a fresh 60-second 5-question calibration!`
+        : `MASA TAMAT! Anda menyelesaikan ${labState.qIndex}/5 soalan. Klik Cuba Semula untuk kalibrasi 5 soalan baharu!`;
+    }
+
+    function resetLabScanner() {
+      if (!labState.active) return;
+      playTone('click');
+      labState.currentLoadSen = 0;
+      updateLabUI();
+    }
+
+    function loadRandomLabSample() {
+      if (!labState.active) return;
+      playTone('click');
+      const target = labState.questions[labState.qIndex];
+      // Load partial sample close to target
+      const partial = Math.max(0, target - 500);
+      labState.currentLoadSen = partial;
+      updateLabUI();
+    }
+
+    function addLabDenom(senVal) {
+      if (!labState.active) return;
+      playTone('click');
+      labState.currentLoadSen += senVal;
+      if (labState.currentLoadSen > 99995) labState.currentLoadSen = 99995;
+      updateLabUI();
+
+      const target = labState.questions[labState.qIndex];
+      if (labState.currentLoadSen === target) {
+        playTone('success');
+        if (labState.qIndex < 4) {
+          // Advance to next question out of 5 while timer continues
+          labState.qIndex++;
+          labState.currentLoadSen = 0;
+          const banner = document.getElementById('lab-alert-banner');
+          banner.className = 'mb-6 p-3.5 rounded-2xl border border-emerald-400/50 bg-emerald-950/70 text-emerald-200 flex flex-wrap items-center justify-between gap-3';
+          document.getElementById('lab-alert-text').textContent = currentLang === 'en'
+            ? `✔ Question ${labState.qIndex}/5 Calibrated! Keep going — Question ${labState.qIndex + 1} of 5 loaded!`
+            : `✔ Soalan ${labState.qIndex}/5 Dikalibrasi! Teruskan — Soalan ${labState.qIndex + 1} daripada 5 dimuatkan!`;
+          document.getElementById('lab-retry-btn').classList.add('hidden');
+          updateLabUI();
+        } else {
+          // All 5 questions completed!
+          labState.active = false;
+          clearInterval(labState.timerId);
+          const statusPill = document.getElementById('lab-status-pill');
+          statusPill.textContent = currentLang === 'en' ? '5/5 COMPLETE' : '5/5 SELESAI';
+          statusPill.className = 'px-2.5 py-1 rounded-lg bg-emerald-500/20 border border-emerald-400/50 font-hud text-[10px] font-bold text-emerald-300';
+
+          const banner = document.getElementById('lab-alert-banner');
+          banner.className = 'mb-6 p-4 rounded-2xl border border-emerald-400/60 bg-emerald-950/80 text-emerald-200 flex flex-wrap items-center justify-between gap-3';
+          document.getElementById('lab-alert-text').textContent = currentLang === 'en'
+            ? `🎉 ALL 5 CALIBRATION QUESTIONS COMPLETED with ${labState.secondsLeft}s remaining! (+150 XP Awarded)`
+            : `🎉 KESEMUA 5 SOALAN KALIBRASI SELESAI dengan baki masa ${labState.secondsLeft}s! (+150 XP Dianugerahkan)`;
+          document.getElementById('lab-retry-btn').classList.remove('hidden');
+          completeMission('set_induksi', 150);
+          updateLabUI();
+        }
+      }
+    }
+
+    function updateLabUI() {
+      updateLabTimerDisplay();
+      const targetSen = labState.questions[labState.qIndex] || 12550;
+      document.getElementById('lab-target-lbl').textContent = currentLang === 'en'
+        ? `QUESTION ${labState.qIndex + 1} OF 5 — TARGET CALIBRATION VALUE`
+        : `SOALAN ${labState.qIndex + 1} DARIPADA 5 — NILAI KALIBRASI SASARAN`;
+      document.getElementById('lab-target-display').textContent = `RM ${(targetSen / 100).toFixed(2)}`;
+
+      // Render 5 question dots
+      const dotsEl = document.getElementById('lab-q-dots');
+      dotsEl.innerHTML = [0, 1, 2, 3, 4].map(idx => {
+        const isDone = idx < labState.qIndex || (!labState.active && completedMissions['set_induksi'] && labState.qIndex === 4);
+        const isCurr = idx === labState.qIndex && labState.active;
+        return `<span class="w-6 h-6 rounded-lg font-hud font-black text-xs flex items-center justify-center ${
+          isDone ? 'bg-emerald-400 text-slate-950' : isCurr ? 'bg-cyan-400 text-slate-950 ring-2 ring-white' : 'bg-slate-800 text-slate-400'
+        }">${isDone ? '✓' : idx + 1}</span>`;
+      }).join('');
+
+      const rmWhole = Math.floor(labState.currentLoadSen / 100);
+      const senRem = labState.currentLoadSen % 100;
+      const hundreds = Math.floor(rmWhole / 100) % 10;
+      const tens = Math.floor(rmWhole / 10) % 10;
+      const ones = rmWhole % 10;
+
+      document.getElementById('box-val-hundreds').textContent = hundreds;
+      document.getElementById('box-val-tens').textContent = tens;
+      document.getElementById('box-val-ones').textContent = ones;
+      document.getElementById('box-val-sen').textContent = String(senRem).padStart(2, '0');
+      document.getElementById('lab-current-load').textContent = `RM ${(labState.currentLoadSen / 100).toFixed(2)}`;
+    }
+
+    /* ==================== MENU 04: SCIENTIFIC CALCULATOR FX-3100 ==================== */
+    let calcExpr = '';
+    let calcDeg = true;
+    let lastCalcNumber = 0;
+
+    function toggleCalcMode() {
+      calcDeg = !calcDeg;
+      document.getElementById('calc-deg-btn').textContent = calcDeg ? 'DEG' : 'RAD';
+      playTone('click');
+    }
+
+    function calcAppend(val) {
+      playTone('click');
+      calcExpr += val;
+      document.getElementById('calc-expr').textContent = calcExpr;
+    }
+
+    function calcBackspace() {
+      playTone('click');
+      calcExpr = calcExpr.slice(0, -1);
+      document.getElementById('calc-expr').textContent = calcExpr || '0';
+    }
+
+    function calcClear() {
+      playTone('click');
+      calcExpr = '';
+      lastCalcNumber = 0;
+      document.getElementById('calc-expr').textContent = '0';
+      document.getElementById('calc-display').textContent = '0';
+      document.getElementById('calc-rm-preview').textContent = 'RM 0.00';
+    }
+
+    function calcFunc(fn) {
+      playTone('click');
+      const cur = parseFloat(document.getElementById('calc-display').textContent) || 0;
+      let res = cur;
+      const rad = calcDeg ? (cur * Math.PI) / 180 : cur;
+      if (fn === 'sin') res = Math.sin(rad);
+      else if (fn === 'cos') res = Math.cos(rad);
+      else if (fn === 'tan') res = Math.tan(rad);
+      else if (fn === 'log') res = Math.log10(Math.max(1e-9, cur));
+      else if (fn === 'ln') res = Math.log(Math.max(1e-9, cur));
+      else if (fn === 'sqrt') res = Math.sqrt(Math.max(0, cur));
+      else if (fn === 'sq') res = cur * cur;
+
+      lastCalcNumber = Number(res.toFixed(4));
+      calcExpr = String(lastCalcNumber);
+      document.getElementById('calc-expr').textContent = `${fn}(${cur})`;
+      document.getElementById('calc-display').textContent = String(lastCalcNumber);
+      document.getElementById('calc-rm-preview').textContent = `RM ${lastCalcNumber.toFixed(2)}`;
+    }
+
+    function calcEvaluate() {
+      playTone('click');
+      try {
+        const sanitized = calcExpr.replace(/\^/g, '**');
+        const val = Function('"use strict";return (' + sanitized + ')')();
+        if (!isNaN(val) && isFinite(val)) {
+          lastCalcNumber = Number(val.toFixed(4));
+          document.getElementById('calc-display').textContent = String(lastCalcNumber);
+          document.getElementById('calc-rm-preview').textContent = `RM ${lastCalcNumber.toFixed(2)}`;
+          calcExpr = String(lastCalcNumber);
+        }
+      } catch (e) {
+        document.getElementById('calc-display').textContent = 'ERR';
+      }
+    }
+
+    function useCalcResult() {
+      playTone('click');
+      document.getElementById('learn-practice-input').value = lastCalcNumber;
+    }
+
+    function checkLearnPractice() {
+      const val = parseFloat(document.getElementById('learn-practice-input').value);
+      const fb = document.getElementById('learn-practice-fb');
+      fb.classList.remove('hidden');
+      if (Math.abs(val - 3830) < 0.01) {
+        playTone('success');
+        fb.className = 'text-xs font-bold p-3 rounded-xl bg-emerald-950/80 border border-emerald-400 text-emerald-300';
+        fb.textContent = currentLang === 'en'
+          ? 'EXACT! RM1,450 + RM2,380 = RM3,830.00! (+150 XP)'
+          : 'TEPAT! RM1,450 + RM2,380 = RM3,830.00! (+150 XP)';
+        completeMission('langkah', 150);
+      } else {
+        playTone('error');
+        fb.className = 'text-xs font-bold p-3 rounded-xl bg-rose-950/80 border border-rose-400 text-rose-300';
+        fb.textContent = currentLang === 'en'
+          ? 'Not quite! Add 1,450 + 2,380 using the FX-3100 calculator on the right.'
+          : 'Belum tepat! Tambah 1,450 + 2,380 menggunakan kalkulator FX-3100 di sebelah kanan.';
+      }
+    }
+
+    /* ==================== COLOURFUL 3D MINI MARKET ADVENTURE ==================== */
+    const MM_PRODUCTS = [
+      { id: 'roti', nameEn: 'Roti Gardenia', nameBm: 'Roti Gardenia', price: 350, icon: '🍞', aisle: 'left', color: 0xf59e0b, x: -3.2, y: 1.55, z: -1.5 },
+      { id: 'milk', nameEn: 'Fresh Milk', nameBm: 'Susu Segar', price: 420, icon: '🥛', aisle: 'left', color: 0x38bdf8, x: -2.1, y: 1.55, z: -1.5 },
+      { id: 'apples', nameEn: 'Red Apples', nameBm: 'Epal Merah', price: 500, icon: '🍎', aisle: 'left', color: 0xef4444, x: -3.2, y: 0.75, z: -1.5 },
+      { id: 'eggs', nameEn: 'Farm Eggs (10s)', nameBm: 'Telur Ayam (10b)', price: 650, icon: '🥚', aisle: 'left', color: 0xfde047, x: -2.1, y: 0.75, z: -1.5 },
+
+      { id: 'milo', nameEn: 'Milo Tin', nameBm: 'Tin Milo', price: 1200, icon: '🥤', aisle: 'center', color: 0x16a34a, x: -0.55, y: 1.55, z: -2.2 },
+      { id: 'rice', nameEn: 'Fragrant Rice', nameBm: 'Beras Wangi', price: 1850, icon: '🍚', aisle: 'center', color: 0xf43f5e, x: 0.55, y: 1.55, z: -2.2 },
+      { id: 'juice', nameEn: 'Orange Juice', nameBm: 'Jus Oren', price: 330, icon: '🧃', aisle: 'center', color: 0xf97316, x: -0.55, y: 0.75, z: -2.2 },
+      { id: 'biscuits', nameEn: 'Cream Biscuits', nameBm: 'Biskut Krim', price: 480, icon: '🍪', aisle: 'center', color: 0xd97706, x: 0.55, y: 0.75, z: -2.2 },
+
+      { id: 'toycar', nameEn: 'Toy Car', nameBm: 'Kereta Mainan', price: 1500, icon: '🚗', aisle: 'right', color: 0xe11d48, x: 2.1, y: 1.55, z: -1.5 },
+      { id: 'pencils', nameEn: 'Color Pencils', nameBm: 'Pensel Warna', price: 600, icon: '🖍️', aisle: 'right', color: 0x8b5cf6, x: 3.2, y: 1.55, z: -1.5 },
+      { id: 'choco', nameEn: 'Chocolate Bar', nameBm: 'Coklat Bar', price: 450, icon: '🍫', aisle: 'right', color: 0x78350f, x: 2.1, y: 0.75, z: -1.5 },
+      { id: 'book', nameEn: 'Exercise Book', nameBm: 'Buku Latihan', price: 250, icon: '📒', aisle: 'right', color: 0x10b981, x: 3.2, y: 0.75, z: -1.5 }
+    ];
+
+    let mmBasket = {}; // { id: qty }
+    let mmTray = [];   // [{ val, label, cls }]
+    let mmStars = 0;
+    let mmChallenge = 'free';
+    let mmKeypadTarget = 'mm-input-rm';
+    let threeInitialized = false;
+    let threeScene, threeCamera, threeRenderer, threeMeshes = [];
+    let camTargetPos = { x: 0, y: 2.3, z: 5.2 };
+    let camLookAt = { x: 0, y: 1.1, z: -1.5 };
+
+    function mountMiniMarket(targetId) {
+      const host = document.getElementById(targetId);
+      const widget = document.getElementById('mini-market-widget');
+      if (!host || !widget) return;
+      host.appendChild(widget);
+      widget.classList.remove('hidden');
+      renderMMProducts();
+      renderMMBasket();
+      renderMMTray();
+
+      if (!threeInitialized) {
+        initThreeMiniMarket();
+        threeInitialized = true;
+      } else if (threeRenderer) {
+        const cont = document.getElementById('mm-three-container');
+        threeRenderer.setSize(cont.clientWidth, cont.clientHeight);
+        threeCamera.aspect = cont.clientWidth / cont.clientHeight;
+        threeCamera.updateProjectionMatrix();
+      }
+    }
+
+    function makeCanvasSignTexture(title, sub, bgHex, txtHex) {
+      const c = document.createElement('canvas');
+      c.width = 512; c.height = 160;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = bgHex;
+      ctx.fillRect(0, 0, 512, 160);
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 8;
+      ctx.strokeRect(8, 8, 496, 144);
+      ctx.fillStyle = txtHex;
+      ctx.font = 'bold 46px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(title, 256, sub ? 72 : 95);
+      if (sub) {
+        ctx.font = 'bold 32px sans-serif';
+        ctx.fillText(sub, 256, 125);
+      }
+      const tex = new THREE.CanvasTexture(c);
+      return tex;
+    }
+
+    function initThreeMiniMarket() {
+      const container = document.getElementById('mm-three-container');
+      threeScene = new THREE.Scene();
+      threeScene.background = new THREE.Color(0xeafcf2);
+
+      threeCamera = new THREE.PerspectiveCamera(46, container.clientWidth / container.clientHeight, 0.1, 100);
+      threeCamera.position.set(0, 2.3, 5.2);
+
+      threeRenderer = new THREE.WebGLRenderer({ antialias: true });
+      threeRenderer.setSize(container.clientWidth, container.clientHeight);
+      threeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.innerHTML = '';
+      container.appendChild(threeRenderer.domElement);
+
+      // Bright Daylight Lights
+      const hemi = new THREE.HemisphereLight(0xffffff, 0xbbf7d0, 1.15);
+      threeScene.add(hemi);
+      const dir = new THREE.DirectionalLight(0xffffff, 0.8);
+      dir.position.set(4, 8, 6);
+      threeScene.add(dir);
+
+      // Mint Cream Floor
+      const floor = new THREE.Mesh(
+        new THREE.PlaneGeometry(20, 14),
+        new THREE.MeshStandardMaterial({ color: 0xd1fae5, roughness: 0.8 })
+      );
+      floor.rotation.x = -Math.PI / 2;
+      threeScene.add(floor);
+
+      // Overhead Emerald MINI MARKET Banner
+      const bannerTex = makeCanvasSignTexture('MINI MARKET', '', '#10b981', '#ffffff');
+      const banner = new THREE.Mesh(
+        new THREE.BoxGeometry(3.6, 0.75, 0.2),
+        new THREE.MeshBasicMaterial({ map: bannerTex })
+      );
+      banner.position.set(0, 3.15, -2.2);
+      threeScene.add(banner);
+
+      // Helper to build colourful shelf units
+      function buildShelfUnit(x, z, headerTitle, headerBg) {
+        const grp = new THREE.Group();
+        const back = new THREE.Mesh(
+          new THREE.BoxGeometry(2.2, 2.2, 0.14),
+          new THREE.MeshStandardMaterial({ color: 0x334155 })
+        );
+        back.position.set(0, 1.1, -0.22);
+        grp.add(back);
+
+        // Two bright yellow shelves
+        [0.55, 1.35].forEach(sy => {
+          const plank = new THREE.Mesh(
+            new THREE.BoxGeometry(2.25, 0.1, 0.6),
+            new THREE.MeshStandardMaterial({ color: 0xfacc15 })
+          );
+          plank.position.set(0, sy, 0.05);
+          grp.add(plank);
+        });
+
+        // Header Sign
+        const hTex = makeCanvasSignTexture(headerTitle, '', headerBg, '#ffffff');
+        const hMesh = new THREE.Mesh(
+          new THREE.BoxGeometry(2.2, 0.34, 0.16),
+          new THREE.MeshBasicMaterial({ map: hTex })
+        );
+        hMesh.position.set(0, 2.38, -0.15);
+        grp.add(hMesh);
+
+        grp.position.set(x, 0, z);
+        threeScene.add(grp);
+      }
+
+      buildShelfUnit(-2.65, -1.5, 'FRESH & BAKERY', '#0284c7');
+      buildShelfUnit(0, -2.2, 'DRINKS & PANTRY', '#0d9488');
+      buildShelfUnit(2.65, -1.5, 'TOYS & SCHOOL', '#6366f1');
+
+      // Add 3D Products + Bright Yellow Price Tag Cards
+      threeMeshes = [];
+      MM_PRODUCTS.forEach(p => {
+        const mesh = new THREE.Mesh(
+          new THREE.BoxGeometry(0.42, 0.42, 0.36),
+          new THREE.MeshStandardMaterial({ color: p.color, roughness: 0.35 })
+        );
+        mesh.position.set(p.x, p.y, p.z + 0.06);
+        mesh.userData = { product: p };
+        threeScene.add(mesh);
+        threeMeshes.push(mesh);
+
+        // Yellow price tag beneath item
+        const tagTex = makeCanvasSignTexture(p.nameEn, `RM ${(p.price / 100).toFixed(2)}`, '#fef08a', '#1e293b');
+        const tag = new THREE.Mesh(
+          new THREE.PlaneGeometry(0.75, 0.25),
+          new THREE.MeshBasicMaterial({ map: tagTex })
+        );
+        tag.position.set(p.x, p.y - 0.28, p.z + 0.36);
+        threeScene.add(tag);
+      });
+
+      // Friendly Cashier Aiman Figure at Counter
+      const counter = new THREE.Mesh(
+        new THREE.BoxGeometry(1.5, 0.75, 0.9),
+        new THREE.MeshStandardMaterial({ color: 0x1e293b })
+      );
+      counter.position.set(-1.3, 0.38, 1.3);
+      threeScene.add(counter);
+
+      const aimanBody = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.28, 0.34, 0.7, 16),
+        new THREE.MeshStandardMaterial({ color: 0x10b981 })
+      );
+      aimanBody.position.set(0.15, 0.65, 0.7);
+      threeScene.add(aimanBody);
+
+      const aimanHead = new THREE.Mesh(
+        new THREE.SphereGeometry(0.26, 20, 20),
+        new THREE.MeshStandardMaterial({ color: 0xfde68a })
+      );
+      aimanHead.position.set(0.15, 1.22, 0.7);
+      threeScene.add(aimanHead);
+
+      const aimanCap = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.27, 0.27, 0.14, 20),
+        new THREE.MeshStandardMaterial({ color: 0xfacc15 })
+      );
+      aimanCap.position.set(0.15, 1.42, 0.7);
+      threeScene.add(aimanCap);
+
+      // Raycaster for Tapping/Hovering 3D Products + Orbit Drag
+      const raycaster = new THREE.Raycaster();
+      const pointer = new THREE.Vector2();
+      let isDragging = false, prevX = 0, yawOffset = 0;
+
+      container.addEventListener('pointerdown', e => {
+        isDragging = true;
+        prevX = e.clientX;
+      });
+      window.addEventListener('pointerup', () => { isDragging = false; });
+
+      container.addEventListener('pointermove', e => {
+        const rect = container.getBoundingClientRect();
+        if (isDragging) {
+          yawOffset += (e.clientX - prevX) * 0.008;
+          yawOffset = Math.max(-1.1, Math.min(1.1, yawOffset));
+          prevX = e.clientX;
+          camTargetPos.x = Math.sin(yawOffset) * 3.5;
+          return;
+        }
+        pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+        raycaster.setFromCamera(pointer, threeCamera);
+        const hits = raycaster.intersectObjects(threeMeshes);
+        const tip = document.getElementById('mm-hover-tooltip');
+        if (hits.length > 0) {
+          const prod = hits[0].object.userData.product;
+          document.getElementById('mm-tip-name').textContent = currentLang === 'en' ? prod.nameEn : prod.nameBm;
+          document.getElementById('mm-tip-price').textContent = `RM ${(prod.price / 100).toFixed(2)}`;
+          tip.style.left = `${e.clientX - rect.left}px`;
+          tip.style.top = `${e.clientY - rect.top}px`;
+          tip.classList.remove('hidden');
+        } else {
+          tip.classList.add('hidden');
+        }
+      });
+
+      container.addEventListener('click', e => {
+        const rect = container.getBoundingClientRect();
+        pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+        raycaster.setFromCamera(pointer, threeCamera);
+        const hits = raycaster.intersectObjects(threeMeshes);
+        if (hits.length > 0) {
+          const prod = hits[0].object.userData.product;
+          addToMMBasket(prod.id);
+        }
+      });
+
+      function animateThree() {
+        requestAnimationFrame(animateThree);
+        threeCamera.position.x += (camTargetPos.x - threeCamera.position.x) * 0.08;
+        threeCamera.position.y += (camTargetPos.y - threeCamera.position.y) * 0.08;
+        threeCamera.position.z += (camTargetPos.z - threeCamera.position.z) * 0.08;
+        threeCamera.lookAt(camLookAt.x, camLookAt.y, camLookAt.z);
+        threeRenderer.render(threeScene, threeCamera);
+      }
+      animateThree();
+    }
+
+    function focusMMAisle(aisle) {
+      playTone('click');
+      if (aisle === 'left') { camTargetPos = { x: -2.6, y: 1.8, z: 2.3 }; camLookAt = { x: -2.65, y: 1.1, z: -1.5 }; }
+      else if (aisle === 'center') { camTargetPos = { x: 0, y: 1.8, z: 1.8 }; camLookAt = { x: 0, y: 1.1, z: -2.2 }; }
+      else if (aisle === 'right') { camTargetPos = { x: 2.6, y: 1.8, z: 2.3 }; camLookAt = { x: 2.65, y: 1.1, z: -1.5 }; }
+      else { camTargetPos = { x: 0, y: 2.3, z: 5.2 }; camLookAt = { x: 0, y: 1.1, z: -1.5 }; }
+    }
+
+    function switchMMStage(stage) {
+      playTone('click');
+      ['shop', 'basket', 'pay'].forEach(s => {
+        document.getElementById('mm-stage-' + s).classList.toggle('hidden', s !== stage);
+        const tab = document.getElementById('mm-tab-' + s);
+        tab.className = s === stage
+          ? 'px-3 py-1.5 rounded-xl font-kid font-bold text-xs bg-emerald-500 text-white shadow'
+          : 'px-3 py-1.5 rounded-xl font-kid font-bold text-xs text-slate-600 hover:bg-white flex items-center gap-1';
+      });
+      if (stage === 'basket') renderMMBasket();
+      if (stage === 'pay') {
+        const due = getMMBasketTotalSen();
+        document.getElementById('mm-pos-due').textContent = `RM ${(due / 100).toFixed(2)}`;
+        renderMMTray();
+      }
+    }
+
+    function setMMChallenge(val) {
+      mmChallenge = val;
+      const banner = document.getElementById('mm-mission-banner');
+      if (val === 'free') {
+        banner.classList.add('hidden');
+        return;
+      }
+      banner.classList.remove('hidden');
+      const texts = {
+        c1: currentLang === 'en' ? 'Mission 1: Buy 1 Milo Tin (RM12.00) + 1 Roti Gardenia (RM3.50), then pay!' : 'Misi 1: Beli 1 Tin Milo (RM12.00) + 1 Roti Gardenia (RM3.50), kemudian bayar!',
+        c2: currentLang === 'en' ? 'Mission 2: Buy 1 Color Pencils (RM6.00) + 1 Exercise Book (RM2.50), then pay!' : 'Misi 2: Beli 1 Pensel Warna (RM6.00) + 1 Buku Latihan (RM2.50), kemudian bayar!',
+        c3: currentLang === 'en' ? 'Mission 3: Buy 1 Fragrant Rice (RM18.50) + 1 Farm Eggs (RM6.50) + 1 Fresh Milk (RM4.20)!' : 'Misi 3: Beli 1 Beras Wangi (RM18.50) + 1 Telur Ayam (RM6.50) + 1 Susu Segar (RM4.20)!'
+      };
+      document.getElementById('mm-mission-text').textContent = texts[val];
+    }
+
+    function renderMMProducts() {
+      const strip = document.getElementById('mm-products-strip');
+      strip.innerHTML = MM_PRODUCTS.map(p => {
+        const label = currentLang === 'en' ? p.nameEn : p.nameBm;
+        return `
+          <div onclick="addToMMBasket('${p.id}')" class="cursor-pointer shrink-0 w-32 bg-slate-50 hover:bg-emerald-50 border-2 border-slate-200 hover:border-emerald-400 rounded-2xl p-2.5 text-center transition">
+            <div class="text-2xl mb-1">${p.icon}</div>
+            <div class="font-kid font-bold text-xs text-slate-800 truncate">${label}</div>
+            <div class="flex items-center justify-between mt-1.5">
+              <span class="font-extrabold text-xs text-emerald-700">RM ${(p.price / 100).toFixed(2)}</span>
+              <span class="w-5 h-5 rounded-full bg-emerald-500 text-white font-bold text-xs flex items-center justify-center">+</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function addToMMBasket(id) {
+      const currentTotal = getMMBasketTotalSen();
+      const prod = MM_PRODUCTS.find(x => x.id === id);
+      if (!prod) return;
+      if (currentTotal + prod.price > 10000) {
+        playTone('error');
+        alert(currentLang === 'en' ? 'Maximum basket budget is RM100.00!' : 'Had maksimum bakul ialah RM100.00!');
+        return;
+      }
+      playTone('click');
+      mmBasket[id] = (mmBasket[id] || 0) + 1;
+      updateMMCountBadges();
+    }
+
+    function changeMMQty(id, delta) {
+      playTone('click');
+      mmBasket[id] = (mmBasket[id] || 0) + delta;
+      if (mmBasket[id] <= 0) delete mmBasket[id];
+      updateMMCountBadges();
+      renderMMBasket();
+    }
+
+    function clearMMBasket() {
+      playTone('click');
+      mmBasket = {};
+      updateMMCountBadges();
+      renderMMBasket();
+    }
+
+    function getMMBasketCount() {
+      return Object.values(mmBasket).reduce((a, b) => a + b, 0);
+    }
+
+    function getMMBasketTotalSen() {
+      return Object.entries(mmBasket).reduce((sum, [id, qty]) => {
+        const p = MM_PRODUCTS.find(x => x.id === id);
+        return sum + (p ? p.price * qty : 0);
+      }, 0);
+    }
+
+    function updateMMCountBadges() {
+      const c = getMMBasketCount();
+      document.getElementById('mm-basket-badge').textContent = c;
+      document.getElementById('mm-strip-count').textContent = c;
+    }
+
+    function renderMMBasket() {
+      const list = document.getElementById('mm-basket-list');
+      const entries = Object.entries(mmBasket);
+      if (entries.length === 0) {
+        list.innerHTML = `<div class="text-xs text-slate-400 italic text-center py-8">${currentLang === 'en' ? 'Your basket is empty. Tap items in the 3D shop!' : 'Bakul kosong. Pilih barang di kedai 3D!'}</div>`;
+        return;
+      }
+      list.innerHTML = entries.map(([id, qty]) => {
+        const p = MM_PRODUCTS.find(x => x.id === id);
+        const name = currentLang === 'en' ? p.nameEn : p.nameBm;
+        return `
+          <div class="bg-white p-2.5 rounded-xl border border-slate-200 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <span class="text-xl">${p.icon}</span>
+              <div>
+                <div class="font-kid font-bold text-xs text-slate-800">${name}</div>
+                <div class="text-[11px] font-bold text-emerald-700">RM ${(p.price / 100).toFixed(2)} × ${qty} = RM ${((p.price * qty) / 100).toFixed(2)}</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-1">
+              <button onclick="changeMMQty('${id}', -1)" class="w-6 h-6 rounded-lg bg-rose-100 text-rose-700 font-bold text-xs">−</button>
+              <span class="font-bold text-xs px-1.5">${qty}</span>
+              <button onclick="changeMMQty('${id}', 1)" class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 font-bold text-xs">+</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleMMHint() {
+      const box = document.getElementById('mm-hint-box');
+      box.classList.toggle('hidden');
+      const entries = Object.entries(mmBasket);
+      box.innerHTML = entries.map(([id, qty]) => {
+        const p = MM_PRODUCTS.find(x => x.id === id);
+        return `<div>+ RM ${((p.price * qty) / 100).toFixed(2)}</div>`;
+      }).join('') || '<div>RM 0.00</div>';
+    }
+
+    function mmKey(digit) {
+      playTone('click');
+      const inp = document.getElementById(mmKeypadTarget);
+      inp.value = (inp.value || '') + digit;
+    }
+    function mmBack() {
+      playTone('click');
+      const inp = document.getElementById(mmKeypadTarget);
+      inp.value = (inp.value || '').slice(0, -1);
+    }
+    function mmToggleField() {
+      playTone('click');
+      mmKeypadTarget = mmKeypadTarget === 'mm-input-rm' ? 'mm-input-sen' : 'mm-input-rm';
+      document.getElementById(mmKeypadTarget).focus();
+    }
+
+    function verifyMMBasket() {
+      const dueSen = getMMBasketTotalSen();
+      if (dueSen === 0) {
+        playTone('error');
+        alert(currentLang === 'en' ? 'Add at least 1 item to your basket first!' : 'Masukkan sekurang-kurangnya 1 barang ke dalam bakul!');
+        return;
+      }
+      const rmVal = parseInt(document.getElementById('mm-input-rm').value || '0', 10);
+      const senVal = parseInt(document.getElementById('mm-input-sen').value || '0', 10);
+      const userSen = rmVal * 100 + senVal;
+      const fb = document.getElementById('mm-basket-fb');
+      fb.classList.remove('hidden');
+
+      if (userSen === dueSen) {
+        playTone('success');
+        fb.className = 'text-xs font-bold p-2.5 rounded-xl bg-emerald-100 border border-emerald-400 text-emerald-900';
+        fb.textContent = currentLang === 'en'
+          ? `✔ Correct! Total is RM ${(dueSen / 100).toFixed(2)}. Proceeding to Cashier Aiman...`
+          : `✔ Betul! Jumlah ialah RM ${(dueSen / 100).toFixed(2)}. Menuju ke kaunter Juruwang Aiman...`;
+        setTimeout(() => switchMMStage('pay'), 700);
+      } else {
+        playTone('error');
+        fb.className = 'text-xs font-bold p-2.5 rounded-xl bg-rose-100 border border-rose-400 text-rose-900';
+        fb.textContent = currentLang === 'en'
+          ? '✖ Not matching yet! Click Step-by-Step Hint to align Ringgit and Sen.'
+          : '✖ Belum tepat! Klik Petunjuk Langkah demi Langkah untuk menyelarikan Ringgit dan Sen.';
+      }
+    }
+
+    function addMMMoney(val, label, cls) {
+      playTone('click');
+      mmTray.push({ val, label, cls });
+      renderMMTray();
+    }
+
+    function removeMMTrayIdx(idx) {
+      playTone('click');
+      mmTray.splice(idx, 1);
+      renderMMTray();
+    }
+
+    function clearMMTray() {
+      playTone('click');
+      mmTray = [];
+      renderMMTray();
+    }
+
+    function renderMMTray() {
+      const box = document.getElementById('mm-tray-items');
+      const paidSen = mmTray.reduce((s, item) => s + item.val, 0);
+      document.getElementById('mm-pos-paid').textContent = `RM ${(paidSen / 100).toFixed(2)}`;
+      if (mmTray.length === 0) {
+        box.innerHTML = `<span class="text-xs text-slate-400 italic">${currentLang === 'en' ? 'Tap banknotes or coins from your wallet...' : 'Ketik wang kertas atau syiling dari dompet...'}</span>`;
+        return;
+      }
+      box.innerHTML = mmTray.map((item, idx) => `
+        <button onclick="removeMMTrayIdx(${idx})" class="px-2.5 py-1 rounded-lg font-kid font-bold text-xs text-white shadow ${item.cls}">
+          ${item.label} ✕
+        </button>
+      `).join('');
+    }
+
+    function submitMMPayment() {
+      const dueSen = getMMBasketTotalSen();
+      const paidSen = mmTray.reduce((s, item) => s + item.val, 0);
+      if (paidSen < dueSen) {
+        playTone('error');
+        document.getElementById('mm-cashier-speech').textContent = currentLang === 'en'
+          ? `"Not enough money! You still need RM ${((dueSen - paidSen) / 100).toFixed(2)} more."`
+          : `"Wang tidak mencukupi! Anda perlukan RM ${((dueSen - paidSen) / 100).toFixed(2)} lagi."`;
+        return;
+      }
+      if (paidSen === dueSen) {
+        finishMMTransaction(dueSen, paidSen, 0);
+      } else {
+        playTone('click');
+        const changeBox = document.getElementById('mm-change-box');
+        changeBox.classList.remove('hidden');
+        document.getElementById('mm-change-prompt').textContent = currentLang === 'en'
+          ? `Subtract: RM ${(paidSen / 100).toFixed(2)} − RM ${(dueSen / 100).toFixed(2)} = ?`
+          : `Tolak: RM ${(paidSen / 100).toFixed(2)} − RM ${(dueSen / 100).toFixed(2)} = ?`;
+      }
+    }
+
+    function verifyMMChange() {
+      const dueSen = getMMBasketTotalSen();
+      const paidSen = mmTray.reduce((s, item) => s + item.val, 0);
+      const expectedChange = paidSen - dueSen;
+      const cRm = parseInt(document.getElementById('mm-change-rm').value || '0', 10);
+      const cSen = parseInt(document.getElementById('mm-change-sen').value || '0', 10);
+      const userChange = cRm * 100 + cSen;
+      const fb = document.getElementById('mm-change-fb');
+      fb.classList.remove('hidden');
+
+      if (userChange === expectedChange) {
+        fb.className = 'text-xs font-bold p-2 rounded-lg bg-emerald-200 text-emerald-950';
+        fb.textContent = currentLang === 'en' ? '✔ Exact change verified!' : '✔ Baki wang disahkan tepat!';
+        finishMMTransaction(dueSen, paidSen, expectedChange);
+      } else {
+        playTone('error');
+        fb.className = 'text-xs font-bold p-2 rounded-lg bg-rose-200 text-rose-950';
+        fb.textContent = currentLang === 'en' ? '✖ Recalculate Paid − Total!' : '✖ Kira semula Wang Dibayar − Jumlah!';
+      }
+    }
+
+    function finishMMTransaction(dueSen, paidSen, changeSen) {
+      playTone('success');
+      mmStars++;
+      document.getElementById('mm-star-count').textContent = mmStars;
+      document.getElementById('mm-change-box').classList.add('hidden');
+      document.getElementById('mm-btn-pay-now').classList.add('hidden');
+
+      document.getElementById('mm-cashier-speech').textContent = currentLang === 'en'
+        ? `"Terima kasih! Payment successful! Your change is RM ${(changeSen / 100).toFixed(2)}. You earned a Star ⭐!"`
+        : `"Terima kasih! Bayaran berjaya! Baki wang anda ialah RM ${(changeSen / 100).toFixed(2)}. Anda mendapat Bintang ⭐!"`;
+
+      const lines = Object.entries(mmBasket).map(([id, qty]) => {
+        const p = MM_PRODUCTS.find(x => x.id === id);
+        return `${(currentLang === 'en' ? p.nameEn : p.nameBm).padEnd(18)} x${qty}  RM ${((p.price * qty) / 100).toFixed(2)}`;
+      });
+      const receipt = [
+        '==============================',
+        '   M.A.T.A MINI MARKET POS    ',
+        '==============================',
+        ...lines,
+        '------------------------------',
+        `TOTAL DUE : RM ${(dueSen / 100).toFixed(2)}`,
+        `CASH PAID : RM ${(paidSen / 100).toFixed(2)}`,
+        `CHANGE    : RM ${(changeSen / 100).toFixed(2)}`,
+        '=============================='
+      ].join('\n');
+
+      document.getElementById('mm-receipt-text').textContent = receipt;
+      document.getElementById('mm-receipt-box').classList.remove('hidden');
+      completeMission('langkah', 150);
+    }
+
+    function downloadMMReceipt() {
+      const txt = document.getElementById('mm-receipt-text').textContent;
+      const blob = new Blob([txt], { type: 'text/plain' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'MATA_MiniMarket_Receipt.txt';
+      a.click();
+    }
+
+    function resetMMNewRound() {
+      mmBasket = {};
+      mmTray = [];
+      document.getElementById('mm-input-rm').value = '';
+      document.getElementById('mm-input-sen').value = '';
+      document.getElementById('mm-change-rm').value = '';
+      document.getElementById('mm-change-sen').value = '';
+      document.getElementById('mm-receipt-box').classList.add('hidden');
+      document.getElementById('mm-btn-pay-now').classList.remove('hidden');
+      updateMMCountBadges();
+      switchMMStage('shop');
+    }
+
+    /* ==================== MENU 05: 8-QUESTION QUIZ & A4 PDF/PNG CERTIFICATE ==================== */
+    const QUIZ_BANK = [
+      { qEn: '1. RM 2,340 + RM 1,520 = ?', qBm: '1. RM 2,340 + RM 1,520 = ?', opts: ['RM 3,860', 'RM 3,760', 'RM 4,860', 'RM 2,860'], ans: 0 },
+      { qEn: '2. 350 sen is equal to:', qBm: '2. 350 sen bersamaan dengan:', opts: ['RM 35.00', 'RM 3.50', 'RM 0.35', 'RM 3.05'], ans: 1 },
+      { qEn: '3. RM 45.60 + RM 23.40 = ?', qBm: '3. RM 45.60 + RM 23.40 = ?', opts: ['RM 68.00', 'RM 69.00', 'RM 69.10', 'RM 70.00'], ans: 1 },
+      { qEn: '4. Add three values: RM 1,200 + RM 2,300 + RM 500 = ?', qBm: '4. Tambah tiga nilai: RM 1,200 + RM 2,300 + RM 500 = ?', opts: ['RM 3,500', 'RM 4,000', 'RM 4,500', 'RM 3,000'], ans: 1 },
+      { qEn: '5. Ali buys a Milo Tin (RM 12.00) and Roti Gardenia (RM 3.50). What is the total?', qBm: '5. Ali membeli Tin Milo (RM 12.00) dan Roti Gardenia (RM 3.50). Berapakah jumlahnya?', opts: ['RM 15.00', 'RM 15.50', 'RM 16.50', 'RM 14.50'], ans: 1 },
+      { qEn: '6. 80 sen + 70 sen = ?', qBm: '6. 80 sen + 70 sen = ?', opts: ['RM 1.50', 'RM 15.00', 'RM 1.05', 'RM 0.15'], ans: 0 },
+      { qEn: '7. RM 4,675.25 + RM 3,120.50 = ?', qBm: '7. RM 4,675.25 + RM 3,120.50 = ?', opts: ['RM 7,795.75', 'RM 7,895.75', 'RM 7,795.25', 'RM 8,795.75'], ans: 0 },
+      { qEn: '8. You pay RM 20.00 for items costing RM 15.50. How much change do you receive?', qBm: '8. Kamu membayar RM 20.00 untuk barang berharga RM 15.50. Berapakah baki wang diterima?', opts: ['RM 5.50', 'RM 4.50', 'RM 3.50', 'RM 5.00'], ans: 1 }
+    ];
+
+    let quizAnswers = {};
+    let lastQuizScore = 0;
+
+    function switchAssessMode(mode) {
+      playTone('click');
+      document.getElementById('assess-mode-market').classList.toggle('hidden', mode !== 'market');
+      document.getElementById('assess-mode-quiz').classList.toggle('hidden', mode !== 'quiz');
+      document.getElementById('btn-mode-market').className = mode === 'market'
+        ? 'px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 font-hud font-bold text-xs'
+        : 'px-4 py-2 rounded-xl bg-slate-800 text-slate-200 border border-slate-600 font-hud font-bold text-xs';
+      document.getElementById('btn-mode-quiz').className = mode === 'quiz'
+        ? 'px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-hud font-bold text-xs'
+        : 'px-4 py-2 rounded-xl bg-slate-800 text-slate-200 border border-slate-600 font-hud font-bold text-xs';
+      if (mode === 'quiz') renderQuizQuestions();
+    }
+
+    function renderQuizQuestions() {
+      const container = document.getElementById('quiz-questions-container');
+      container.innerHTML = QUIZ_BANK.map((q, qIdx) => {
+        const prompt = currentLang === 'en' ? q.qEn : q.qBm;
+        return `
+          <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-4">
+            <div class="font-bold text-sm text-white mb-3">${prompt}</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              ${q.opts.map((opt, oIdx) => {
+                const picked = quizAnswers[qIdx] === oIdx;
+                return `
+                  <button onclick="selectQuizOpt(${qIdx}, ${oIdx})" class="text-left px-4 py-2.5 rounded-xl border font-hud text-xs transition ${
+                    picked ? 'bg-cyan-500/25 border-cyan-400 text-cyan-200 font-bold' : 'bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-600'
+                  }">
+                    ${String.fromCharCode(65 + oIdx)}. ${opt}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function selectQuizOpt(qIdx, oIdx) {
+      playTone('click');
+      quizAnswers[qIdx] = oIdx;
+      renderQuizQuestions();
+    }
+
+    function submitFinalQuiz() {
+      let score = 0;
+      QUIZ_BANK.forEach((q, idx) => {
+        if (quizAnswers[idx] === q.ans) score++;
+      });
+      lastQuizScore = score;
+      document.getElementById('quiz-score-pill').textContent = `${currentLang === 'en' ? 'SCORE' : 'MARKAH'}: ${score} / 8`;
+
+      if (score >= 5) {
+        playTone('success');
+        document.getElementById('certificate-unlock-panel').classList.remove('hidden');
+        renderCertificatePreview();
+        completeMission('penilaian', 200);
+      } else {
+        playTone('error');
+        alert(currentLang === 'en'
+          ? `You scored ${score}/8. You need at least 5/8 (62.5%) to unlock the M.A.T.A Certificate. Try again!`
+          : `Anda mendapat ${score}/8. Anda memerlukan sekurang-kurangnya 5/8 (62.5%) untuk membuka Sijil M.A.T.A. Cuba lagi!`);
+      }
+    }
+
+    function resetQuiz() {
+      playTone('click');
+      quizAnswers = {};
+      document.getElementById('certificate-unlock-panel').classList.add('hidden');
+      renderQuizQuestions();
+    }
+
+    function renderCertificatePreview() {
+      const name = (document.getElementById('cert-student-name').value || 'AGENT ALI BIN GHAZALI').toUpperCase();
+      document.getElementById('cert-display-name').textContent = name;
+      const pct = Math.round((lastQuizScore / 8) * 100);
+      document.getElementById('cert-display-score').textContent = `${lastQuizScore} / 8 (${pct}%)`;
+      document.getElementById('cert-display-date').textContent = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
+    }
+
+    function buildCertificateCanvas() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1684;
+      canvas.height = 1190;
+      const ctx = canvas.getContext('2d');
+
+      const grad = ctx.createLinearGradient(0, 0, 1684, 1190);
+      grad.addColorStop(0, '#071124');
+      grad.addColorStop(0.5, '#0c1e3e');
+      grad.addColorStop(1, '#060d1c');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1684, 1190);
+
+      ctx.strokeStyle = '#fbbf24';
+      ctx.lineWidth = 18;
+      ctx.strokeRect(40, 40, 1604, 1110);
+
+      ctx.strokeStyle = '#22d3ee';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(72, 72, 1540, 1046);
+
+      const t = I18N[currentLang];
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#22d3ee';
+      ctx.font = 'bold 30px sans-serif';
+      ctx.fillText(t.certOrg, 842, 175);
+
+      ctx.fillStyle = '#fbbf24';
+      ctx.font = 'bold 68px sans-serif';
+      ctx.fillText(t.certHeading, 842, 285);
+
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '32px sans-serif';
+      ctx.fillText(t.certSub, 842, 375);
+
+      const name = (document.getElementById('cert-student-name').value || 'AGENT ALI BIN GHAZALI').toUpperCase();
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 62px sans-serif';
+      ctx.fillText(name, 842, 495);
+
+      ctx.strokeStyle = '#fbbf24';
+      ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.moveTo(420, 525); ctx.lineTo(1264, 525); ctx.stroke();
+
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = '30px sans-serif';
+      ctx.fillText(t.certBody, 842, 625);
+
+      const pct = Math.round((lastQuizScore / 8) * 100);
+      ctx.fillStyle = '#34d399';
+      ctx.font = 'bold 34px sans-serif';
+      ctx.fillText(`${t.certLblScore}: ${lastQuizScore} / 8 (${pct}%)`, 842, 760);
+
+      const dateStr = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
+      ctx.fillStyle = '#22d3ee';
+      ctx.font = 'bold 28px sans-serif';
+      ctx.fillText(`${t.certLblDate}: ${dateStr}  |  OPERATIVE Z-03`, 842, 960);
+
+      return canvas;
+    }
+
+    function downloadCertificatePNG() {
+      playTone('success');
+      const canvas = buildCertificateCanvas();
+      const link = document.createElement('a');
+      link.download = 'MATA_Academy_Certificate.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function downloadCertificatePDF() {
+      playTone('success');
+      const canvas = buildCertificateCanvas();
+      const imgData = canvas.toDataURL('image/jpeg', 0.92);
+      const binStr = atob(imgData.split(',')[1]);
+      const imgBytes = new Uint8Array(binStr.length);
+      for (let i = 0; i < binStr.length; i++) imgBytes[i] = binStr.charCodeAt(i);
+
+      // Build valid Landscape A4 PDF (842 x 595 pt) embedding the JPEG image
+      const encoder = new TextEncoder();
+      const chunks = [];
+      const offsets = [0];
+      let length = 0;
+      function pushStr(s) {
+        const b = encoder.encode(s);
+        chunks.push(b);
+        length += b.length;
+      }
+      function pushBytes(b) {
+        chunks.push(b);
+        length += b.length;
+      }
+
+      pushStr('%PDF-1.3\n');
+      offsets.push(length);
+      pushStr('1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj\n');
+      offsets.push(length);
+      pushStr('2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj\n');
+      offsets.push(length);
+      pushStr('3 0 obj << /Type /Page /Parent 2 0 R /Resources << /XObject << /Im1 4 0 R >> >> /MediaBox [0 0 842 595] /Contents 5 0 R >> endobj\n');
+      offsets.push(length);
+      pushStr(`4 0 obj << /Type /XObject /Subtype /Image /Width 1684 /Height 1190 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${imgBytes.length} >> stream\n`);
+      pushBytes(imgBytes);
+      pushStr('\nendstream endobj\n');
+      const contentStream = 'q 842 0 0 595 0 0 cm /Im1 Do Q';
+      offsets.push(length);
+      pushStr(`5 0 obj << /Length ${contentStream.length} >> stream\n${contentStream}\nendstream endobj\n`);
+
+      const xrefPos = length;
+      pushStr(`xref\n0 ${offsets.length}\n0000000000 65535 f \n`);
+      for (let i = 1; i < offsets.length; i++) {
+        pushStr(String(offsets[i]).padStart(10, '0') + ' 00000 n \n');
+      }
+      pushStr(`trailer << /Size ${offsets.length} /Root 1 0 R >>\nstartxref\n${xrefPos}\n%%EOF`);
+
+      const pdfBlob = new Blob(chunks, { type: 'application/pdf' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(pdfBlob);
+      a.download = 'MATA_Academy_Certificate_A4.pdf';
+      a.click();
+    }
+
+    /* ==================== MENU 06: DIGITAL EXIT TICKET ==================== */
+    let exitLogs = JSON.parse(localStorage.getItem('mata_exit_logs') || '[]');
+    if (exitLogs.length === 0) {
+      exitLogs = [
+        { name: 'Agent Ali', note: '100 sen equals RM1.00 when regrouping!', time: '09:15 AM' },
+        { name: 'Agent Alicia', note: 'Always line up the decimal point vertically.', time: '09:18 AM' }
+      ];
+    }
+
+    function renderExitLogs() {
+      const box = document.getElementById('exit-log-list');
+      box.innerHTML = exitLogs.map(item => `
+        <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl">
+          <div class="flex justify-between font-hud text-[11px] text-cyan-300">
+            <span>${item.name}</span>
+            <span class="text-slate-500">${item.time}</span>
+          </div>
+          <p class="text-slate-300 mt-1">${item.note}</p>
+        </div>
+      `).join('');
+    }
+
+    function submitExitTicket() {
+      const name = document.getElementById('exit-agent-name').value.trim() || 'Junior Agent';
+      const note = document.getElementById('exit-reflection').value.trim();
+      if (!note) return;
+      exitLogs.unshift({
+        name,
+        note,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      });
+      localStorage.setItem('mata_exit_logs', JSON.stringify(exitLogs));
+      document.getElementById('exit-reflection').value = '';
+      renderExitLogs();
+      completeMission('penutup', 100);
+    }
+
+    /* ==================== MENU 07: METADATA (OPERATIVE Z-03 PROFILE) ==================== */
+    const DEFAULT_META = {
+      name: 'SHARIFAH NUR ZAHIRA',
+      code: 'OPERATIVE Z-03',
+      role: 'Student In Mathematic Education',
+      school: 'Akademi Teknologi Pendidikan M.A.T.A',
+      email: 'zahira.math@mata-academy.edu.my',
+      avatar: DEFAULT_AVATAR_SVG
+    };
+
+    function loadMetadataProfile() {
+      let saved = JSON.parse(localStorage.getItem('mata_metadata_v2') || 'null');
+      if (!saved) {
+        saved = { ...DEFAULT_META };
+        localStorage.setItem('mata_metadata_v2', JSON.stringify(saved));
+      }
+      applyMetadataToDOM(saved);
+    }
+
+    function applyMetadataToDOM(data) {
+      document.getElementById('meta-badge-code').textContent = data.code;
+      document.getElementById('meta-card-name').textContent = data.name;
+      document.getElementById('meta-card-role').textContent = data.role;
+      document.getElementById('meta-card-school').textContent = data.school;
+      document.getElementById('meta-card-email').textContent = data.email;
+      document.getElementById('meta-avatar-preview').src = data.avatar || DEFAULT_AVATAR_SVG;
+
+      document.getElementById('input-meta-name').value = data.name;
+      document.getElementById('input-meta-code').value = data.code;
+      document.getElementById('input-meta-role').value = data.role;
+      document.getElementById('input-meta-school').value = data.school;
+      document.getElementById('input-meta-email').value = data.email;
+
+      document.getElementById('dash-op-code').textContent = data.code;
+      document.getElementById('dash-op-name').textContent = data.name;
+      document.getElementById('dash-op-role').textContent = data.role;
+      document.getElementById('dash-avatar-img').src = data.avatar || DEFAULT_AVATAR_SVG;
+    }
+
+    function handleProfilePhotoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        const cur = JSON.parse(localStorage.getItem('mata_metadata_v2') || JSON.stringify(DEFAULT_META));
+        cur.avatar = reader.result;
+        localStorage.setItem('mata_metadata_v2', JSON.stringify(cur));
+        applyMetadataToDOM(cur);
+        playTone('success');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function resetProfilePhoto() {
+      const cur = JSON.parse(localStorage.getItem('mata_metadata_v2') || JSON.stringify(DEFAULT_META));
+      cur.avatar = DEFAULT_AVATAR_SVG;
+      localStorage.setItem('mata_metadata_v2', JSON.stringify(cur));
+      applyMetadataToDOM(cur);
+      playTone('click');
+    }
+
+    function saveMetadataProfile() {
+      const cur = JSON.parse(localStorage.getItem('mata_metadata_v2') || JSON.stringify(DEFAULT_META));
+      const updated = {
+        name: document.getElementById('input-meta-name').value.trim() || DEFAULT_META.name,
+        code: document.getElementById('input-meta-code').value.trim() || DEFAULT_META.code,
+        role: document.getElementById('input-meta-role').value.trim() || DEFAULT_META.role,
+        school: document.getElementById('input-meta-school').value.trim() || DEFAULT_META.school,
+        email: document.getElementById('input-meta-email').value.trim() || DEFAULT_META.email,
+        avatar: cur.avatar || DEFAULT_AVATAR_SVG
+      };
+      localStorage.setItem('mata_metadata_v2', JSON.stringify(updated));
+      applyMetadataToDOM(updated);
+      const fb = document.getElementById('meta-save-fb');
+      fb.classList.remove('hidden');
+      fb.textContent = currentLang === 'en'
+        ? '✔ Profile saved locally and +100 XP claimed!'
+        : '✔ Profil berjaya disimpan dan +100 XP dituntut!';
+      completeMission('metadata', 100);
+    }
+
+    /* ==================== COMOT x I.R.I.S. AI ASSISTANT ==================== */
+    function toggleIrisChat() {
+      playTone('click');
+      const win = document.getElementById('iris-chat-window');
+      win.classList.toggle('hidden');
+      if (!win.classList.contains('hidden') && document.getElementById('iris-messages').children.length === 0) {
+        addIrisMsg('bot', currentLang === 'en'
+          ? 'Meow! I.R.I.S. online. Need help adding Ringgit & Sen or calibrating the 5-question Gadget Lab?'
+          : 'Meow! I.R.I.S. aktif. Perlukan bantuan menambah Ringgit & Sen atau kalibrasi Makmal Gajet 5 soalan?');
+      }
+    }
+
+    function addIrisMsg(sender, text) {
+      const box = document.getElementById('iris-messages');
+      const div = document.createElement('div');
+      div.className = sender === 'bot'
+        ? 'bg-cyan-950/70 border border-cyan-500/30 text-cyan-100 p-2.5 rounded-2xl'
+        : 'bg-slate-800 text-white p-2.5 rounded-2xl ml-6 text-right';
+      div.textContent = text;
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function askIrisPreset(topic) {
+      playTone('click');
+      if (topic === 'sen') {
+        addIrisMsg('bot', currentLang === 'en'
+          ? '100 sen = RM1.00! Whenever your sen column reaches 100 or more, carry 1 Ringgit to the Ones column.'
+          : '100 sen = RM1.00! Apabila lajur sen mencapai 100 atau lebih, bawa 1 Ringgit ke rumah Sa.');
+      } else if (topic === 'regroup') {
+        addIrisMsg('bot', currentLang === 'en'
+          ? 'Line up the decimal dots vertically. Add from right to left (Sen → Ones → Tens → Hundreds → Thousands).'
+          : 'Selarikan titik perpuluhan secara menegak. Tambah dari kanan ke kiri (Sen → Sa → Puluh → Ratus → Ribu).');
+      } else {
+        addIrisMsg('bot', currentLang === 'en'
+          ? 'In Menu 03 Gadget Lab, tap banknotes and coins to match each of the 5 target amounts before the 60s timer ends!'
+          : 'Dalam Menu 03 Makmal Gajet, tekan wang kertas dan syiling untuk memadankan setiap daripada 5 nilai sasaran sebelum masa 60s tamat!');
+      }
+    }
+
+    function sendIrisCustom() {
+      const inp = document.getElementById('iris-input');
+      const q = inp.value.trim();
+      if (!q) return;
+      addIrisMsg('user', q);
+      inp.value = '';
+      setTimeout(() => askIrisPreset('regroup'), 250);
+    }
+
+    /* ==================== STRICT 100% EN / BM LANGUAGE SWITCHER ==================== */
+    function setLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('mata_lang', lang);
+      document.getElementById('btn-lang-en').className = lang === 'en'
+        ? 'px-2.5 py-1 rounded-lg font-hud text-xs font-bold bg-cyan-500 text-slate-950 transition'
+        : 'px-2.5 py-1 rounded-lg font-hud text-xs font-bold text-slate-300 hover:text-white transition';
+      document.getElementById('btn-lang-bm').className = lang === 'bm'
+        ? 'px-2.5 py-1 rounded-lg font-hud text-xs font-bold bg-cyan-500 text-slate-950 transition'
+        : 'px-2.5 py-1 rounded-lg font-hud text-xs font-bold text-slate-300 hover:text-white transition';
+
+      const t = I18N[lang];
+      const map = {
+        'hud-year-pill': t.yearPill,
+        'hud-subtitle': t.hudSub,
+        'lbl-rank-title': t.rankTitle,
+        'lbl-xp-title': t.xpTitle,
+        'lbl-mission-prog': t.missionProg,
+        'sound-label': audioEnabled ? t.audioOn : t.audioOff,
+        'btn-reset-all': t.reset,
+        'dash-badge': t.dashBadge,
+        'dash-title': t.dashTitle,
+        'dash-desc': t.dashDesc,
+        'dash-start-btn': t.dashStartBtn,
+        'dash-sim-btn': t.dashSimBtn,
+        'dash-op-btn': t.dashOpBtn,
+        'm1-tag': t.m1Tag, 'm1-title': t.m1Title, 'm1-claim-btn': t.m1Claim, 'm1-intro-p': t.m1Intro,
+        'm1-notes-heading': t.m1NotesH, 'm1-coins-heading': t.m1CoinsH, 'm1-coin-rule': t.m1CoinRule,
+        'm1-check-title': t.m1CheckTitle, 'm1-check-q': t.m1CheckQ, 'm1-next-btn': t.m1Next,
+        'm2-tag': t.m2Tag, 'm2-title': t.m2Title, 'm2-claim-btn': t.m2Claim,
+        'rph-lbl-subj': t.rphSubjL, 'rph-val-subj': t.rphSubjV,
+        'rph-lbl-topic': t.rphTopicL, 'rph-val-topic': t.rphTopicV,
+        'rph-lbl-cs': t.rphCsL, 'rph-val-cs': t.rphCsV,
+        'rph-lbl-ls': t.rphLsL, 'rph-val-ls': t.rphLsV,
+        'rph-obj-heading': t.rphObjH, 'rph-prof-heading': t.rphProfH, 'rph-prof-text': t.rphProfT,
+        'rph-ped-heading': t.rphPedH, 'rph-ped-text': t.rphPedT, 'm2-next-btn': t.m2Next,
+        'm3-tag': t.m3Tag, 'm3-title': t.m3Title, 'm3-desc': t.m3Desc,
+        'lab-q-label': t.labQLabel, 'lab-countdown-lbl': t.labCountdown,
+        'btn-lab-reset': t.labReset, 'btn-lab-random': t.labRandom, 'btn-lab-restart': t.labRestart,
+        'lab-retry-btn': t.labRetry,
+        'box-lbl-hundreds': t.boxH, 'box-lbl-tens': t.boxT, 'box-lbl-ones': t.boxO,
+        'box-lbl-decimal': t.boxD, 'box-lbl-point': t.boxP, 'box-lbl-sen': t.boxS,
+        'lab-current-lbl': t.labCurrent, 'm3-next-btn': t.m3Next,
+        'm4-tag': t.m4Tag, 'm4-title': t.m4Title, 'm4-claim-btn': t.m4Claim,
+        'step1-title': t.step1T, 'step1-desc': t.step1D, 'step2-title': t.step2T, 'step2-desc': t.step2D,
+        'learn-practice-title': t.learnPracT, 'learn-practice-q': t.learnPracQ,
+        'btn-check-answer': t.btnCheck, 'btn-use-calc-result': t.btnUseCalc,
+        'calc-header-title': t.calcTitle, 'calc-tip-text': t.calcTip, 'm4-next-btn': t.m4Next,
+        'm5-tag': t.m5Tag, 'm5-title': t.m5Title, 'btn-mode-market': t.modeA, 'btn-mode-quiz': t.modeB,
+        'quiz-header-title': t.quizH, 'quiz-header-sub': t.quizSub,
+        'btn-submit-quiz': t.btnSubmitQuiz, 'btn-retake-quiz': t.btnRetakeQuiz,
+        'cert-unlocked-badge': t.certBadge, 'cert-section-title': t.certSecT,
+        'btn-dl-pdf': t.btnDlPdf, 'btn-dl-png': t.btnDlPng, 'btn-print-cert': t.btnPrint,
+        'lbl-cert-name': t.lblCertName, 'cert-org': t.certOrg, 'cert-heading': t.certHeading,
+        'cert-sub': t.certSub, 'cert-body-text': t.certBody, 'cert-lbl-score': t.certLblScore,
+        'cert-lbl-date': t.certLblDate, 'm5-next-btn': t.m5Next,
+        'm6-tag': t.m6Tag, 'm6-title': t.m6Title, 'm6-claim-btn': t.m6Claim,
+        'take1-tag': t.take1Tag, 'take1-title': t.take1T, 'take1-desc': t.take1D,
+        'take2-tag': t.take2Tag, 'take2-title': t.take2T, 'take2-desc': t.take2D,
+        'take3-tag': t.take3Tag, 'take3-title': t.take3T, 'take3-desc': t.take3D,
+        'exit-form-title': t.exitFormT, 'btn-submit-exit': t.btnSubmitExit,
+        'exit-log-title': t.exitLogT, 'm6-next-btn': t.m6Next,
+        'm7-tag': t.m7Tag, 'm7-title': t.m7Title, 'm7-subtitle': t.m7Sub,
+        'btn-upload-photo': t.btnUpload, 'btn-reset-photo': t.btnResetPhoto,
+        'lbl-meta-name': t.lblMetaName, 'lbl-meta-code': t.lblMetaCode, 'lbl-meta-role': t.lblMetaRole,
+        'lbl-meta-school': t.lblMetaSchool, 'lbl-meta-email': t.lblMetaEmail,
+        'btn-save-meta': t.btnSaveMeta, 'btn-return-dash': t.btnReturnDash,
+        'footer-text': t.footer
+      };
+
+      Object.entries(map).forEach(([id, val]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+      });
+
+      document.getElementById('rph-obj-list').innerHTML = t.rphObjs.map(o => `<li class="bg-slate-950/70 p-3 rounded-xl border border-slate-800">${o}</li>`).join('');
+      updateHUD();
+      updateLabUI();
+      renderMMProducts();
+      renderQuizQuestions();
+    }
+
+    /* ==================== INITIALIZATION ==================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      loadMetadataProfile();
+      renderExitLogs();
+      setLang(currentLang);
+      navigateMenu('dashboard');
+    });
+  </script>
+</body>
+</html>
