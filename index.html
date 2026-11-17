@@ -3084,151 +3084,11 @@
       msgEl.value = "";
       renderAllViews();
       showToast(`📡 ${t.exitSuccess}`, "success");
-    }
+    }<section id="closure">
+    <h2>Closure</h2>
 
-    function loadMetadata() {
-      const defs = DB[state.lang].m07.defaults;
-      let custom = null;
-      try {
-        const raw = localStorage.getItem("mata_op_z03_profile_v2");
-        if (raw) custom = JSON.parse(raw);
-      } catch (e) {}
+    <!-- PASTE STUDENT FEEDBACK FORM HERE -->
 
-      const name = custom?.name || defs.name;
-      const code = custom?.code || defs.code;
-      const role = custom?.role || defs.role;
-      const inst = custom?.inst || defs.inst;
-      const bio = custom?.bio || defs.bio;
-      const photo = custom?.photo || "https://placehold.co/160x160/0f172a/06b6d4?text=Z-03";
-
-      document.getElementById("meta-name").value = name;
-      document.getElementById("meta-code").value = code;
-      document.getElementById("meta-role").value = role;
-      document.getElementById("meta-inst").value = inst;
-      document.getElementById("meta-bio").value = bio;
-      document.getElementById("meta-photo-preview").src = photo;
-
-      document.getElementById("dash-op-name").textContent = name;
-      document.getElementById("dash-op-role").textContent = role;
-      document.getElementById("dash-op-inst").textContent = inst;
-      document.getElementById("dash-op-bio").textContent = bio;
-      document.getElementById("dash-op-photo").src = photo;
-    }
-
-    function handlePhotoUpload(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        document.getElementById("meta-photo-preview").src = e.target.result;
-        saveMetadata();
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function saveMetadata() {
-      playSFX("success");
-      const data = {
-        name: document.getElementById("meta-name").value.trim(),
-        code: document.getElementById("meta-code").value.trim(),
-        role: document.getElementById("meta-role").value.trim(),
-        inst: document.getElementById("meta-inst").value.trim(),
-        bio: document.getElementById("meta-bio").value.trim(),
-        photo: document.getElementById("meta-photo-preview").src
-      };
-      try {
-        localStorage.setItem("mata_op_z03_profile_v2", JSON.stringify(data));
-      } catch (e) {}
-      addXP(20, "menu07");
-      loadMetadata();
-      showToast(`💾 ${DB[state.lang].m07.savedToast}`, "success");
-    }
-
-    function resetMetadata() {
-      playSFX("click");
-      try {
-        localStorage.removeItem("mata_op_z03_profile_v2");
-      } catch (e) {}
-      loadMetadata();
-      showToast(`🔄 ${DB[state.lang].m07.resetToast}`, "info");
-    }
-
-    /* ==========================================================================
-       11. FLOATING COMOT x I.R.I.S. AI ASSISTANT (100% BILINGUAL)
-       ========================================================================== */
-    function toggleIrisChat() {
-      playSFX("click");
-      state.chatOpen = !state.chatOpen;
-      const box = document.getElementById("iris-chat-box");
-      if (state.chatOpen) box.classList.remove("hidden");
-      else box.classList.add("hidden");
-    }
-
-    function renderIrisChat() {
-      const t = DB[state.lang].iris;
-      document.getElementById("iris-fab-lbl").textContent = t.fabLbl;
-      document.getElementById("iris-hdr-title").textContent = t.hdrTitle;
-      document.getElementById("iris-hdr-sub").textContent = t.hdrSub;
-      document.getElementById("iris-input").placeholder = t.inputPh;
-      document.getElementById("iris-send-btn").textContent = t.sendBtn;
-
-      document.getElementById("iris-chips").innerHTML = t.chips.map((c, idx) => `
-        <button onclick="askIrisChip(${idx})" class="px-2.5 py-1 rounded-full bg-slate-800 hover:bg-cyan-600 text-[11px] font-semibold text-cyan-200 hover:text-slate-950 transition">
-          ${c.label}
-        </button>
-      `).join("");
-
-      const msgBox = document.getElementById("iris-messages");
-      const allMsgs = [{ sender: "ai", text: t.greeting }, ...state.chatHistory];
-      msgBox.innerHTML = allMsgs.map(m => `
-        <div class="${m.sender === "user" ? "ml-8 bg-cyan-600/30 border-cyan-500/40 text-white" : "mr-6 bg-slate-900 border-slate-800 text-slate-200"} border rounded-xl p-2.5 leading-relaxed">
-          ${m.text}
-        </div>
-      `).join("");
-      msgBox.scrollTop = msgBox.scrollHeight;
-    }
-
-    function askIrisChip(idx) {
-      playSFX("click");
-      const chip = DB[state.lang].iris.chips[idx];
-      state.chatHistory.push({ sender: "user", text: chip.label });
-      state.chatHistory.push({ sender: "ai", text: chip.reply });
-      renderIrisChat();
-    }
-
-    function sendIrisCustom() {
-      const inp = document.getElementById("iris-input");
-      const q = inp.value.trim();
-      if (!q) return;
-      playSFX("click");
-      inp.value = "";
-      state.chatHistory.push({ sender: "user", text: q });
-
-      const lower = q.toLowerCase();
-      const chips = DB[state.lang].iris.chips;
-      let reply = DB[state.lang].iris.fallbackReply;
-      if (lower.includes("sen") || lower.includes("100") || lower.includes("kumpul") || lower.includes("regroup")) {
-        reply = chips[1].reply;
-      } else if (lower.includes("dot") || lower.includes("titik") || lower.includes("align") || lower.includes("selaras")) {
-        reply = chips[0].reply;
-      } else if (lower.includes("market") || lower.includes("pasar") || lower.includes("3d") || lower.includes("aiman")) {
-        reply = chips[2].reply;
-      } else if (lower.includes("cert") || lower.includes("sijil") || lower.includes("quiz") || lower.includes("kuiz")) {
-        reply = chips[3].reply;
-      }
-
-      state.chatHistory.push({ sender: "ai", text: reply });
-      renderIrisChat();
-    }
-
-    /* ==========================================================================
-       12. BOOTSTRAP ON WINDOW LOAD
-       ========================================================================== */
-    window.onload = function () {
-      renderAllViews();
-    };
-  </script>
-  
 <div id="mata-agent-wall">
   <style>
     #mata-agent-wall {
@@ -3693,6 +3553,334 @@
     wall.textContent = "M.A.T.A network connection error.";
   }
 })();
+</script>
+
+</section>
+
+    function loadMetadata() {
+      const defs = DB[state.lang].m07.defaults;
+      let custom = null;
+      try {
+        const raw = localStorage.getItem("mata_op_z03_profile_v2");
+        if (raw) custom = JSON.parse(raw);
+      } catch (e) {}
+
+      const name = custom?.name || SHARIFAH NUR ZAHIRA BINTI SYED YAHYA PUTRA;
+      const code = custom?.code || AGENT DEVELOPER;
+      const role = custom?.role || WEBSITE BUILDER;
+      const inst = custom?.inst || defs.inst;
+      const bio = custom?.bio || MONEY IN REAL LIFE;
+      const photo = custom?.photo || "https://cdn.phototourl.com/anon/2026-11-17-13e6cf19-eacc-4435-b455-30bc925c9a26.png";
+
+      document.getElementById("meta-name").value = name;
+      document.getElementById("meta-code").value = code;
+      document.getElementById("meta-role").value = role;
+      document.getElementById("meta-inst").value = inst;
+      document.getElementById("meta-bio").value = bio;
+      document.getElementById("meta-photo-preview").src = photo;
+
+      document.getElementById("dash-op-name").textContent = name;
+      document.getElementById("dash-op-role").textContent = role;
+      document.getElementById("dash-op-inst").textContent = inst;
+      document.getElementById("dash-op-bio").textContent = bio;
+      document.getElementById("dash-op-photo").src = photo;
+    }
+
+    function handlePhotoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        document.getElementById("meta-photo-preview").src = e.target.result;
+        saveMetadata();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function saveMetadata() {
+      playSFX("success");
+      const data = {
+        name: document.getElementById("meta-name").value.trim(),
+        code: document.getElementById("meta-code").value.trim(),
+        role: document.getElementById("meta-role").value.trim(),
+        inst: document.getElementById("meta-inst").value.trim(),
+        bio: document.getElementById("meta-bio").value.trim(),
+        photo: document.getElementById("meta-photo-preview").src
+      };
+      try {
+        localStorage.setItem("mata_op_z03_profile_v2", JSON.stringify(data));
+      } catch (e) {}
+      addXP(20, "menu07");
+      loadMetadata();
+      showToast(`💾 ${DB[state.lang].m07.savedToast}`, "success");
+    }
+
+    function resetMetadata() {
+      playSFX("click");
+      try {
+        localStorage.removeItem("mata_op_z03_profile_v2");
+      } catch (e) {}
+      loadMetadata();
+      showToast(`🔄 ${DB[state.lang].m07.resetToast}`, "info");
+    }
+
+    /* ==========================================================================
+       11. FLOATING COMOT x I.R.I.S. AI ASSISTANT (100% BILINGUAL)
+       ========================================================================== */
+    function toggleIrisChat() {
+      playSFX("click");
+      state.chatOpen = !state.chatOpen;
+      const box = document.getElementById("iris-chat-box");
+      if (state.chatOpen) box.classList.remove("hidden");
+      else box.classList.add("hidden");
+    }
+
+    function renderIrisChat() {
+      const t = DB[state.lang].iris;
+      document.getElementById("iris-fab-lbl").textContent = t.fabLbl;
+      document.getElementById("iris-hdr-title").textContent = t.hdrTitle;
+      document.getElementById("iris-hdr-sub").textContent = t.hdrSub;
+      document.getElementById("iris-input").placeholder = t.inputPh;
+      document.getElementById("iris-send-btn").textContent = t.sendBtn;
+
+      document.getElementById("iris-chips").innerHTML = t.chips.map((c, idx) => `
+        <button onclick="askIrisChip(${idx})" class="px-2.5 py-1 rounded-full bg-slate-800 hover:bg-cyan-600 text-[11px] font-semibold text-cyan-200 hover:text-slate-950 transition">
+          ${c.label}
+        </button>
+      `).join("");
+
+      const msgBox = document.getElementById("iris-messages");
+      const allMsgs = [{ sender: "ai", text: t.greeting }, ...state.chatHistory];
+      msgBox.innerHTML = allMsgs.map(m => `
+        <div class="${m.sender === "user" ? "ml-8 bg-cyan-600/30 border-cyan-500/40 text-white" : "mr-6 bg-slate-900 border-slate-800 text-slate-200"} border rounded-xl p-2.5 leading-relaxed">
+          ${m.text}
+        </div>
+      `).join("");
+      msgBox.scrollTop = msgBox.scrollHeight;
+    }
+
+    function askIrisChip(idx) {
+      playSFX("click");
+      const chip = DB[state.lang].iris.chips[idx];
+      state.chatHistory.push({ sender: "user", text: chip.label });
+      state.chatHistory.push({ sender: "ai", text: chip.reply });
+      renderIrisChat();
+    }
+
+    function sendIrisCustom() {
+      const inp = document.getElementById("iris-input");
+      const q = inp.value.trim();
+      if (!q) return;
+      playSFX("click");
+      inp.value = "";
+      state.chatHistory.push({ sender: "user", text: q });
+
+      const lower = q.toLowerCase();
+      const chips = DB[state.lang].iris.chips;
+      let reply = DB[state.lang].iris.fallbackReply;
+      if (lower.includes("sen") || lower.includes("100") || lower.includes("kumpul") || lower.includes("regroup")) {
+        reply = chips[1].reply;
+      } else if (lower.includes("dot") || lower.includes("titik") || lower.includes("align") || lower.includes("selaras")) {
+        reply = chips[0].reply;
+      } else if (lower.includes("market") || lower.includes("pasar") || lower.includes("3d") || lower.includes("aiman")) {
+        reply = chips[2].reply;
+      } else if (lower.includes("cert") || lower.includes("sijil") || lower.includes("quiz") || lower.includes("kuiz")) {
+        reply = chips[3].reply;
+      }
+
+      state.chatHistory.push({ sender: "ai", text: reply });
+      renderIrisChat();
+    }
+
+    /* ==========================================================================
+       12. BOOTSTRAP ON WINDOW LOAD
+       ========================================================================== */
+    window.onload = function () {
+      renderAllViews();
+    };
+  </script>
+  
+<div id="mata-agent-wall">
+  <style>
+    #mata-agent-wall {
+      background: #061329;
+      color: #edf8ff;
+      font-family: Arial, sans-serif;
+      padding: 25px 15px;
+      border: 1px solid #1679a5;
+      border-radius: 18px;
+      box-sizing: border-box;
+    }
+    #mata-agent-wall * { box-sizing: border-box; }
+    #mata-agent-wall .hero {
+      text-align: center;
+      padding: 25px 10px;
+      background: linear-gradient(135deg,#0a2850,#061329);
+      border-radius: 14px;
+    }
+    #mata-agent-wall .tag {
+      color: #35dfff;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+    #mata-agent-wall h1 {
+      color: #35dfff;
+      font-size: clamp(25px,5vw,38px);
+      margin: 14px 0;
+      text-shadow: 0 0 15px #00bfff;
+    }
+    #mata-agent-wall h2 { color: #35dfff; font-size: 19px; }
+    #mata-agent-wall p { color: #bcd4e9; line-height: 1.5; }
+    #mata-agent-wall .stats {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+    #mata-agent-wall .stat {
+      background: #102b4d;
+      border: 1px solid #1684ad;
+      border-radius: 10px;
+      padding: 14px 25px;
+      min-width: 125px;
+    }
+    #mata-agent-wall .stat strong {
+      display: block;
+      color: #35dfff;
+      font-size: 27px;
+    }
+    #mata-agent-wall .stat span {
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+    #mata-agent-wall .panel {
+      background: linear-gradient(145deg,#10294b,#091a34);
+      border: 1px solid #1679a5;
+      border-radius: 14px;
+      padding: 22px;
+      margin-top: 20px;
+    }
+    #mata-agent-wall label {
+      display: block;
+      color: #d9efff;
+      font-size: 13px;
+      font-weight: bold;
+      margin: 17px 0 7px;
+    }
+    #mata-agent-wall input,
+    #mata-agent-wall select,
+    #mata-agent-wall textarea {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      background: #06172e;
+      color: white;
+      border: 1px solid #28618c;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    #mata-agent-wall textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+    #mata-agent-wall button {
+      cursor: pointer;
+    }
+    #mata-agent-wall .stars {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    #mata-agent-wall .stars button {
+      background: none;
+      border: none;
+      color: #52647a;
+      font-size: 32px;
+      padding: 0;
+    }
+    #mata-agent-wall .stars button.active { color: #ffd447; }
+    #mata-agent-wall .send {
+      width: 100%;
+      padding: 15px;
+      margin-top: 18px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg,#087cb7,#19d5ed);
+      color: #00152a;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+    #mata-agent-wall .send:disabled {
+      opacity: .5;
+      cursor: wait;
+    }
+    #mata-agent-wall .status {
+      min-height: 20px;
+      font-size: 13px;
+      text-align: center;
+      color: #35dfff;
+    }
+    #mata-agent-wall .live {
+      color: #4bffb1;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    #mata-agent-wall .filters { margin: 18px 0; }
+    #mata-agent-wall .wall {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 14px;
+    }
+    #mata-agent-wall .card {
+      background: linear-gradient(145deg,#17395f,#0a1c35);
+      border: 1px solid #1979a5;
+      border-radius: 12px;
+      padding: 17px;
+      overflow-wrap: anywhere;
+      animation: mataAppear .3s ease;
+    }
+    @keyframes mataAppear {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #mata-agent-wall .agent {
+      color: #35dfff;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    #mata-agent-wall .mission {
+      display: inline-block;
+      background: #07557b;
+      color: #a9edff;
+      border-radius: 5px;
+      padding: 5px 8px;
+      font-size: 11px;
+    }
+    #mata-agent-wall .label {
+      color: #35dfff;
+      font-size: 11px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+    #mata-agent-wall .card p {
+      color: #e0edfa;
+      font-size: 13px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    #mata-agent-wall .card .rating { color: #ffd447; }
+    #mata-agent-wall .date {
+      color: #8daac5;
+      font-size: 10px;
+    }
+    @media(max-width:480px) {
+      #mata-agent-wall { padding: 12px; }
+      #mata-agent-wall .panel { padding: 16px; }
+    }
+  </style>
 </script>
 </body>
 </html>
