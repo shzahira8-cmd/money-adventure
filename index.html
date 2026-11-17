@@ -3228,5 +3228,471 @@
       renderAllViews();
     };
   </script>
+  
+<div id="mata-agent-wall">
+  <style>
+    #mata-agent-wall {
+      background: #061329;
+      color: #edf8ff;
+      font-family: Arial, sans-serif;
+      padding: 25px 15px;
+      border: 1px solid #1679a5;
+      border-radius: 18px;
+      box-sizing: border-box;
+    }
+    #mata-agent-wall * { box-sizing: border-box; }
+    #mata-agent-wall .hero {
+      text-align: center;
+      padding: 25px 10px;
+      background: linear-gradient(135deg,#0a2850,#061329);
+      border-radius: 14px;
+    }
+    #mata-agent-wall .tag {
+      color: #35dfff;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+    #mata-agent-wall h1 {
+      color: #35dfff;
+      font-size: clamp(25px,5vw,38px);
+      margin: 14px 0;
+      text-shadow: 0 0 15px #00bfff;
+    }
+    #mata-agent-wall h2 { color: #35dfff; font-size: 19px; }
+    #mata-agent-wall p { color: #bcd4e9; line-height: 1.5; }
+    #mata-agent-wall .stats {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+    #mata-agent-wall .stat {
+      background: #102b4d;
+      border: 1px solid #1684ad;
+      border-radius: 10px;
+      padding: 14px 25px;
+      min-width: 125px;
+    }
+    #mata-agent-wall .stat strong {
+      display: block;
+      color: #35dfff;
+      font-size: 27px;
+    }
+    #mata-agent-wall .stat span {
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+    #mata-agent-wall .panel {
+      background: linear-gradient(145deg,#10294b,#091a34);
+      border: 1px solid #1679a5;
+      border-radius: 14px;
+      padding: 22px;
+      margin-top: 20px;
+    }
+    #mata-agent-wall label {
+      display: block;
+      color: #d9efff;
+      font-size: 13px;
+      font-weight: bold;
+      margin: 17px 0 7px;
+    }
+    #mata-agent-wall input,
+    #mata-agent-wall select,
+    #mata-agent-wall textarea {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      background: #06172e;
+      color: white;
+      border: 1px solid #28618c;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    #mata-agent-wall textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+    #mata-agent-wall button {
+      cursor: pointer;
+    }
+    #mata-agent-wall .stars {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    #mata-agent-wall .stars button {
+      background: none;
+      border: none;
+      color: #52647a;
+      font-size: 32px;
+      padding: 0;
+    }
+    #mata-agent-wall .stars button.active { color: #ffd447; }
+    #mata-agent-wall .send {
+      width: 100%;
+      padding: 15px;
+      margin-top: 18px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg,#087cb7,#19d5ed);
+      color: #00152a;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+    #mata-agent-wall .send:disabled {
+      opacity: .5;
+      cursor: wait;
+    }
+    #mata-agent-wall .status {
+      min-height: 20px;
+      font-size: 13px;
+      text-align: center;
+      color: #35dfff;
+    }
+    #mata-agent-wall .live {
+      color: #4bffb1;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    #mata-agent-wall .filters { margin: 18px 0; }
+    #mata-agent-wall .wall {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 14px;
+    }
+    #mata-agent-wall .card {
+      background: linear-gradient(145deg,#17395f,#0a1c35);
+      border: 1px solid #1979a5;
+      border-radius: 12px;
+      padding: 17px;
+      overflow-wrap: anywhere;
+      animation: mataAppear .3s ease;
+    }
+    @keyframes mataAppear {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #mata-agent-wall .agent {
+      color: #35dfff;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    #mata-agent-wall .mission {
+      display: inline-block;
+      background: #07557b;
+      color: #a9edff;
+      border-radius: 5px;
+      padding: 5px 8px;
+      font-size: 11px;
+    }
+    #mata-agent-wall .label {
+      color: #35dfff;
+      font-size: 11px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+    #mata-agent-wall .card p {
+      color: #e0edfa;
+      font-size: 13px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    #mata-agent-wall .card .rating { color: #ffd447; }
+    #mata-agent-wall .date {
+      color: #8daac5;
+      font-size: 10px;
+    }
+    @media(max-width:480px) {
+      #mata-agent-wall { padding: 12px; }
+      #mata-agent-wall .panel { padding: 16px; }
+    }
+  </style>
+
+  <div class="hero">
+    <div class="tag">M.A.T.A NETWORK // DEBRIEFING ROOM</div>
+    <h1>AGENT FEEDBACK HUB</h1>
+    <p>Every agent has a voice. Share your Money Mission experience!</p>
+    <div class="stats">
+      <div class="stat">
+        <strong id="mata-count">0</strong>
+        <span>AGENT REPORTS</span>
+      </div>
+      <div class="stat">
+        <strong id="mata-average">0.0</strong>
+        <span>AVERAGE RATING</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="tag">01 // TRANSMISSION FORM</div>
+    <h2>📡 Submit Your Mission Report</h2>
+    <p>Agent, complete your report below.</p>
+
+    <form id="mata-form">
+      <label for="mata-name">Agent Nickname</label>
+      <input id="mata-name" maxlength="25"
+        placeholder="Enter your nickname" required>
+
+      <label for="mata-mission">Select Mission</label>
+      <select id="mata-mission" required>
+        <option value="">Choose mission</option>
+        <option>Introduction</option>
+        <option>Mission 1</option>
+        <option>Mission 2</option>
+        <option>Mission 3</option>
+        <option>Mission 4</option>
+        <option>Mission 5</option>
+        <option>Overall Experience</option>
+      </select>
+
+      <label for="mata-learning">What did you learn?</label>
+      <textarea id="mata-learning" maxlength="500"
+        placeholder="I learned how to..." required></textarea>
+
+      <label for="mata-challenge">What was challenging?</label>
+      <textarea id="mata-challenge" maxlength="500"
+        placeholder="I found it difficult when..." required></textarea>
+
+      <label for="mata-experience">Your Experience</label>
+      <select id="mata-experience" required>
+        <option value="">Choose your experience</option>
+        <option>Excellent</option>
+        <option>Good</option>
+        <option>Average</option>
+        <option>Need More Practice</option>
+      </select>
+
+      <label>Rate Your Mission</label>
+      <div class="stars" id="mata-stars">
+        <button type="button" data-value="1" aria-label="1 star">★</button>
+        <button type="button" data-value="2" aria-label="2 stars">★</button>
+        <button type="button" data-value="3" aria-label="3 stars">★</button>
+        <button type="button" data-value="4" aria-label="4 stars">★</button>
+        <button type="button" data-value="5" aria-label="5 stars">★</button>
+      </div>
+
+      <button class="send" id="mata-submit" type="submit">
+        🚀 TRANSMIT REPORT
+      </button>
+      <div class="status" id="mata-status" role="status"
+        aria-live="polite"></div>
+    </form>
+  </div>
+
+  <div class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+      <div>
+        <div class="tag">02 // LIVE DATA TRANSMISSION</div>
+        <h2>AGENT RESPONSE WALL</h2>
+      </div>
+      <span class="live">● LIVE</span>
+    </div>
+
+    <p>Explore the reports shared by other agents!</p>
+
+    <div class="filters">
+      <label for="mata-filter">Filter by mission</label>
+      <select id="mata-filter">
+        <option value="All">All Missions</option>
+        <option>Introduction</option>
+        <option>Mission 1</option>
+        <option>Mission 2</option>
+        <option>Mission 3</option>
+        <option>Mission 4</option>
+        <option>Mission 5</option>
+        <option>Overall Experience</option>
+      </select>
+    </div>
+
+    <div class="wall" id="mata-wall">
+      <p>Connecting to M.A.T.A network...</p>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:18px 5px">
+    <div class="tag">M.A.T.A ACADEMY</div>
+    <p style="font-size:11px">MISSION MONEY OPERATIONS // AGENT REPORTING SYSTEM</p>
+  </div>
+</div>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+(function () {
+  const root = document.getElementById("mata-agent-wall");
+  if (!root || root.dataset.initialized) return;
+  root.dataset.initialized = "true";
+
+  // PASTE YOUR FIREBASE CONFIGURATION HERE
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  const $ = id => root.querySelector("#" + id);
+  const form = $("mata-form");
+  const wall = $("mata-wall");
+  const status = $("mata-status");
+  const submit = $("mata-submit");
+  const filter = $("mata-filter");
+
+  let rating = 0;
+  let reports = [];
+
+  const starButtons = [...$("mata-stars").querySelectorAll("button")];
+
+  starButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      rating = Number(button.dataset.value);
+      starButtons.forEach(star =>
+        star.classList.toggle(
+          "active", Number(star.dataset.value) <= rating
+        )
+      );
+    });
+  });
+
+  if (firebaseConfig.apiKey === "YOUR_API_KEY" ||
+      firebaseConfig.projectId === "YOUR_PROJECT_ID") {
+    wall.textContent = "Please configure Firebase to activate the feedback wall.";
+    status.textContent = "Firebase setup is required.";
+    return;
+  }
+
+  try {
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+
+    const db = firebase.firestore();
+    const collection = db.collection("agentFeedback");
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      if (rating < 1) {
+        status.textContent = "Please select a star rating.";
+        return;
+      }
+
+      submit.disabled = true;
+      status.textContent = "Transmitting your report...";
+
+      const data = {
+        agent: $("mata-name").value.trim(),
+        mission: $("mata-mission").value,
+        learning: $("mata-learning").value.trim(),
+        challenge: $("mata-challenge").value.trim(),
+        experience: $("mata-experience").value,
+        rating: rating,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+
+      try {
+        await collection.add(data);
+        form.reset();
+        rating = 0;
+        starButtons.forEach(s => s.classList.remove("active"));
+        status.textContent = "✓ REPORT TRANSMITTED SUCCESSFULLY!";
+      } catch (error) {
+        console.error(error);
+        status.textContent = "Transmission failed. Please try again.";
+      } finally {
+        submit.disabled = false;
+      }
+    });
+
+    function element(tag, className, text) {
+      const node = document.createElement(tag);
+      node.className = className;
+      node.textContent = text;
+      return node;
+    }
+
+    function makeCard(item) {
+      const card = element("article", "card", "");
+      card.appendChild(element("div", "agent", "M.A.T.A AGENT REPORT"));
+      card.appendChild(element("h3", "", item.agent));
+      card.appendChild(element("span", "mission", item.mission));
+
+      [
+        ["WHAT I LEARNED", item.learning],
+        ["MY CHALLENGE", item.challenge],
+        ["MY EXPERIENCE", item.experience]
+      ].forEach(([heading, answer]) => {
+        card.appendChild(element("div", "label", heading));
+        card.appendChild(element("p", "", answer));
+      });
+
+      card.appendChild(element(
+        "div", "rating",
+        "★".repeat(item.rating) + "☆".repeat(5-item.rating)
+      ));
+
+      const date = item.createdAt &&
+        typeof item.createdAt.toDate === "function"
+        ? item.createdAt.toDate().toLocaleDateString()
+        : "Just submitted";
+
+      card.appendChild(element("div", "date", "MISSION LOG: " + date));
+      return card;
+    }
+
+    function render() {
+      const selected = filter.value;
+      const visible = reports.filter(item =>
+        selected === "All" || item.mission === selected
+      );
+
+      wall.replaceChildren();
+
+      if (!visible.length) {
+        wall.appendChild(element(
+          "p", "", "No reports yet. Be the first agent to submit!"
+        ));
+        return;
+      }
+
+      visible.forEach(item => wall.appendChild(makeCard(item)));
+    }
+
+    filter.addEventListener("change", render);
+
+    collection.orderBy("createdAt", "desc").limit(200)
+      .onSnapshot(snapshot => {
+        reports = snapshot.docs.map(doc => doc.data());
+
+        $("mata-count").textContent = snapshot.size;
+
+        const values = reports
+          .map(item => Number(item.rating))
+          .filter(value => value >= 1 && value <= 5);
+
+        const average = values.length
+          ? values.reduce((a,b) => a+b,0) / values.length
+          : 0;
+
+        $("mata-average").textContent = average.toFixed(1);
+        render();
+
+      }, error => {
+        console.error(error);
+        wall.textContent = "Unable to load reports. Check Firebase rules.";
+      });
+
+  } catch (error) {
+    console.error(error);
+    wall.textContent = "M.A.T.A network connection error.";
+  }
+})();
+</script>
 </body>
 </html>
