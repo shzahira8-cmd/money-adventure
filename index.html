@@ -178,7 +178,6 @@
                 <p id="dash-op-role" class="text-xs text-cyan-400 font-medium"></p>
                 <p id="dash-op-inst" class="text-[11px] text-slate-400 mt-0.5"></p>
               </div>
-                            </div>
             </div>
             <p id="dash-op-bio" class="text-xs text-slate-300 bg-slate-950/70 p-3 rounded-xl border border-slate-800 leading-relaxed"></p>
           </div>
@@ -228,7 +227,7 @@
           <button id="m01-btn-next" onclick="navigateTo('menu02')" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold text-sm transition shadow-lg"></button>
         </div>
       </div>
-
+      
       <!-- INTRODUCTION VIDEO -->
       <div class="bg-slate-900/90 border border-cyan-500/40 rounded-2xl p-6 space-y-4 shadow-xl">
         <div>
@@ -359,7 +358,7 @@
       <div class="bg-slate-900 border border-cyan-500/30 rounded-2xl p-6">
         <span id="m04-tag" class="text-xs font-cyber text-cyan-400 font-bold"></span>
         <h2 id="m04-title" class="text-2xl font-cyber font-bold text-white mt-1"></h2>
-                <p id="m04-desc" class="text-sm text-slate-300 mt-1"></p>
+        <p id="m04-desc" class="text-sm text-slate-300 mt-1"></p>
       </div>
 
       <!-- Worked Examples -->
@@ -559,27 +558,29 @@
         <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-5">
           <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
             <div>
-                    <!-- MODE B: 8-QUESTION QUIZ & LANDSCAPE A4 CERTIFICATE -->
-      <div id="m05-mode-b" class="hidden space-y-6">
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-5">
-          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
-            <div>
               <h3 id="quiz-title" class="font-cyber text-lg font-bold text-amber-400"></h3>
               <p id="quiz-sub" class="text-xs text-slate-300"></p>
             </div>
             <div id="quiz-score-badge" class="px-4 py-2 rounded-xl bg-slate-950 border border-slate-700 font-cyber text-sm font-bold text-cyan-400"></div>
           </div>
+
           <div id="quiz-questions-list" class="space-y-4"></div>
+
           <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
             <button id="quiz-submit-btn" onclick="submitQuiz()" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm transition shadow-lg"></button>
             <button id="quiz-next-btn" onclick="navigateTo('menu06')" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold text-xs transition"></button>
           </div>
         </div>
+
+        <!-- Landscape A4 Certificate -->
         <div id="certificate-section" class="hidden space-y-4">
           <div class="bg-emerald-950/50 border border-emerald-500/40 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-3">
               <span class="text-2xl">🏆</span>
-              <div><h4 id="cert-unlock-title" class="font-bold text-emerald-300 text-sm"></h4><p id="cert-unlock-sub" class="text-xs text-slate-300"></p></div>
+              <div>
+                <h4 id="cert-unlock-title" class="font-bold text-emerald-300 text-sm"></h4>
+                <p id="cert-unlock-sub" class="text-xs text-slate-300"></p>
+              </div>
             </div>
             <div class="flex flex-wrap items-center gap-2">
               <input id="cert-name-input" type="text" oninput="updateCertName(this.value)" class="px-3 py-2 rounded-xl bg-slate-950 border border-cyan-500/50 text-xs font-bold text-white uppercase" />
@@ -588,20 +589,38 @@
               <button id="cert-print-btn" onclick="window.print()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-extrabold text-xs"></button>
             </div>
           </div>
+
+          <!-- Printable Certificate Preview -->
           <div id="certificate-print-area" class="bg-white text-slate-900 rounded-2xl p-8 sm:p-12 border-8 border-double border-amber-500 shadow-2xl max-w-4xl mx-auto">
             <div class="border-2 border-cyan-700 p-6 sm:p-10 text-center space-y-4">
               <div class="flex items-center justify-center gap-3">
                 <div class="w-12 h-12 rounded-xl bg-slate-900 text-cyan-400 font-cyber font-black text-2xl flex items-center justify-center">M</div>
-                <div class="text-left"><div class="font-cyber font-black text-lg tracking-widest text-slate-900">M.A.T.A ACADEMY</div><div id="cert-div-lbl" class="text-xs font-bold text-cyan-700 tracking-wider"></div></div>
+                <div class="text-left">
+                  <div class="font-cyber font-black text-lg tracking-widest text-slate-900">M.A.T.A ACADEMY</div>
+                  <div id="cert-div-lbl" class="text-xs font-bold text-cyan-700 tracking-wider"></div>
+                </div>
               </div>
-              <div class="pt-2"><h2 id="cert-main-heading" class="font-cyber text-2xl sm:text-4xl font-black text-slate-900 tracking-wide"></h2><p id="cert-sub-heading" class="text-xs sm:text-sm text-slate-500 uppercase tracking-widest mt-1"></p></div>
+
+              <div class="pt-2">
+                <h2 id="cert-main-heading" class="font-cyber text-2xl sm:text-4xl font-black text-slate-900 tracking-wide"></h2>
+                <p id="cert-sub-heading" class="text-xs sm:text-sm text-slate-500 uppercase tracking-widest mt-1"></p>
+              </div>
+
               <p id="cert-awarded-lbl" class="text-sm text-slate-600 pt-2"></p>
               <div id="cert-display-name" class="text-2xl sm:text-4xl font-black text-cyan-800 border-b-2 border-slate-300 inline-block px-8 py-1 uppercase"></div>
+
               <p id="cert-body-text" class="text-xs sm:text-sm text-slate-700 max-w-xl mx-auto leading-relaxed"></p>
+
               <div class="pt-6 flex items-end justify-between text-xs text-slate-600 max-w-2xl mx-auto">
-                <div class="text-center"><div class="font-bold text-slate-900 border-b border-slate-400 px-4 pb-1" id="cert-date"></div><div id="cert-date-lbl" class="mt-1"></div></div>
+                <div class="text-center">
+                  <div class="font-bold text-slate-900 border-b border-slate-400 px-4 pb-1" id="cert-date"></div>
+                  <div id="cert-date-lbl" class="mt-1"></div>
+                </div>
                 <div id="cert-seal-lbl" class="w-16 h-16 rounded-full border-4 border-amber-500 flex items-center justify-center font-cyber font-black text-[10px] text-amber-700 rotate-12"></div>
-                <div class="text-center"><div class="font-bold text-slate-900 border-b border-slate-400 px-4 pb-1">Operative Z-03</div><div class="mt-1">Sharifah Nur Zahira</div></div>
+                <div class="text-center">
+                  <div class="font-bold text-slate-900 border-b border-slate-400 px-4 pb-1">Operative Z-03</div>
+                  <div class="mt-1">Sharifah Nur Zahira</div>
+                </div>
               </div>
             </div>
           </div>
@@ -609,14 +628,16 @@
       </div>
     </section>
 
-    <!-- MENU 06: CLOSURE -->
+    <!-- ==================== VIEW 6: MENU 06 (CLOSURE) ==================== -->
     <section id="view-menu06" class="view-section hidden space-y-6">
       <div class="bg-slate-900 border border-cyan-500/30 rounded-2xl p-6">
         <span id="m06-tag" class="text-xs font-cyber text-cyan-400 font-bold"></span>
         <h2 id="m06-title" class="text-2xl font-cyber font-bold text-white mt-1"></h2>
         <p id="m06-desc" class="text-sm text-slate-300 mt-1"></p>
       </div>
+
       <div id="m06-rules-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+
       <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
         <h3 id="m06-exit-hdr" class="font-cyber text-base font-bold text-amber-400"></h3>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -627,112 +648,31 @@
         <div id="exit-ticket-feed" class="space-y-2 pt-2 max-h-60 overflow-y-auto"></div>
       </div>
 
-    
-<!-- M.A.T.A ACADEMY – STUDENT FEEDBACK WALL -->
-<section id="mata-padlet-wall" class="mata-padlet-section">
+      <!-- EMBEDDED STUDENT FEEDBACK WALL (PADLET) -->
+      <section id="mata-agent-wall" class="rounded-2xl border border-cyan-500/40 bg-slate-950/90 p-4 sm:p-6 space-y-4 shadow-xl">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <div class="text-xs font-cyber font-bold tracking-widest text-cyan-400">M.A.T.A ACADEMY // STUDENT FEEDBACK</div>
+            <h3 class="mt-1 text-xl font-cyber font-bold text-white">💬 Student Feedback Wall</h3>
+            <p class="mt-1 text-xs sm:text-sm text-slate-300">Share your feedback, reflections, and mission notes directly on our Padlet board below!</p>
+          </div>
+          <a href="https://padlet.com/shzahira8/feedback-s025juqjkwah7yzcuiuh" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 text-cyan-300 text-xs font-bold transition">
+            ↗ Open Padlet in New Tab
+          </a>
+        </div>
 
-  <div class="mata-padlet-header">
-    <div class="mata-padlet-tag">M.A.T.A ACADEMY • CLOSURE</div>
-    <h2>STUDENT FEEDBACK WALL</h2>
-    <p>
-      Share your learning experience, leave a reflection,
-      and explore what your fellow M.A.T.A agents think!
-    </p>
-  </div>
-
-  <div class="mata-padlet-frame">
-    <iframe
-      src="https://padlet.com/embed/s025juqjkwah7yzcuiuh"
-      title="M.A.T.A Academy Student Feedback Wall"
-      allow="camera; microphone; geolocation; display-capture; clipboard-write"
-      loading="lazy">
-    </iframe>
-  </div>
-
-  <p class="mata-padlet-note">
-    <span>✦</span> Your feedback helps every M.A.T.A agent improve!
-  </p>
-
-</section>
-
-<style>
-.mata-padlet-section {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 35px 20px;
-  margin: 25px auto;
-  color: #eafaff;
-  font-family: inherit;
-}
-
-.mata-padlet-header {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.mata-padlet-tag {
-  display: inline-block;
-  color: #65eaff;
-  border: 1px solid rgba(101,234,255,.5);
-  border-radius: 30px;
-  padding: 7px 16px;
-  font-size: 11px;
-  letter-spacing: 2px;
-  margin-bottom: 12px;
-}
-
-.mata-padlet-header h2 {
-  color: #65eaff;
-  font-size: clamp(23px, 4vw, 36px);
-  letter-spacing: 2px;
-  margin: 8px 0;
-  text-shadow: 0 0 15px rgba(0,220,255,.35);
-}
-
-.mata-padlet-header p {
-  color: #c5dce9;
-  max-width: 650px;
-  margin: 10px auto;
-  line-height: 1.7;
-}
-
-.mata-padlet-frame {
-  width: 100%;
-  height: 650px;
-  overflow: hidden;
-  border: 1px solid rgba(101,234,255,.55);
-  border-radius: 16px;
-  background: #f4f4f4;
-  box-shadow: 0 0 25px rgba(0,190,255,.15);
-}
-
-.mata-padlet-frame iframe {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.mata-padlet-note {
-  text-align: center;
-  color: #9bd9e9;
-  font-size: 13px;
-  margin-top: 18px;
-}
-
-.mata-padlet-note span {
-  color: #65eaff;
-}
-</style>
+        <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4"><p style="padding:0;margin:0"><iframe src="https://padlet.com/embed/s025juqjkwah7yzcuiuh" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe></p></div>
+      </section>
     </section>
 
-    <!-- MENU 07: METADATA -->
+    <!-- ==================== VIEW 7: MENU 07 (METADATA) ==================== -->
     <section id="view-menu07" class="view-section hidden space-y-6">
       <div class="bg-slate-900 border border-amber-500/30 rounded-2xl p-6">
         <span id="m07-tag" class="text-xs font-cyber text-amber-400 font-bold"></span>
         <h2 id="m07-title" class="text-2xl font-cyber font-bold text-white mt-1"></h2>
         <p id="m07-desc" class="text-sm text-slate-300 mt-1"></p>
       </div>
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center space-y-4">
           <img id="meta-photo-preview" src="https://i.postimg.cc/V6BfKZ1F/Screenshot-2026-11-12-213325.png" alt="Operative Avatar" class="w-36 h-36 rounded-2xl object-cover border-4 border-cyan-500 shadow-lg" />
@@ -742,21 +682,40 @@
           </label>
           <button id="m07-reset-photo-btn" onclick="resetMetadata()" class="text-xs text-red-400 hover:underline font-semibold"></button>
         </div>
+
         <div class="md:col-span-2 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
-          <div><label id="m07-lbl-name" class="text-xs font-bold text-slate-400 block mb-1"></label><input id="meta-name" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white" /></div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div><label id="m07-lbl-code" class="text-xs font-bold text-slate-400 block mb-1"></label><input id="meta-code" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white" /></div>
-            <div><label id="m07-lbl-role" class="text-xs font-bold text-slate-400 block mb-1"></label><input id="meta-role" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white" /></div>
+          <div>
+            <label id="m07-lbl-name" class="text-xs font-bold text-slate-400 block mb-1"></label>
+            <input id="meta-name" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white" />
           </div>
-          <div><label id="m07-lbl-inst" class="text-xs font-bold text-slate-400 block mb-1"></label><input id="meta-inst" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white" /></div>
-          <div><label id="m07-lbl-bio" class="text-xs font-bold text-slate-400 block mb-1"></label><textarea id="meta-bio" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white"></textarea></div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label id="m07-lbl-code" class="text-xs font-bold text-slate-400 block mb-1"></label>
+              <input id="meta-code" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white" />
+            </div>
+            <div>
+              <label id="m07-lbl-role" class="text-xs font-bold text-slate-400 block mb-1"></label>
+              <input id="meta-role" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white" />
+            </div>
+          </div>
+          <div>
+            <label id="m07-lbl-inst" class="text-xs font-bold text-slate-400 block mb-1"></label>
+            <input id="meta-inst" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white" />
+          </div>
+          <div>
+            <label id="m07-lbl-bio" class="text-xs font-bold text-slate-400 block mb-1"></label>
+            <textarea id="meta-bio" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white"></textarea>
+          </div>
           <button id="m07-save-btn" onclick="saveMetadata()" class="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm transition shadow-lg"></button>
         </div>
       </div>
     </section>
+
   </main>
-                <!-- ==================== FLOATING COMOT x I.R.I.S. AI CHAT WIDGET ==================== -->
+
+  <!-- ==================== FLOATING COMOT x I.R.I.S. AI CHAT WIDGET ==================== -->
   <div class="fixed bottom-5 right-5 z-50">
+    <!-- Chat Window -->
     <div id="iris-chat-box" class="hidden mb-3 w-80 sm:w-96 bg-slate-950/95 backdrop-blur-md border-2 border-cyan-500/60 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
       <div class="bg-gradient-to-r from-cyan-900 to-slate-900 px-4 py-3 border-b border-cyan-500/40 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
@@ -768,15 +727,23 @@
         </div>
         <button onclick="toggleIrisChat()" class="text-slate-400 hover:text-white font-bold text-sm px-2">✕</button>
       </div>
+
       <div id="iris-messages" class="p-3.5 space-y-2.5 max-h-64 overflow-y-auto text-xs"></div>
+
+      <!-- Preset Chips -->
       <div id="iris-chips" class="px-3 py-2 border-t border-slate-800 flex flex-wrap gap-1.5 bg-slate-900/60"></div>
+
+      <!-- Custom Input -->
       <div class="p-2.5 border-t border-slate-800 flex gap-2 bg-slate-950">
         <input id="iris-input" type="text" onkeydown="if(event.key==='Enter') sendIrisCustom()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white" />
         <button id="iris-send-btn" onclick="sendIrisCustom()" class="px-3 py-1.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold text-xs"></button>
       </div>
     </div>
+
+    <!-- Floating Toggle Button -->
     <button onclick="toggleIrisChat()" class="ml-auto flex items-center gap-2 px-4 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-cyber font-black text-xs shadow-xl shadow-cyan-500/30 transition">
-      <span>🐱</span><span id="iris-fab-lbl"></span>
+      <span>🐱</span>
+      <span id="iris-fab-lbl"></span>
     </button>
   </div>
 
@@ -932,7 +899,200 @@
           pracSuccess: "All 3 addition drills verified! +75 XP awarded!",
           pracWarn: "Check your regrouping carefully using the FX-3100 calculator on the right."
         },
-                  ],
+        m05: {
+          tag: "MODULE 05 // ASSESSMENT & SIMULATION",
+          title: "Assessment & Games",
+          modeABtn: "Mode A: 3D Mini Market Adventure",
+          modeBBtn: "Mode B: 8-Question Quiz & Certificate",
+          chalLbl: "CURRENT MISSION CHALLENGE",
+          newChalBtn: "New Challenge",
+          challenges: [
+            "Buy Milo Tin (RM18.90) + Fresh Milk (RM7.50) and verify the exact sum!",
+            "Buy Rice Sack (RM26.50) + Farm Eggs (RM13.80) and pay Cashier Aiman!",
+            "Buy Turbo Car (RM34.90) + Color Pencils (RM12.90) and calculate your change!",
+            "Pick any 3 items in the 3D Mini Market, calculate the total, and print your receipt!"
+          ],
+          camLbl: "AISLE CAMERA:",
+          cams: {
+            all: "All Aisles",
+            fresh: "Fresh & Bakery",
+            drinks: "Drinks & Pantry",
+            toys: "Toys & School",
+            checkout: "Checkout Counter"
+          },
+          aisleSigns: {
+            drinks: "AISLE 1: DRINKS & PANTRY",
+            fresh: "AISLE 2: FRESH & BAKERY",
+            toys: "AISLE 3: TOYS & SCHOOL",
+            checkout: "CHECKOUT COUNTER"
+          },
+          products: [
+            { id: "milo", name: "Milo Tin 1kg", price: 18.90, aisle: "drinks", pos: [-3.2, 1.35, -2.5], color: 0x15803d, shape: "cyl" },
+            { id: "milk", name: "Fresh Milk 1L", price: 7.50, aisle: "drinks", pos: [-1.8, 1.35, -2.5], color: 0x38bdf8, shape: "box" },
+            { id: "water", name: "Mineral Water", price: 2.40, aisle: "drinks", pos: [-0.4, 1.35, -2.5], color: 0x0284c7, shape: "cyl" },
+            { id: "rice", name: "Fragrant Rice 5kg", price: 26.50, aisle: "drinks", pos: [-2.5, 0.55, -2.5], color: 0xfef08a, shape: "box" },
+            { id: "bread", name: "Wholemeal Bread", price: 4.20, aisle: "fresh", pos: [1.4, 1.35, -2.5], color: 0xdc2626, shape: "box" },
+            { id: "eggs", name: "Farm Eggs Tray", price: 13.80, aisle: "fresh", pos: [2.8, 1.35, -2.5], color: 0xd97706, shape: "box" },
+            { id: "fruit", name: "Fresh Fruit Pack", price: 15.60, aisle: "fresh", pos: [2.1, 0.55, -2.5], color: 0xf97316, shape: "sphere" },
+            { id: "pencils", name: "Color Pencils", price: 12.90, aisle: "toys", pos: [-3.2, 1.35, 1.2], color: 0xec4899, shape: "box" },
+            { id: "book", name: "Exercise Books", price: 6.50, aisle: "toys", pos: [-1.8, 1.35, 1.2], color: 0x8b5cf6, shape: "box" },
+            { id: "car", name: "M.A.T.A Turbo Car", price: 34.90, aisle: "toys", pos: [-0.4, 1.35, 1.2], color: 0x06b6d4, shape: "box" }
+          ],
+          clickToAdd: "Click to add to basket",
+          controlsHint: "Drag to orbit • Scroll to zoom • Click any 3D product on the shelves!",
+          basketHdr: "STAGE 2: SHOPPING BASKET",
+          clearBtn: "Clear All",
+          emptyBasket: "Click any 3D product on the shelves to add it to your basket!",
+          hintHdr: "Step-by-Step Vertical Alignment Hint:",
+          hintEmpty: "Add at least 2 items to view vertical decimal alignment!",
+          hintFooter: "Align decimal dots (.) and add Sen first!",
+          enterTotalLbl: "Calculate & Enter Total Price (RM):",
+          verifyTotalBtn: "Verify Total",
+          emptyWarn: "Your basket is empty! Click 3D products first.",
+          totalVerifiedToast: "Total verified! Proceed to Stage 3 with Cashier Aiman!",
+          totalWrongToast: "Incorrect total! Check your Sen addition and decimal alignment.",
+          cashierTag: "STAGE 3 // CHECKOUT COUNTER",
+          cashierTitle: "Cashier Aiman: Payment & Change Verification",
+          cashierDialogue: "Cashier Aiman: \"Welcome Agent! Tap banknotes and coins from your wallet, then calculate your exact change.\"",
+          billLbl: "Total Bill:",
+          walletLbl: "Tap Malaysian Banknotes & Coins to Pay:",
+          tenderedLbl: "Cash Tendered:",
+          resetPayBtn: "Reset",
+          changeLbl: "Calculate Exact Change (Cash Tendered − Total Bill):",
+          completePayBtn: "Verify Change & Print Receipt",
+          insufficientToast: "Insufficient cash tendered! Tap more banknotes or coins.",
+          wrongChangeToast: "Change calculation is incorrect! Subtract the Total Bill from Cash Tendered.",
+          checkoutSuccessToast: "Payment & Change verified! Official Receipt generated (+70 XP)!",
+          receiptHdr: "M.A.T.A 3D MINI MARKET RECEIPT",
+          receiptDlBtn: "Download Official Receipt (.txt)",
+          quizTitle: "8-Question Certification Quiz (Up to RM10,000)",
+          quizSub: "Answer all 8 questions. Score 5/8 (62.5%) or higher to unlock your Landscape A4 M.A.T.A Certificate!",
+          quizScorePrefix: "Score:",
+          quizSubmitBtn: "Submit & Grade Assessment",
+          quizNextBtn: "Proceed to Menu 06 (Closure) →",
+          quizPassToast: "Congratulations! You passed and unlocked your Landscape A4 Certificate!",
+          quizFailToast: "Score at least 5/8 (62.5%) to unlock the official certificate. Review the explanations and try again!",
+          quizData: [
+            {
+              q: "1. RM 1,420.35 + RM 2,315.40 = ?",
+              opts: ["RM 3,735.75", "RM 3,725.75", "RM 3,835.75", "RM 3,735.05"],
+              ans: 0,
+              exp: "Add sen: 35 + 40 = 75 sen. Add Ringgit: RM1,420 + RM2,315 = RM3,735."
+            },
+            {
+              q: "2. RM 3,450.80 + RM 1,230.50 = ?",
+              opts: ["RM 4,680.30", "RM 4,681.30", "RM 4,681.13", "RM 4,581.30"],
+              ans: 1,
+              exp: "80 sen + 50 sen = 130 sen = RM1.30. Carry RM1 to RM3,450 + RM1,230 = RM4,681.30."
+            },
+            {
+              q: "3. Agent Ali buys a tactical visor for RM 1,285.90 and boots for RM 645.45. What is the total cost?",
+              opts: ["RM 1,930.35", "RM 1,921.35", "RM 1,931.35", "RM 1,831.35"],
+              ans: 2,
+              exp: "90 sen + 45 sen = 135 sen (RM1.35). RM1 + RM1,285 + RM645 = RM1,931.35."
+            },
+            {
+              q: "4. Find the sum of RM 4,999.50 and RM 3,500.50.",
+              opts: ["RM 8,499.00", "RM 8,500.00", "RM 7,500.00", "RM 8,500.50"],
+              ans: 1,
+              exp: "50 sen + 50 sen = 100 sen = RM1.00. RM4,999 + RM3,500 + RM1 = RM8,500.00."
+            },
+            {
+              q: "5. RM 6,075.25 + RM 2,849.85 = ?",
+              opts: ["RM 8,925.10", "RM 8,924.10", "RM 8,825.10", "RM 8,925.00"],
+              ans: 0,
+              exp: "25 sen + 85 sen = 110 sen (RM1.10). RM6,075 + RM2,849 + RM1 = RM8,925.10."
+            },
+            {
+              q: "6. Which vertical alignment rule is TRUE when adding RM 450 and RM 23.75?",
+              opts: ["Align 450 with 75 sen", "Write RM 450 as RM 450.00 so decimal points align", "Ignore the decimal point", "Add 450 + 2375"],
+              ans: 1,
+              exp: "Whole Ringgit values like RM450 have .00 sen, so writing RM450.00 aligns the decimal points properly."
+            },
+            {
+              q: "7. RM 5,488.65 + RM 4,511.35 = ?",
+              opts: ["RM 9,999.00", "RM 10,000.00", "RM 9,990.00", "RM 10,000.10"],
+              ans: 1,
+              exp: "65 sen + 35 sen = RM1.00. RM5,488 + RM4,511 + RM1 = RM10,000.00."
+            },
+            {
+              q: "8. M.A.T.A Academy spent RM 3,765.40 on drones and RM 4,189.95 on tablets. Calculate the total expenditure.",
+              opts: ["RM 7,955.35", "RM 7,954.35", "RM 7,855.35", "RM 7,955.45"],
+              ans: 0,
+              exp: "40 sen + 95 sen = 135 sen (RM1.35). RM3,765 + RM4,189 + RM1 = RM7,955.35."
+            }
+          ],
+          cert: {
+            unlockTitle: "Landscape A4 Certificate Unlocked!",
+            unlockSub: "Enter your full name below, then download PDF, download PNG, or Print Certificate.",
+            defaultStudent: "AGENT HARITH ISKANDAR",
+            pngBtn: "Download PNG",
+            pdfBtn: "Download PDF",
+            printBtn: "Print Certificate",
+            divLbl: "CYBERAYA MATHEMATICS & TACTICAL DIVISION",
+            mainHeading: "CERTIFICATE OF ACHIEVEMENT",
+            subHeading: "MISSION: MONEY OPERATIONS (YEAR 3 MATHEMATICS)",
+            awardedLbl: "This official tactical commendation is proudly awarded to",
+            bodyPrefix: "For successfully mastering Malaysian Ringgit & Sen place value alignment and addition operations up to RM10,000 with an official assessment score of",
+            dateLbl: "Date Issued",
+            sealLbl: "M.A.T.A\nVERIFIED"
+          }
+        },
+        m06: {
+          tag: "MODULE 06 // MISSION DEBRIEFING",
+          title: "Closure: 3 Golden Rules & Digital Agent Exit Ticket",
+          desc: "Review the 3 Golden Rules of Money Addition and log your learning reflection in the live Agent Exit Ticket feed.",
+          rules: [
+            { num: "01", title: "Align the Decimal Dot (.)", desc: "Always place Ringgit (RM) on the left and Sen (2 digits) on the right so the decimal points form a straight vertical line." },
+            { num: "02", title: "Regroup 100 Sen = RM1", desc: "Whenever the Sen column totals 100 sen or more, regroup 100 sen into RM1 and carry it to the Ringgit Ones column." },
+            { num: "03", title: "Write the RM Unit", desc: "Always include the RM symbol in your final answer and check change (balance) carefully when shopping." }
+          ],
+          exitHdr: "Live Digital Agent Exit Ticket Log",
+          namePh: "Your Agent Codename (e.g. Agent Ali)",
+          msgPh: "Write one key takeaway you learned in today's mission...",
+          exitBtn: "Submit Exit Ticket (+30 XP)",
+          exitWarn: "Please write your takeaway message before submitting!",
+          exitSuccess: "Exit Ticket saved to mission log! +30 XP awarded!",
+          defaultTickets: [
+            { name: "Agent Alicia", msg: "Aligning the decimal point makes adding Ringgit and Sen super accurate!", time: "Academy Log" },
+            { name: "Agent Bakar", msg: "100 sen equals RM1! Always regroup in the 3D Mini Market.", time: "Academy Log" }
+          ]
+        },
+        m07: {
+          tag: "MODULE 07 // OPERATIVE Z-03 METADATA",
+          title: "Developer & Educator Profile",
+          desc: "Customize Operative Z-03's profile details and avatar photo. All updates are saved automatically in your browser.",
+          uploadLbl: "Upload Photo",
+          resetPhotoBtn: "Reset Photo & Default Profile",
+          lblName: "Full Name",
+          lblCode: "Operative Codename",
+          lblRole: "Role / Designation",
+          lblInst: "Institution / Academy",
+          lblBio: "Mission Biography",
+          saveBtn: "Save Operative Profile",
+          savedToast: "Operative Z-03 profile saved!",
+          resetToast: "Operative Z-03 profile restored to defaults.",
+          defaults: {
+            name: "Sharifah Nur Zahira",
+            code: "Operative Z-03",
+            role: "Student In Mathematic Education",
+            inst: "M.A.T.A Educational Technology Academy",
+            bio: "Passionate future mathematics educator designing interactive, gamified Year 3 KSSR learning experiences for Malaysian primary students."
+          }
+        },
+        iris: {
+          fabLbl: "Comot × I.R.I.S.",
+          hdrTitle: "COMOT × I.R.I.S. AI ASSIST",
+          hdrSub: "Tactical Mathematics Co-Pilot • Online",
+          greeting: "Meow! I am Comot linked with I.R.I.S. Ask me anything about Ringgit & Sen, decimal alignment, regrouping, or the 3D Mini Market!",
+          inputPh: "Ask I.R.I.S. a math question...",
+          sendBtn: "Send",
+          chips: [
+            { label: "How to align decimal dots?", reply: "Always stack the two money values vertically so the decimal points (.) sit directly on top of each other. Add Sen first, then Ringgit!" },
+            { label: "Explain 100 sen = RM1", reply: "100 sen equals RM1.00! If your Sen column adds up to 135 sen, keep 35 sen in the Sen column and carry RM1 to the Ones column." },
+            { label: "3D Mini Market tip", reply: "Click any 3D item on the shelves to fly it into your basket, enter the sum on the keypad, and pay Cashier Aiman with notes and coins!" },
+            { label: "How to earn the Certificate?", reply: "Open Menu 05, switch to Mode B (8-Question Quiz), and score at least 5 out of 8 (62.5%) to unlock your Landscape A4 Certificate!" }
+          ],
           fallbackReply: "I.R.I.S. Analysis: Remember the 3 Golden Rules — (1) Align the decimal dots vertically, (2) Regroup every 100 sen into RM1, and (3) Always write RM in your answer!"
         }
       },
@@ -1084,7 +1244,7 @@
           pracSuccess: "Semua 3 latihan tambah disahkan! +75 XP diberikan!",
           pracWarn: "Semak semula pengumpulan semula anda menggunakan kalkulator FX-3100 di sebelah kanan."
         },
-                m05: {
+        m05: {
           tag: "MODUL 05 // PENILAIAN & SIMULASI",
           title: "Penilaian & Permainan",
           modeABtn: "Mod A: Pengembaraan Pasar Mini 3D",
@@ -1282,7 +1442,8 @@
         }
       }
     };
-        /* ==========================================================================
+
+    /* ==========================================================================
        2. GLOBAL STATE & WEB AUDIO SYNTHESIZER
        ========================================================================== */
     const state = {
@@ -1321,7 +1482,6 @@
     };
 
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
     function playTone(freq, type = "sine", duration = 0.12, gainVal = 0.08) {
       if (!state.soundEnabled) return;
       try {
@@ -1341,18 +1501,15 @@
 
     function playSFX(kind) {
       if (kind === "click") playTone(640, "triangle", 0.07, 0.06);
-
       if (kind === "coin") {
         playTone(987.77, "sine", 0.08, 0.08);
         setTimeout(() => playTone(1318.51, "sine", 0.18, 0.08), 70);
       }
-
       if (kind === "success") {
         playTone(523.25, "sine", 0.12, 0.09);
         setTimeout(() => playTone(659.25, "sine", 0.12, 0.09), 90);
         setTimeout(() => playTone(783.99, "sine", 0.22, 0.1), 180);
       }
-
       if (kind === "error") {
         playTone(220, "sawtooth", 0.18, 0.09);
         setTimeout(() => playTone(165, "sawtooth", 0.24, 0.09), 130);
@@ -1368,18 +1525,15 @@
     function showToast(msg, type = "info") {
       const container = document.getElementById("toast-container");
       const el = document.createElement("div");
-
       const styles = {
         info: "bg-slate-900 border-cyan-500 text-cyan-200",
         success: "bg-emerald-950 border-emerald-400 text-emerald-200",
         error: "bg-red-950 border-red-500 text-red-200",
         warn: "bg-amber-950 border-amber-400 text-amber-200"
       };
-
       el.className = `pointer-events-auto border ${styles[type] || styles.info} px-4 py-3 rounded-xl shadow-2xl text-xs font-semibold transition-all duration-300`;
       el.textContent = msg;
       container.appendChild(el);
-
       setTimeout(() => {
         el.style.opacity = "0";
         setTimeout(() => el.remove(), 300);
@@ -1395,12 +1549,10 @@
     function updateHUD() {
       const t = DB[state.lang];
       document.getElementById("val-xp").textContent = `${state.xp} XP`;
-
       let rankIdx = 0;
       if (state.xp >= 350) rankIdx = 3;
       else if (state.xp >= 200) rankIdx = 2;
       else if (state.xp >= 80) rankIdx = 1;
-
       document.getElementById("val-rank").textContent = t.ranks[rankIdx];
 
       const pct = Math.min(100, Math.round((state.completedModules.size / 7) * 100));
@@ -1413,10 +1565,8 @@
         showToast(DB[state.lang].lockNavToast, "error");
         return;
       }
-
       playSFX("click");
       clearInterval(state.m03Interval);
-
       state.xp = 0;
       state.completedModules.clear();
       state.m03Active = false;
@@ -1432,13 +1582,16 @@
       state.quizSubmitted = false;
       state.quizScore = 0;
       state.userQuizChoices = {};
-
       updateLockUI(false);
       updateHUD();
       renderAllViews();
       showToast(DB[state.lang].resetConfirmToast, "info");
     }
-        function setLanguage(lang) {
+
+    /* ==========================================================================
+       3. STRICT 100% LANGUAGE SWITCHER & FULL RE-RENDER ENGINE
+       ========================================================================== */
+    function setLanguage(lang) {
       if (state.lang === lang) return;
       playSFX("click");
       state.lang = lang;
@@ -1589,7 +1742,8 @@
           </div>
         </div>
       `;
-            // View 3: Menu 03 (5-Mission Currency Energy Synthesizer)
+
+      // View 3: Menu 03 (5-Mission Currency Energy Synthesizer)
       renderM03Synthesizer();
 
       // View 4: Menu 04 (Learning Steps)
@@ -1726,7 +1880,8 @@
       // Floating I.R.I.S. AI Chat
       renderIrisChat();
     }
-        /* ==========================================================================
+
+    /* ==========================================================================
        4. NAVIGATION & STRICT LOCK HELPERS
        ========================================================================== */
     function navigateTo(viewId) {
@@ -1810,7 +1965,8 @@
         showToast(`⚠️ (${correct}/3) ${t.toastWarn}`, "warn");
       }
     }
-        /* ==========================================================================
+
+    /* ==========================================================================
        6. MENU 03: 5-MISSION CURRENCY ENERGY SYNTHESIZER & STRICT 60s LOCK
        ========================================================================== */
     function getM03ActiveTargetSen() {
@@ -2136,19 +2292,16 @@
       state.calcAngleMode = state.calcAngleMode === "DEG" ? "RAD" : "DEG";
       document.getElementById("calc-angle-btn").textContent = state.calcAngleMode;
     }
-
     function calcAppend(ch) {
       playSFX("click");
       state.calcExpr += ch;
       document.getElementById("calc-expr").textContent = state.calcExpr;
     }
-
     function calcFunc(fn) {
       playSFX("click");
       state.calcExpr += `${fn}(`;
       document.getElementById("calc-expr").textContent = state.calcExpr;
     }
-
     function calcClear() {
       playSFX("click");
       state.calcExpr = "";
@@ -2157,13 +2310,99 @@
       document.getElementById("calc-display").textContent = "0";
       document.getElementById("calc-rm-preview").textContent = "RM 0.00";
     }
-
     function calcBack() {
       playSFX("click");
       state.calcExpr = state.calcExpr.slice(0, -1);
       document.getElementById("calc-expr").textContent = state.calcExpr || "0";
     }
-        function init3DMiniMarket() {
+    function calcEval() {
+      try {
+        let expr = state.calcExpr
+          .replace(/\^/g, "**")
+          .replace(/sqrt\(/g, "Math.sqrt(")
+          .replace(/log\(/g, "Math.log10(")
+          .replace(/ln\(/g, "Math.log(")
+          .replace(/sq\(([^)]+)\)/g, "(($1)**2)");
+
+        const toRad = state.calcAngleMode === "DEG" ? "*(Math.PI/180)" : "";
+        expr = expr
+          .replace(/sin\(([^)]+)\)/g, `Math.sin(($1)${toRad})`)
+          .replace(/cos\(([^)]+)\)/g, `Math.cos(($1)${toRad})`)
+          .replace(/tan\(([^)]+)\)/g, `Math.tan(($1)${toRad})`);
+
+        const res = Function('"use strict";return (' + expr + ")")();
+        if (typeof res === "number" && isFinite(res)) {
+          playSFX("coin");
+          state.calcLastValue = res;
+          document.getElementById("calc-display").textContent = Number.isInteger(res) ? res.toString() : res.toFixed(4).replace(/\.?0+$/, "");
+          document.getElementById("calc-rm-preview").textContent = `RM ${res.toFixed(2)}`;
+          state.calcExpr = res.toString();
+        }
+      } catch (e) {
+        playSFX("error");
+        document.getElementById("calc-display").textContent = "ERR";
+      }
+    }
+
+    /* ==========================================================================
+       8. MENU 05 MODE A: TRUE 3D MINI MARKET ADVENTURE (BILINGUAL 3D LABELS)
+       ========================================================================== */
+    let marketScene, marketCamera, marketRenderer, marketControls;
+    const clickableProducts = [];
+    const aisleSignMeshes = {};
+    const flyingClones = [];
+    let hoveredMesh = null;
+
+    function createSignTexture(text, bgHex = "#0f172a", borderHex = "#06b6d4", textHex = "#facc15") {
+      const canvas = document.createElement("canvas");
+      canvas.width = 512;
+      canvas.height = 96;
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = bgHex;
+      ctx.fillRect(0, 0, 512, 96);
+      ctx.strokeStyle = borderHex;
+      ctx.lineWidth = 8;
+      ctx.strokeRect(4, 4, 504, 88);
+      ctx.fillStyle = textHex;
+      ctx.font = "900 28px Orbitron, Inter, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(text, 256, 48);
+      return new THREE.CanvasTexture(canvas);
+    }
+
+    function makeProductLabelTexture(name, price, hexColor) {
+      const canvas = document.createElement("canvas");
+      canvas.width = 256;
+      canvas.height = 256;
+      const ctx = canvas.getContext("2d");
+
+      ctx.fillStyle = "#" + hexColor.toString(16).padStart(6, "0");
+      ctx.fillRect(0, 0, 256, 256);
+
+      ctx.fillStyle = "rgba(15, 23, 42, 0.84)";
+      ctx.fillRect(14, 24, 228, 208);
+
+      ctx.strokeStyle = "#38bdf8";
+      ctx.lineWidth = 6;
+      ctx.strokeRect(14, 24, 228, 208);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 22px Inter, sans-serif";
+      ctx.textAlign = "center";
+      const words = name.split(" ");
+      words.forEach((w, i) => ctx.fillText(w, 128, 70 + i * 26));
+
+      ctx.fillStyle = "#facc15";
+      ctx.fillRect(28, 165, 200, 48);
+      ctx.fillStyle = "#0f172a";
+      ctx.font = "900 28px monospace";
+      ctx.fillText(`RM ${price.toFixed(2)}`, 128, 198);
+
+      return new THREE.CanvasTexture(canvas);
+    }
+
+    function init3DMiniMarket() {
       const container = document.getElementById("three-market-container");
       if (!container || state.marketInitialized) return;
       state.marketInitialized = true;
@@ -2399,6 +2638,7 @@
         progress: 0
       });
     }
+
     function setCameraPreset(preset) {
       if (!marketCamera || !marketControls) return;
       playSFX("click");
@@ -2603,36 +2843,8 @@
         btnA.className = "px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-700 transition";
       }
     }
-    
-    function calcEval() {
-      try {
-        let expr = state.calcExpr
-          .replace(/\^/g, "**")
-          .replace(/sqrt\(/g, "Math.sqrt(")
-          .replace(/log\(/g, "Math.log10(")
-          .replace(/ln\(/g, "Math.log(")
-          .replace(/sq\(([^)]+)\)/g, "(($1)**2)");
 
-        const toRad = state.calcAngleMode === "DEG" ? "*(Math.PI/180)" : "";
-        expr = expr
-          .replace(/sin\(([^)]+)\)/g, `Math.sin(($1)${toRad})`)
-          .replace(/cos\(([^)]+)\)/g, `Math.cos(($1)${toRad})`)
-          .replace(/tan\(([^)]+)\)/g, `Math.tan(($1)${toRad})`);
-
-        const res = Function('"use strict";return (' + expr + ")")();
-        if (typeof res === "number" && isFinite(res)) {
-          playSFX("coin");
-          state.calcLastValue = res;
-          document.getElementById("calc-display").textContent = Number.isInteger(res) ? res.toString() : res.toFixed(4).replace(/\.?0+$/, "");
-          document.getElementById("calc-rm-preview").textContent = `RM ${res.toFixed(2)}`;
-          state.calcExpr = res.toString();
-        }
-      } catch (e) {
-        playSFX("error");
-        document.getElementById("calc-display").textContent = "ERR";
-      }
-    }
-        function renderQuiz() {
+    function renderQuiz() {
       const qData = DB[state.lang].m05.quizData;
       const container = document.getElementById("quiz-questions-list");
       container.innerHTML = qData.map((item, qIdx) => {
@@ -2839,7 +3051,8 @@
       a.click();
       URL.revokeObjectURL(url);
     }
-        /* ==========================================================================
+
+    /* ==========================================================================
        10. MENU 06 (EXIT TICKET) & MENU 07 (METADATA PERSISTENCE)
        ========================================================================== */
     function renderExitTickets() {
@@ -3036,218 +3249,6 @@
     window.onload = function () {
       renderAllViews();
     };
-  </script>
-    <!-- Anonymous Student Feedback Wall: Firebase Firestore. No student name/email/login is requested. -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script>
-  (function () {
-    const root = document.getElementById("mata-agent-wall");
-    if (!root) return;
-
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
-
-    const $ = id => document.getElementById(id);
-    const wall = $("mata-wall");
-    const form = $("mata-form");
-    const status = $("mata-status");
-    const submit = $("mata-submit");
-
-    let rating = 0;
-    let posts = [];
-
-    const stars = [...$("mata-stars").querySelectorAll("button")];
-
-    stars.forEach(btn => btn.addEventListener("click", () => {
-      rating = Number(btn.dataset.value);
-      stars.forEach(star => {
-        const active = Number(star.dataset.value) <= rating;
-        star.classList.toggle("text-amber-300", active);
-        star.classList.toggle("text-slate-600", !active);
-      });
-    }));
-
-    const setStatus = message => {
-      status.textContent = message;
-    };
-
-    if (
-      !window.firebase ||
-      firebaseConfig.apiKey === "YOUR_API_KEY" ||
-      firebaseConfig.projectId === "YOUR_PROJECT_ID"
-    ) {
-      wall.innerHTML = '<div class="md:col-span-3 rounded-xl border border-amber-500/30 bg-amber-950/30 p-4 text-sm text-amber-200">The feedback wall is ready, but it needs your Firebase project configuration before posts can be shared between students. Follow the setup instructions provided with this website file.</div>';
-
-      setStatus("Firebase setup required to enable shared posts.");
-      return;
-    }
-
-    try {
-      if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-      }
-
-      const db = firebase.firestore();
-      const collection = db.collection("mataStudentFeedback");
-
-      function makeCard(post) {
-        const card = document.createElement("article");
-        card.className = "rounded-xl border border-cyan-500/25 bg-slate-900 p-4 shadow-lg";
-
-        const top = document.createElement("div");
-        top.className = "flex items-start justify-between gap-2";
-
-        const who = document.createElement("div");
-
-        const name = document.createElement("h5");
-        name.className = "font-bold text-cyan-300";
-        name.textContent = "Anonymous Agent";
-
-        const mission = document.createElement("span");
-        mission.className = "mt-1 inline-block rounded-full bg-blue-950 px-2 py-1 text-[10px] text-blue-200";
-        mission.textContent = post.mission || "Overall Experience";
-
-        who.append(name, mission);
-
-        const score = document.createElement("span");
-        score.className = "whitespace-nowrap text-amber-300";
-        score.textContent =
-          "★".repeat(post.rating || 0) +
-          "☆".repeat(5 - (post.rating || 0));
-
-        top.append(who, score);
-        card.append(top);
-
-        const learned = document.createElement("p");
-        learned.className = "mt-3 whitespace-pre-wrap break-words text-sm text-slate-200";
-        learned.textContent = post.learning || "";
-        card.append(learned);
-
-        if (post.challenge) {
-          const challenge = document.createElement("p");
-          challenge.className = "mt-2 whitespace-pre-wrap break-words text-xs text-slate-400";
-          challenge.textContent = "💡 Suggestion: " + post.challenge;
-          card.append(challenge);
-        }
-
-        const date = document.createElement("div");
-        date.className = "mt-4 border-t border-slate-800 pt-2 text-[10px] text-slate-500";
-
-        const d =
-          post.createdAt && post.createdAt.toDate
-            ? post.createdAt.toDate()
-            : null;
-
-        date.textContent = d ? d.toLocaleString() : "Just posted";
-        card.append(date);
-
-        return card;
-      }
-
-      function render() {
-        const chosen = $("mata-filter").value;
-
-        const visible = posts.filter(
-          p => chosen === "All" || p.mission === chosen
-        );
-
-        wall.replaceChildren();
-
-        if (!visible.length) {
-          const empty = document.createElement("p");
-          empty.className = "text-sm text-slate-400";
-          empty.textContent = "No feedback yet. Be the first agent to post!";
-          wall.append(empty);
-          return;
-        }
-
-        visible.forEach(post => wall.append(makeCard(post)));
-      }
-
-      $("mata-filter").addEventListener("change", render);
-
-      form.addEventListener("submit", async event => {
-        event.preventDefault();
-
-        const learning = $("mata-learning").value.trim();
-        const challenge = $("mata-challenge").value.trim();
-
-        if (!learning) {
-          setStatus("Please enter your feedback.");
-          return;
-        }
-
-        if (!rating) {
-          setStatus("Please choose a star rating before publishing.");
-          return;
-        }
-
-        submit.disabled = true;
-        setStatus("Publishing your feedback...");
-
-        try {
-          await collection.add({
-            anonymous: true,
-            mission: $("mata-mission").value,
-            learning,
-            challenge,
-            rating,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
-
-          form.reset();
-          rating = 0;
-
-          stars.forEach(star => {
-            star.classList.remove("text-amber-300");
-            star.classList.add("text-slate-600");
-          });
-
-          setStatus("✓ Your anonymous feedback is published! Everyone can see it.");
-
-        } catch (error) {
-          console.error(error);
-          setStatus("Could not publish. Please check your internet connection and Firebase rules.");
-        } finally {
-          submit.disabled = false;
-        }
-      });
-
-      collection.orderBy("createdAt", "desc").limit(100).onSnapshot(snapshot => {
-        posts = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-
-        $("mata-count").textContent = posts.length;
-
-        const valid = posts
-          .map(p => Number(p.rating))
-          .filter(n => n >= 1 && n <= 5);
-
-        $("mata-average").textContent = valid.length
-          ? (valid.reduce((a, b) => a + b, 0) / valid.length).toFixed(1)
-          : "—";
-
-        render();
-
-      }, error => {
-        console.error(error);
-        wall.textContent = "Unable to load feedback. Check Firestore security rules.";
-      });
-
-    } catch (error) {
-      console.error(error);
-      wall.textContent = "M.A.T.A network connection error.";
-    }
-  })();
   </script>
 
 </body>
