@@ -1,1 +1,211 @@
 file:///C:/Users/shzah/Downloads/index%20(3)(1)%20(1).html?
+<!-- M.A.T.A STUDENT FEEDBACK WALL -->
+<section id="mata-feedback-embed" style="
+  background:#020b1c;
+  color:white;
+  border:1px solid #0891b2;
+  border-radius:18px;
+  padding:24px;
+  font-family:Arial,sans-serif;
+  margin:25px 0;
+">
+  <div style="text-align:center;margin-bottom:22px">
+    <h2 style="color:#22d3ee;font-size:25px;font-weight:bold">
+      💬 M.A.T.A STUDENT FEEDBACK WALL
+    </h2>
+    <p style="color:#cbd5e1">
+      Share your learning experience and read feedback from other agents!
+    </p>
+    <p style="color:#fbbf24">
+      👥 <span id="mata-post-count">0</span> posts
+    </p>
+  </div>
+
+  <form id="mata-feedback-form" style="
+    background:#0f172a;padding:18px;border-radius:14px;
+    display:grid;gap:12px
+  ">
+    <input id="mata-student-name" required maxlength="40"
+      placeholder="Your name / Agent name"
+      style="padding:12px;border-radius:8px;background:#020617;color:white;border:1px solid #334155">
+
+    <select id="mata-student-mission"
+      style="padding:12px;border-radius:8px;background:#020617;color:white;border:1px solid #334155">
+      <option>Introduction</option>
+      <option>Money Knowledge</option>
+      <option>Money Synthesizer</option>
+      <option>Learning Steps</option>
+      <option>Mini Market</option>
+      <option>Overall Experience</option>
+    </select>
+
+    <textarea id="mata-student-learning" required maxlength="500"
+      placeholder="What did you learn?"
+      style="padding:12px;border-radius:8px;background:#020617;color:white;border:1px solid #334155"></textarea>
+
+    <textarea id="mata-student-challenge" maxlength="400"
+      placeholder="What was difficult? Any suggestions?"
+      style="padding:12px;border-radius:8px;background:#020617;color:white;border:1px solid #334155"></textarea>
+
+    <select id="mata-student-rating"
+      style="padding:12px;border-radius:8px;background:#020617;color:white;border:1px solid #334155">
+      <option value="5">★★★★★ Excellent</option>
+      <option value="4">★★★★☆ Very Good</option>
+      <option value="3">★★★☆☆ Good</option>
+      <option value="2">★★☆☆☆ Fair</option>
+      <option value="1">★☆☆☆☆ Need Improvement</option>
+    </select>
+
+    <button type="submit" id="mata-feedback-submit"
+      style="padding:13px;background:#22d3ee;color:#020617;font-weight:bold;border:0;border-radius:10px;cursor:pointer">
+      📡 PUBLISH FEEDBACK
+    </button>
+    <p id="mata-feedback-status" style="font-size:12px;color:#67e8f9"></p>
+  </form>
+
+  <h3 style="margin:24px 0 12px;color:#67e8f9;font-weight:bold">
+    🌐 Agent Community Posts
+  </h3>
+
+  <div id="mata-feedback-posts"
+    style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px">
+    <p style="color:#94a3b8">Loading student feedback...</p>
+  </div>
+</section>
+
+<!-- FIREBASE LIBRARIES -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+(function () {
+  // AUTOMATIC METADATA PROFILE PHOTO
+  const PHOTO_URL =
+    "https://i.postimg.cc/V6BfKZ1F/Screenshot-2026-11-12-213325.png";
+
+  const profilePhoto = document.getElementById("meta-photo-preview");
+  const dashboardPhoto = document.getElementById("dash-op-photo");
+
+  if (profilePhoto) profilePhoto.src = PHOTO_URL;
+  if (dashboardPhoto) dashboardPhoto.src = PHOTO_URL;
+
+  // FIREBASE CONFIGURATION: REPLACE WITH YOUR OWN
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  const form = document.getElementById("mata-feedback-form");
+  const postsArea = document.getElementById("mata-feedback-posts");
+  const status = document.getElementById("mata-feedback-status");
+  const submit = document.getElementById("mata-feedback-submit");
+
+  if (!window.firebase ||
+      firebaseConfig.apiKey === "YOUR_API_KEY" ||
+      firebaseConfig.projectId === "YOUR_PROJECT_ID") {
+    status.textContent =
+      "Firebase setup is required to share feedback between students.";
+    postsArea.innerHTML =
+      '<p style="color:#fbbf24">Connect your Firebase project to activate the shared wall.</p>';
+    return;
+  }
+
+  try {
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+
+    const db = firebase.firestore();
+    const feedback = db.collection("mataStudentFeedback");
+
+    function safeText(tag, value, style) {
+      const el = document.createElement(tag);
+      el.textContent = value || "";
+      if (style) el.style.cssText = style;
+      return el;
+    }
+
+    function displayPosts(snapshot) {
+      postsArea.replaceChildren();
+      document.getElementById("mata-post-count").textContent =
+        snapshot.size;
+
+      if (snapshot.empty) {
+        postsArea.append(
+          safeText("p", "Be the first agent to share feedback!")
+        );
+        return;
+      }
+
+      snapshot.forEach(doc => {
+        const post = doc.data();
+        const card = document.createElement("article");
+        card.style.cssText =
+          "background:#0f172a;border:1px solid #155e75;border-radius:13px;padding:16px;overflow-wrap:anywhere";
+
+        card.append(
+          safeText("h4", post.name, "color:#67e8f9;font-weight:bold;font-size:16px"),
+          safeText("small", post.mission, "color:#fbbf24"),
+          safeText("p", "★".repeat(Number(post.rating || 0)),
+            "color:#fbbf24;margin:8px 0"),
+          safeText("p", post.learning, "color:#e2e8f0;margin-top:10px;white-space:pre-wrap")
+        );
+
+        if (post.challenge) {
+          card.append(
+            safeText("p", "💡 " + post.challenge,
+              "color:#94a3b8;font-size:13px;margin-top:10px;white-space:pre-wrap")
+          );
+        }
+
+        const date = post.createdAt?.toDate
+          ? post.createdAt.toDate().toLocaleString()
+          : "Recently posted";
+
+        card.append(
+          safeText("small", date, "color:#64748b;display:block;margin-top:12px")
+        );
+
+        postsArea.append(card);
+      });
+    }
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+      submit.disabled = true;
+      status.textContent = "Publishing your feedback...";
+
+      try {
+        await feedback.add({
+          name: document.getElementById("mata-student-name").value.trim(),
+          mission: document.getElementById("mata-student-mission").value,
+          learning: document.getElementById("mata-student-learning").value.trim(),
+          challenge: document.getElementById("mata-student-challenge").value.trim(),
+          rating: Number(document.getElementById("mata-student-rating").value),
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        form.reset();
+        status.textContent = "✓ Feedback published! Everyone can see your post.";
+      } catch(error) {
+        console.error(error);
+        status.textContent = "Unable to publish. Check Firebase settings.";
+      } finally {
+        submit.disabled = false;
+      }
+    });
+
+    feedback.orderBy("createdAt", "desc").limit(100)
+      .onSnapshot(displayPosts, error => {
+        console.error(error);
+        status.textContent = "Unable to load the shared feedback wall.";
+      });
+
+  } catch(error) {
+    console.error(error);
+    status.textContent = "M.A.T.A network connection error.";
+  }
+})();
+</script>
